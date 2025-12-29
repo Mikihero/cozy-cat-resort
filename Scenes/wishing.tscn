@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3 uid="uid://w5u71dvit3sr"]
+
+[ext_resource type="Texture2D" uid="uid://dcf5w6li4wn7e" path="res://Placeholders/star.png" id="1_m6upw"]
+[ext_resource type="Script" uid="uid://dixq837iqepag" path="res://Scripts/wishing.gd" id="1_xto2g"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xto2g"]
+radius = 1073.3333
+
+[sub_resource type="Environment" id="Environment_xto2g"]
+background_mode = 3
+glow_enabled = true
+glow_intensity = 1.0
+glow_blend_mode = 0
+glow_hdr_threshold = 0.6
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_xto2g")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -579.5
+offset_top = -331.0
+offset_right = 579.5
+offset_bottom = 331.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Star" type="Sprite2D" parent="."]
+modulate = Color(2, 2, 2, 1)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("1_m6upw")
+
+[node name="Area2D" type="Area2D" parent="Star"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Star/Area2D"]
+position = Vector2(-40, 39.999996)
+shape = SubResource("CircleShape2D_xto2g")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_xto2g")
+
+[connection signal="input_event" from="Star/Area2D" to="." method="_on_area_2d_input_event"]

@@ -4,6 +4,8 @@ var message_text = ""
 var coin_type = ""
 var wish_amount:int = 0
 
+@onready var wishing_scene = preload("res://Scenes/wishing.tscn")
+
 func  _ready() -> void:
 	if(coin_type == "diamond"):
 		if (Globals.DiamondCatCoins < 1):
@@ -30,6 +32,11 @@ func _on_confirm_pressed() -> void:
 	elif (coin_type == "gold"):
 		Globals.GoldCatCoins = Globals.GoldCatCoins - 100 * wish_amount
 	print(Globals.DiamondCatCoins,"	", Globals.GoldCatCoins)
+	
+	var wishing_instance = wishing_scene.instantiate()
+	
+	get_tree().root.add_child(wishing_instance)
+	
 	queue_free()
 
 

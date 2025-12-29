@@ -15,6 +15,7 @@ bg_pink = ExtResource("3_t80qp")
 bg_purple = ExtResource("4_gy7bo")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+visible = false
 
 [node name="Banner" type="Sprite2D" parent="."]
 position = Vector2(-0.94441223, 1.1920929e-07)
