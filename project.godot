@@ -29,9 +29,10 @@ window/stretch/scale_mode="integer"
 
 [gui]
 
-theme/custom_font="uid://bshut8qxqe6ct"
+theme/custom_font="uid://godib3f4j271"
 
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"
+textures/vram_compression/import_etc2_astc=true
