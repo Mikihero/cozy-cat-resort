@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://bk4sup2o4or00"]
+[gd_scene load_steps=4 format=3 uid="uid://bk4sup2o4or00"]
 
+[ext_resource type="Script" uid="uid://dl8cit7xrc3q1" path="res://Scripts/gacha.gd" id="1_ym5em"]
 [ext_resource type="Texture2D" uid="uid://cld0emutf706g" path="res://Placeholders/banner.png" id="2_jaewt"]
 [ext_resource type="Texture2D" uid="uid://4lyagpeux4hr" path="res://Placeholders/banner1.png" id="2_wxypu"]
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_ym5em")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -13,29 +15,32 @@ scale = Vector2(0.59994215, 0.6)
 texture = ExtResource("2_jaewt")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-offset_left = 1.0
-offset_top = 229.0
-offset_right = 511.0
-offset_bottom = 283.0
+offset_left = -38.0
+offset_top = 216.0
+offset_right = 547.0
+offset_bottom = 304.0
 theme_override_constants/separation = 30
 
 [node name="Wish premium" type="Button" parent="HBoxContainer"]
-custom_minimum_size = Vector2(150, 0)
+custom_minimum_size = Vector2(175, 0)
 layout_mode = 2
+theme_override_font_sizes/font_size = 35
 text = "Wish x1
 1 premium coin
 "
 
 [node name="Wish 1" type="Button" parent="HBoxContainer"]
-custom_minimum_size = Vector2(150, 0)
+custom_minimum_size = Vector2(175, 0)
 layout_mode = 2
+theme_override_font_sizes/font_size = 35
 text = "Wish x1
 100 coins
 "
 
 [node name="Wish 10" type="Button" parent="HBoxContainer"]
-custom_minimum_size = Vector2(150, 0)
+custom_minimum_size = Vector2(175, 0)
 layout_mode = 2
+theme_override_font_sizes/font_size = 35
 text = "Wish x10
 1000 coins"
 
@@ -81,3 +86,5 @@ layout_mode = 2
 texture_normal = ExtResource("2_wxypu")
 ignore_texture_size = true
 stretch_mode = 0
+
+[connection signal="pressed" from="HBoxContainer/Wish premium" to="." method="_on_wish_pressed"]
