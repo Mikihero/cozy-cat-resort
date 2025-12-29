@@ -1,0 +1,117 @@
+[gd_scene load_steps=11 format=3 uid="uid://bycvbl6062x44"]
+
+[ext_resource type="Script" uid="uid://dyobabpohs3fe" path="res://Scripts/album.gd" id="1_g6llf"]
+[ext_resource type="Texture2D" uid="uid://d2pt3shydhe8b" path="res://Assets/ui/simple-background.png" id="2_bfts0"]
+[ext_resource type="StyleBox" uid="uid://ykbqjul20drt" path="res://Assets/ui/styles/simple-basic.tres" id="3_pdpnd"]
+[ext_resource type="StyleBox" uid="uid://douabvrad66ov" path="res://Assets/ui/styles/brown-pressed.tres" id="4_6vwvs"]
+[ext_resource type="Texture2D" uid="uid://bd2458fnbm0dl" path="res://Assets/ui/cancel.png" id="5_f75t2"]
+[ext_resource type="PackedScene" uid="uid://dcy051y6hstrs" path="res://Scenes/character_card.tscn" id="6_6vwvs"]
+[ext_resource type="Script" uid="uid://d3moxxpqercvg" path="res://Scenes/scroll_container.gd" id="6_whfmd"]
+[ext_resource type="Texture2D" uid="uid://difnkfoip1rio" path="res://Placeholders/cat.png" id="7_f75t2"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_whfmd"]
+
+[sub_resource type="FontVariation" id="FontVariation_pdpnd"]
+spacing_glyph = 1
+spacing_bottom = -5
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_g6llf")
+
+[node name="simpleBackground" type="NinePatchRect" parent="."]
+offset_left = 199.0
+offset_top = 37.000004
+offset_right = 350.8
+offset_bottom = 147.4
+scale = Vector2(5, 5)
+texture = ExtResource("2_bfts0")
+region_rect = Rect2(0, 0, 21, 21)
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="exampleCancelIconButton" type="Button" parent="."]
+offset_left = 836.0
+offset_top = 55.00006
+offset_right = 856.4
+offset_bottom = 75.00006
+scale = Vector2(5, 5)
+theme_override_styles/normal = ExtResource("3_pdpnd")
+theme_override_styles/normal_mirrored = ExtResource("3_pdpnd")
+theme_override_styles/pressed = ExtResource("4_6vwvs")
+theme_override_styles/pressed_mirrored = ExtResource("4_6vwvs")
+theme_override_styles/hover = ExtResource("3_pdpnd")
+theme_override_styles/hover_mirrored = ExtResource("3_pdpnd")
+theme_override_styles/hover_pressed = ExtResource("4_6vwvs")
+theme_override_styles/hover_pressed_mirrored = ExtResource("4_6vwvs")
+theme_override_styles/disabled = ExtResource("3_pdpnd")
+theme_override_styles/disabled_mirrored = ExtResource("3_pdpnd")
+theme_override_styles/focus = SubResource("StyleBoxTexture_whfmd")
+icon = ExtResource("5_f75t2")
+icon_alignment = 1
+
+[node name="Label" type="Label" parent="."]
+offset_left = 236.00002
+offset_top = 55.0
+offset_right = 335.59998
+offset_bottom = 75.0
+scale = Vector2(5, 5)
+theme_override_fonts/font = SubResource("FontVariation_pdpnd")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = ExtResource("3_pdpnd")
+theme_override_styles/focus = ExtResource("3_pdpnd")
+text = "Cat album"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+offset_left = 242.0
+offset_top = 188.0
+offset_right = 939.0
+offset_bottom = 558.0
+follow_focus = true
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 0
+script = ExtResource("6_whfmd")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+alignment = 1
+
+[node name="PanelContainer" parent="ScrollContainer/HBoxContainer" instance=ExtResource("6_6vwvs")]
+layout_mode = 2
+character_name = "veri veri silli car"
+character_image = ExtResource("7_f75t2")
+
+[node name="PanelContainer2" parent="ScrollContainer/HBoxContainer" instance=ExtResource("6_6vwvs")]
+layout_mode = 2
+character_name = "veri veri silli car"
+character_image = ExtResource("7_f75t2")
+
+[node name="PanelContainer3" parent="ScrollContainer/HBoxContainer" instance=ExtResource("6_6vwvs")]
+layout_mode = 2
+character_name = "veri veri silli car"
+character_image = ExtResource("7_f75t2")
+
+[node name="PanelContainer4" parent="ScrollContainer/HBoxContainer" instance=ExtResource("6_6vwvs")]
+layout_mode = 2
+character_name = "veri veri silli car"
+character_image = ExtResource("7_f75t2")
+
+[node name="PanelContainer5" parent="ScrollContainer/HBoxContainer" instance=ExtResource("6_6vwvs")]
+layout_mode = 2
+character_name = "veri veri silli car"
+character_image = ExtResource("7_f75t2")
+
+[node name="PanelContainer6" parent="ScrollContainer/HBoxContainer" instance=ExtResource("6_6vwvs")]
+layout_mode = 2
+character_name = "veri veri silli car"
+character_image = ExtResource("7_f75t2")
+
+[node name="PanelContainer7" parent="ScrollContainer/HBoxContainer" instance=ExtResource("6_6vwvs")]
+layout_mode = 2
+character_name = "veri veri silli car"
+character_image = ExtResource("7_f75t2")
