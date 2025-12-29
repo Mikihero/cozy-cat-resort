@@ -88,27 +88,27 @@ character_image = ExtResource("7_f75t2")
 
 [node name="PanelContainer2" parent="ScrollContainer/HBoxContainer" instance=ExtResource("6_6vwvs")]
 layout_mode = 2
-character_name = "veri veri silli car"
+character_name = "silli car"
 character_image = ExtResource("7_f75t2")
 
 [node name="PanelContainer3" parent="ScrollContainer/HBoxContainer" instance=ExtResource("6_6vwvs")]
 layout_mode = 2
-character_name = "veri veri silli car"
+character_name = "veri silli car"
 character_image = ExtResource("7_f75t2")
 
 [node name="PanelContainer4" parent="ScrollContainer/HBoxContainer" instance=ExtResource("6_6vwvs")]
 layout_mode = 2
-character_name = "veri veri silli car"
+character_name = "veri veri car"
 character_image = ExtResource("7_f75t2")
 
 [node name="PanelContainer5" parent="ScrollContainer/HBoxContainer" instance=ExtResource("6_6vwvs")]
 layout_mode = 2
-character_name = "veri veri silli car"
+character_name = "ver"
 character_image = ExtResource("7_f75t2")
 
 [node name="PanelContainer6" parent="ScrollContainer/HBoxContainer" instance=ExtResource("6_6vwvs")]
 layout_mode = 2
-character_name = "veri veri silli car"
+character_name = "veri "
 character_image = ExtResource("7_f75t2")
 
 [node name="PanelContainer7" parent="ScrollContainer/HBoxContainer" instance=ExtResource("6_6vwvs")]
