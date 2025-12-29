@@ -22,7 +22,7 @@ offset_right = 63.5
 offset_bottom = 27.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 41
+theme_override_font_sizes/font_size = 48
 theme_override_styles/focus = SubResource("StyleBoxEmpty_6l7je")
 text = "Add coins!"
 script = ExtResource("1_6l7je")
@@ -37,3 +37,9 @@ offset_top = 8.0
 offset_right = 71.0
 offset_bottom = 35.0
 grow_horizontal = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -48.0
+offset_top = -40.0
+offset_right = 480.0
+offset_bottom = 272.0
