@@ -1,12 +1,16 @@
-[gd_scene load_steps=8 format=3 uid="uid://yk6m8hxqmvdp"]
+[gd_scene load_steps=11 format=3 uid="uid://yk6m8hxqmvdp"]
 
 [ext_resource type="Texture2D" uid="uid://bi4ngf0fqyv3k" path="res://Placeholders/silver coin.png" id="1_eqp3x"]
+[ext_resource type="Texture2D" uid="uid://d2pt3shydhe8b" path="res://Assets/ui/simple-background.png" id="1_y4ply"]
 [ext_resource type="Texture2D" uid="uid://c65b2itdwqnxt" path="res://Placeholders/gold coin.png" id="2_721si"]
 [ext_resource type="Texture2D" uid="uid://h66oo5mpsyq8" path="res://Placeholders/diamond coin.png" id="3_s7llh"]
 [ext_resource type="Texture2D" uid="uid://ba2h4xc8re76n" path="res://Placeholders/gold to silver conversion.png" id="4_s7llh"]
-[ext_resource type="Texture2D" uid="uid://podqbsm0j0ux" path="res://Placeholders/buttom.png" id="5_1h0el"]
 [ext_resource type="Texture2D" uid="uid://bie1ndfy5q2im" path="res://Placeholders/diamond to gold conversion.png" id="5_785vh"]
-[ext_resource type="Texture2D" uid="uid://tfg6gvxuup6y" path="res://icon.svg" id="6_be1s2"]
+[ext_resource type="FontFile" uid="uid://bshut8qxqe6ct" path="res://Fonts/Silver.ttf" id="6_5lr0d"]
+[ext_resource type="StyleBox" uid="uid://ykbqjul20drt" path="res://Assets/ui/styles/simple-basic.tres" id="7_sglpf"]
+[ext_resource type="StyleBox" uid="uid://douabvrad66ov" path="res://Assets/ui/styles/brown-pressed.tres" id="8_ghnfr"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_s2dh5"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -21,8 +25,19 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 772.0
+offset_bottom = 585.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="simpleBackground" type="NinePatchRect" parent="full layout"]
+layout_mode = 2
+texture = ExtResource("1_y4ply")
+region_rect = Rect2(0, 0, 21, 21)
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
 
 [node name="coin display container" type="HBoxContainer" parent="full layout"]
 layout_mode = 2
@@ -89,12 +104,13 @@ size_flags_vertical = 3
 [node name="gold to silver conversion" type="VBoxContainer" parent="full layout/conversions container"]
 layout_mode = 2
 size_flags_horizontal = 10
+size_flags_vertical = 0
 
-[node name="TextureRect" type="TextureRect" parent="full layout/conversions container/gold to silver conversion"]
+[node name="coin texture" type="TextureRect" parent="full layout/conversions container/gold to silver conversion"]
 layout_mode = 2
 texture = ExtResource("4_s7llh")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="full layout/conversions container/gold to silver conversion"]
+[node name="ratio text" type="RichTextLabel" parent="full layout/conversions container/gold to silver conversion"]
 custom_minimum_size = Vector2(200, 115)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -104,13 +120,34 @@ text = "4 : 1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TextureButton" type="TextureButton" parent="full layout/conversions container/gold to silver conversion"]
+[node name="positional control node" type="Control" parent="full layout/conversions container/gold to silver conversion"]
+custom_minimum_size = Vector2(195, 150)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
-action_mode = 0
-texture_normal = ExtResource("5_1h0el")
-texture_pressed = ExtResource("6_be1s2")
+size_flags_stretch_ratio = 0.0
+
+[node name="convert button" type="Button" parent="full layout/conversions container/gold to silver conversion/positional control node"]
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 23.0
+scale = Vector2(5, 5)
+theme_override_fonts/font = ExtResource("6_5lr0d")
+theme_override_styles/normal = ExtResource("7_sglpf")
+theme_override_styles/normal_mirrored = ExtResource("7_sglpf")
+theme_override_styles/pressed = ExtResource("8_ghnfr")
+theme_override_styles/pressed_mirrored = ExtResource("8_ghnfr")
+theme_override_styles/hover = ExtResource("7_sglpf")
+theme_override_styles/hover_mirrored = ExtResource("7_sglpf")
+theme_override_styles/hover_pressed = ExtResource("8_ghnfr")
+theme_override_styles/hover_pressed_mirrored = ExtResource("8_ghnfr")
+theme_override_styles/disabled = ExtResource("7_sglpf")
+theme_override_styles/disabled_mirrored = ExtResource("7_sglpf")
+theme_override_styles/focus = SubResource("StyleBoxTexture_s2dh5")
+text = "Convert"
+alignment = 2
+autowrap_trim_flags = 0
+icon_alignment = 1
 
 [node name="diamond to gold conversion" type="VBoxContainer" parent="full layout/conversions container"]
 layout_mode = 2
