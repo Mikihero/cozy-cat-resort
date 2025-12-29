@@ -1,0 +1,97 @@
+[gd_scene load_steps=2 format=3 uid="uid://bstrwgy5nhygs"]
+
+[ext_resource type="Texture2D" uid="uid://bc71hterjdpwo" path="res://Graphics/coin.png" id="1_i0ev7"]
+
+[node name="Top Status Bar" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -552.0
+offset_bottom = -548.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="Coin status" type="HBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Coin status"]
+custom_minimum_size = Vector2(75, 75)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("1_i0ev7")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/Coin status"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(0.6745098, 0.12156863, 0.8, 1)
+theme_override_font_sizes/normal_font_size = 70
+text = "123"
+fit_content = true
+autowrap_mode = 0
+shortcut_keys_enabled = false
+vertical_alignment = 1
+justification_flags = 0
+
+[node name="Coin status2" type="HBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Coin status2"]
+custom_minimum_size = Vector2(75, 75)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("1_i0ev7")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/Coin status2"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(0.6745098, 0.12156863, 0.8, 1)
+theme_override_font_sizes/normal_font_size = 70
+text = "123"
+fit_content = true
+autowrap_mode = 0
+shortcut_keys_enabled = false
+vertical_alignment = 1
+justification_flags = 0
+
+[node name="Coin status3" type="HBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Coin status3"]
+custom_minimum_size = Vector2(75, 75)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("1_i0ev7")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/Coin status3"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(0.6745098, 0.12156863, 0.8, 1)
+theme_override_font_sizes/normal_font_size = 70
+text = "123"
+fit_content = true
+autowrap_mode = 0
+shortcut_keys_enabled = false
+vertical_alignment = 1
+justification_flags = 0
