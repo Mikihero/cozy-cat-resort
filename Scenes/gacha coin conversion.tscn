@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://yk6m8hxqmvdp"]
+[gd_scene load_steps=4 format=3 uid="uid://yk6m8hxqmvdp"]
 
-[ext_resource type="Texture2D" uid="uid://bpbpamwvwed5q" path="res://Placeholders/coin.png" id="1_s2pdh"]
+[ext_resource type="Texture2D" uid="uid://bi4ngf0fqyv3k" path="res://Placeholders/silver coin.png" id="1_eqp3x"]
+[ext_resource type="Texture2D" uid="uid://c65b2itdwqnxt" path="res://Placeholders/gold coin.png" id="2_721si"]
+[ext_resource type="Texture2D" uid="uid://h66oo5mpsyq8" path="res://Placeholders/diamond coin.png" id="3_s7llh"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -10,24 +12,64 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-layout_mode = 0
-offset_right = 155.0
+[node name="coin display container" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
 offset_bottom = 150.0
+grow_horizontal = 2
+alignment = 1
 
-[node name="gacha coin 1" type="HBoxContainer" parent="HBoxContainer"]
+[node name="silver coins" type="HBoxContainer" parent="coin display container"]
+clip_contents = true
 layout_direction = 2
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/gacha coin 1"]
+[node name="TextureRect" type="TextureRect" parent="coin display container/silver coins"]
 layout_mode = 2
 size_flags_horizontal = 0
-texture = ExtResource("1_s2pdh")
+texture = ExtResource("1_eqp3x")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/gacha coin 1"]
+[node name="RichTextLabel" type="RichTextLabel" parent="coin display container/silver coins"]
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/normal_font_size = 45
+theme_override_font_sizes/normal_font_size = 80
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="golden coins" type="HBoxContainer" parent="coin display container"]
+clip_contents = true
+layout_direction = 2
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="coin display container/golden coins"]
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("2_721si")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="coin display container/golden coins"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 80
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="diamond coins" type="HBoxContainer" parent="coin display container"]
+clip_contents = true
+layout_direction = 2
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="coin display container/diamond coins"]
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("3_s7llh")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="coin display container/diamond coins"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 80
 text = "100"
 horizontal_alignment = 1
 vertical_alignment = 1
