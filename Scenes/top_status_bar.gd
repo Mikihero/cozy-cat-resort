@@ -10,6 +10,6 @@ func _process(delta: float) -> void:
 	update_coins()
 
 func update_coins() -> void:
-	$"HBoxContainer/Coin status/CatCoinsText".text = str(Globals.CatCoins)
-	$"HBoxContainer/Coin status2/GoldCatCoinsText".text = str(Globals.GoldCatCoins)
-	$"HBoxContainer/Coin status3/DiamondCatCoinsText".text = str(Globals.DiamondCatCoins)
+	$"MarginContainer/MarginContainer/HBoxContainer/Coin status/CatCoinsText".text = str(Globals.CatCoins)
+	$"MarginContainer/MarginContainer/HBoxContainer/Coin status2/GoldCatCoinsText".text = str(Globals.GoldCatCoins)
+	$"MarginContainer/MarginContainer/HBoxContainer/Coin status3/DiamondCatCoinsText".text = str(Globals.DiamondCatCoins)

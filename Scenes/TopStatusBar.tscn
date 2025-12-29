@@ -1,43 +1,50 @@
-[gd_scene load_steps=3 format=3 uid="uid://bstrwgy5nhygs"]
+[gd_scene load_steps=4 format=3 uid="uid://bstrwgy5nhygs"]
 
 [ext_resource type="Script" uid="uid://dlxvxe0l3yj3v" path="res://Scenes/top_status_bar.gd" id="1_fc0x8"]
 [ext_resource type="Texture2D" uid="uid://bc71hterjdpwo" path="res://Graphics/coin.png" id="1_i0ev7"]
+[ext_resource type="Texture2D" uid="uid://d2pt3shydhe8b" path="res://Assets/ui/simple-background.png" id="3_wamkq"]
 
 [node name="Top Status Bar" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 600.0
-offset_bottom = 100.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_fc0x8")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 50
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 142.0
+offset_bottom = 20.0
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme_override_constants/separation = 5
 alignment = 1
 
-[node name="Coin status" type="HBoxContainer" parent="HBoxContainer"]
+[node name="Coin status" type="HBoxContainer" parent="MarginContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Coin status"]
-custom_minimum_size = Vector2(75, 75)
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/MarginContainer/HBoxContainer/Coin status"]
+custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 texture = ExtResource("1_i0ev7")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="CatCoinsText" type="RichTextLabel" parent="HBoxContainer/Coin status"]
-custom_minimum_size = Vector2(30, 0)
+[node name="CatCoinsText" type="RichTextLabel" parent="MarginContainer/MarginContainer/HBoxContainer/Coin status"]
+custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
-theme_override_colors/default_color = Color(0.6745098, 0.12156863, 0.8, 1)
-theme_override_font_sizes/normal_font_size = 70
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/normal_font_size = 20
 text = "123"
 fit_content = true
 autowrap_mode = 0
@@ -45,23 +52,22 @@ shortcut_keys_enabled = false
 vertical_alignment = 1
 justification_flags = 0
 
-[node name="Coin status2" type="HBoxContainer" parent="HBoxContainer"]
+[node name="Coin status2" type="HBoxContainer" parent="MarginContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Coin status2"]
-custom_minimum_size = Vector2(75, 75)
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/MarginContainer/HBoxContainer/Coin status2"]
+custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 texture = ExtResource("1_i0ev7")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="GoldCatCoinsText" type="RichTextLabel" parent="HBoxContainer/Coin status2"]
-custom_minimum_size = Vector2(30, 0)
+[node name="GoldCatCoinsText" type="RichTextLabel" parent="MarginContainer/MarginContainer/HBoxContainer/Coin status2"]
+custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
-size_flags_vertical = 4
-theme_override_colors/default_color = Color(0.6745098, 0.12156863, 0.8, 1)
-theme_override_font_sizes/normal_font_size = 70
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/normal_font_size = 20
 text = "123"
 fit_content = true
 autowrap_mode = 0
@@ -69,26 +75,35 @@ shortcut_keys_enabled = false
 vertical_alignment = 1
 justification_flags = 0
 
-[node name="Coin status3" type="HBoxContainer" parent="HBoxContainer"]
+[node name="Coin status3" type="HBoxContainer" parent="MarginContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Coin status3"]
-custom_minimum_size = Vector2(75, 75)
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/MarginContainer/HBoxContainer/Coin status3"]
+custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 texture = ExtResource("1_i0ev7")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="DiamondCatCoinsText" type="RichTextLabel" parent="HBoxContainer/Coin status3"]
-custom_minimum_size = Vector2(30, 0)
+[node name="DiamondCatCoinsText" type="RichTextLabel" parent="MarginContainer/MarginContainer/HBoxContainer/Coin status3"]
+custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
-size_flags_vertical = 4
-theme_override_colors/default_color = Color(0.6745098, 0.12156863, 0.8, 1)
-theme_override_font_sizes/normal_font_size = 70
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/normal_font_size = 20
 text = "123"
 fit_content = true
 autowrap_mode = 0
 shortcut_keys_enabled = false
 vertical_alignment = 1
 justification_flags = 0
+
+[node name="simpleBackground" type="NinePatchRect" parent="MarginContainer"]
+z_index = -1
+layout_mode = 2
+texture = ExtResource("3_wamkq")
+region_rect = Rect2(0, 0, 21, 21)
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2

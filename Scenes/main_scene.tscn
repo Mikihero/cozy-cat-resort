@@ -6,6 +6,7 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6l7je"]
 
 [node name="MainScene" type="Node2D"]
+clip_children = 2
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -15,21 +16,24 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -27.0
-offset_top = -13.5
-offset_right = 27.0
-offset_bottom = 13.5
+offset_left = -63.5
+offset_top = -27.0
+offset_right = 63.5
+offset_bottom = 27.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 100
+theme_override_font_sizes/font_size = 41
 theme_override_styles/focus = SubResource("StyleBoxEmpty_6l7je")
 text = "Add coins!"
 script = ExtResource("1_6l7je")
 
 [node name="Top Status Bar" parent="CanvasLayer" instance=ExtResource("1_52fb6")]
+custom_minimum_size = Vector2(143, 27)
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -300.0
-offset_right = 300.0
+offset_left = -71.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 29.0
 grow_horizontal = 2

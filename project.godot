@@ -12,13 +12,20 @@ config_version=5
 
 config/name="cozy cat resort"
 run/main_scene="uid://dal6ahd0v764d"
-run/main_scene="uid://bb00m10lkwj2b"
 config/features=PackedStringArray("4.5", "Mobile")
 config/icon="res://icon.svg"
 
 [autoload]
 
 Globals="*res://Scripts/globals.gd"
+
+[display]
+
+window/size/viewport_width=384
+window/size/viewport_height=216
+window/stretch/mode="canvas_items"
+window/stretch/aspect="ignore"
+window/stretch/scale_mode="integer"
 
 [gui]
 
