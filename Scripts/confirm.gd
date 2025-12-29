@@ -6,13 +6,13 @@ var wish_amount:int = 0
 
 func  _ready() -> void:
 	if(coin_type == "diamond"):
-		if (Globals.placeholder_diamond_catcoin < 1):
+		if (Globals.DiamondCatCoins < 1):
 			message_text = "Not enough diamond catcoins"
 			$PanelContainer/VBoxContainer/HBoxContainer/Cancel.visible = false
 			$PanelContainer/VBoxContainer/HBoxContainer/Confirm.visible = false
 			$PanelContainer/VBoxContainer/OK.visible = true
 	elif(coin_type == "gold"):
-		if (Globals.placeholder_gold_catcoin < 100 * wish_amount):
+		if (Globals.GoldCatCoins < 100 * wish_amount):
 			message_text = "Not enough gold catcoins"
 			$PanelContainer/VBoxContainer/HBoxContainer/Cancel.visible = false
 			$PanelContainer/VBoxContainer/HBoxContainer/Confirm.visible = false
@@ -26,10 +26,10 @@ func _on_cancel_pressed() -> void:
 
 func _on_confirm_pressed() -> void:
 	if(coin_type == "diamond"):
-		Globals.placeholder_diamond_catcoin = Globals.placeholder_diamond_catcoin - 1
+		Globals.DiamondCatCoins = Globals.DiamondCatCoins - 1
 	elif (coin_type == "gold"):
-		Globals.placeholder_gold_catcoin = Globals.placeholder_gold_catcoin - 100 * wish_amount
-	print(Globals.placeholder_diamond_catcoin,"	", Globals.placeholder_gold_catcoin)
+		Globals.GoldCatCoins = Globals.GoldCatCoins - 100 * wish_amount
+	print(Globals.DiamondCatCoins,"	", Globals.GoldCatCoins)
 	queue_free()
 
 

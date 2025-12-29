@@ -1,6 +1,11 @@
 extends Node2D
 
+@export var bg_blue: Texture2D
+@export var bg_pink: Texture2D
+@export var bg_purple: Texture2D
+
 @onready var popup_scene = preload("res://Scenes/confirm.tscn")
+@onready var backgrond_node = $Banner
 
 
 func _on_wish_premium_pressed() -> void:
@@ -27,3 +32,16 @@ func _on_wish_10_pressed() -> void:
 	popup_instance.wish_amount = 10
 	
 	add_child(popup_instance)
+
+
+func _on_banner_1_pressed() -> void:
+	backgrond_node.texture = bg_blue
+	
+
+
+func _on_banner_2_pressed() -> void:
+	backgrond_node.texture = bg_pink
+
+
+func _on_banner_3_pressed() -> void:
+	backgrond_node.texture = bg_purple	

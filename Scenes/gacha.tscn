@@ -1,11 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://bypyg2i4u4j7e"]
+[gd_scene load_steps=8 format=3 uid="uid://bypyg2i4u4j7e"]
 
 [ext_resource type="Script" uid="uid://dl8cit7xrc3q1" path="res://Scripts/gacha.gd" id="1_ym5em"]
-[ext_resource type="Texture2D" uid="uid://cld0emutf706g" path="res://Placeholders/banner.png" id="2_jaewt"]
+[ext_resource type="Texture2D" uid="uid://cld0emutf706g" path="res://Placeholders/banner_blue.png" id="2_jaewt"]
 [ext_resource type="Texture2D" uid="uid://4lyagpeux4hr" path="res://Placeholders/banner1.png" id="2_wxypu"]
+[ext_resource type="Texture2D" uid="uid://bi4txrgwnx82l" path="res://Placeholders/banner_pink.png" id="3_t80qp"]
+[ext_resource type="Texture2D" uid="uid://bsoutbx64rf61" path="res://Placeholders/banner_purple.png" id="4_gy7bo"]
+[ext_resource type="Texture2D" uid="uid://by2xn5empnkgq" path="res://Placeholders/banner2.png" id="4_k8vgs"]
+[ext_resource type="Texture2D" uid="uid://xo63bh8dh4rs" path="res://Placeholders/banner3.png" id="5_6oi3p"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_ym5em")
+bg_blue = ExtResource("2_jaewt")
+bg_pink = ExtResource("3_t80qp")
+bg_purple = ExtResource("4_gy7bo")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -15,34 +22,34 @@ scale = Vector2(0.59994215, 0.6)
 texture = ExtResource("2_jaewt")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-offset_left = -38.0
+offset_left = -112.0
 offset_top = 216.0
-offset_right = 547.0
+offset_right = 548.0
 offset_bottom = 304.0
 theme_override_constants/separation = 30
 
 [node name="Wish premium" type="Button" parent="HBoxContainer"]
-custom_minimum_size = Vector2(175, 0)
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 35
 text = "Wish x1
-1 premium coin
+1 Diamond Catcoin
 "
 
 [node name="Wish 1" type="Button" parent="HBoxContainer"]
-custom_minimum_size = Vector2(175, 0)
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 35
 text = "Wish x1
-100 coins
+100 Gold Catcoins
 "
 
 [node name="Wish 10" type="Button" parent="HBoxContainer"]
-custom_minimum_size = Vector2(175, 0)
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 35
 text = "Wish x10
-1000 coins"
+1000 Gold Catcoins"
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -506.0
@@ -66,27 +73,30 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 50
 
-[node name="TextureButton3" type="TextureButton" parent="ColorRect/VBoxContainer"]
+[node name="Banner1" type="TextureButton" parent="ColorRect/VBoxContainer"]
 custom_minimum_size = Vector2(200, 100)
 layout_mode = 2
 texture_normal = ExtResource("2_wxypu")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="TextureButton2" type="TextureButton" parent="ColorRect/VBoxContainer"]
+[node name="Banner2" type="TextureButton" parent="ColorRect/VBoxContainer"]
 custom_minimum_size = Vector2(200, 100)
 layout_mode = 2
-texture_normal = ExtResource("2_wxypu")
+texture_normal = ExtResource("4_k8vgs")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="TextureButton" type="TextureButton" parent="ColorRect/VBoxContainer"]
+[node name="Banner3" type="TextureButton" parent="ColorRect/VBoxContainer"]
 custom_minimum_size = Vector2(200, 100)
 layout_mode = 2
-texture_normal = ExtResource("2_wxypu")
+texture_normal = ExtResource("5_6oi3p")
 ignore_texture_size = true
 stretch_mode = 0
 
 [connection signal="pressed" from="HBoxContainer/Wish premium" to="." method="_on_wish_premium_pressed"]
 [connection signal="pressed" from="HBoxContainer/Wish 1" to="." method="_on_wish_1_pressed"]
 [connection signal="pressed" from="HBoxContainer/Wish 10" to="." method="_on_wish_10_pressed"]
+[connection signal="pressed" from="ColorRect/VBoxContainer/Banner1" to="." method="_on_banner_1_pressed"]
+[connection signal="pressed" from="ColorRect/VBoxContainer/Banner2" to="." method="_on_banner_2_pressed"]
+[connection signal="pressed" from="ColorRect/VBoxContainer/Banner3" to="." method="_on_banner_3_pressed"]
