@@ -7,7 +7,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	update_coins()
 
 func update_coins() -> void:
 	$"HBoxContainer/Coin status/CatCoinsText".text = str(Globals.CatCoins)

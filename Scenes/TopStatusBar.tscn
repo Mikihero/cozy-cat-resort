@@ -5,13 +5,9 @@
 
 [node name="Top Status Bar" type="Control"]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -552.0
-offset_bottom = -548.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
+offset_right = 600.0
+offset_bottom = 100.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_fc0x8")
@@ -40,7 +36,6 @@ stretch_mode = 5
 [node name="CatCoinsText" type="RichTextLabel" parent="HBoxContainer/Coin status"]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
-size_flags_vertical = 4
 theme_override_colors/default_color = Color(0.6745098, 0.12156863, 0.8, 1)
 theme_override_font_sizes/normal_font_size = 70
 text = "123"
