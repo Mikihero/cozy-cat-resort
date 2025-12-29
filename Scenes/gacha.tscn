@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bk4sup2o4or00"]
+[gd_scene load_steps=4 format=3 uid="uid://bypyg2i4u4j7e"]
 
 [ext_resource type="Script" uid="uid://dl8cit7xrc3q1" path="res://Scripts/gacha.gd" id="1_ym5em"]
 [ext_resource type="Texture2D" uid="uid://cld0emutf706g" path="res://Placeholders/banner.png" id="2_jaewt"]
@@ -87,4 +87,6 @@ texture_normal = ExtResource("2_wxypu")
 ignore_texture_size = true
 stretch_mode = 0
 
-[connection signal="pressed" from="HBoxContainer/Wish premium" to="." method="_on_wish_pressed"]
+[connection signal="pressed" from="HBoxContainer/Wish premium" to="." method="_on_wish_premium_pressed"]
+[connection signal="pressed" from="HBoxContainer/Wish 1" to="." method="_on_wish_1_pressed"]
+[connection signal="pressed" from="HBoxContainer/Wish 10" to="." method="_on_wish_10_pressed"]
