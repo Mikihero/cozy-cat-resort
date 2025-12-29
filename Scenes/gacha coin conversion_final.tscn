@@ -131,3 +131,9 @@ theme_override_font_sizes/normal_font_size = 32
 text = "100"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="coin conversion display" type="HBoxContainer" parent="full layout"]
+layout_mode = 2
+
+[node name="gold to silver conversion" type="VBoxContainer" parent="full layout/coin conversion display"]
+layout_mode = 2
