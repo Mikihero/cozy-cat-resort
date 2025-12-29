@@ -11,8 +11,17 @@ config_version=5
 [application]
 
 config/name="cozy cat resort"
+run/main_scene="uid://460ht54ok3sx"
 config/features=PackedStringArray("4.5", "Mobile")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Globals="*res://Scripts/globals.gd"
+
+[gui]
+
+theme/custom_font="uid://bshut8qxqe6ct"
 
 [rendering]
 
