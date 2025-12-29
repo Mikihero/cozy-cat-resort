@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://w5u71dvit3sr"]
+[gd_scene load_steps=6 format=3 uid="uid://w5u71dvit3sr"]
 
 [ext_resource type="Texture2D" uid="uid://dcf5w6li4wn7e" path="res://Placeholders/star.png" id="1_m6upw"]
 [ext_resource type="Script" uid="uid://dixq837iqepag" path="res://Scripts/wishing.gd" id="1_xto2g"]
+[ext_resource type="Texture2D" uid="uid://difnkfoip1rio" path="res://Placeholders/cat.png" id="3_dyupp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xto2g"]
 radius = 1073.3333
@@ -44,5 +45,10 @@ shape = SubResource("CircleShape2D_xto2g")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_xto2g")
+
+[node name="Cat" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.6, 0.604)
+texture = ExtResource("3_dyupp")
 
 [connection signal="input_event" from="Star/Area2D" to="." method="_on_area_2d_input_event"]
