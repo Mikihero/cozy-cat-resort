@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cn0sjrrdd23m4"]
+[gd_scene load_steps=8 format=3 uid="uid://cn0sjrrdd23m4"]
 
 [ext_resource type="Texture2D" uid="uid://d2pt3shydhe8b" path="res://Assets/ui/simple-background.png" id="1_wmlle"]
 [ext_resource type="Texture2D" uid="uid://chhlpceoabnbi" path="res://Assets/ui/coin-holder-background.png" id="2_iisca"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://ctrijwaomomj2" path="res://Assets/ui/coins/silver-coin.png" id="4_iisca"]
 [ext_resource type="Texture2D" uid="uid://dhjp6el51wqh6" path="res://Assets/ui/coins/golden-coin.png" id="5_10b1h"]
 [ext_resource type="Texture2D" uid="uid://dcitos7xyk562" path="res://Assets/ui/coins/platinum-coin.png" id="6_1rwxw"]
+[ext_resource type="Texture2D" uid="uid://b8b3fahbjp4wm" path="res://Placeholders/gold to silver conversion final.png" id="7_1rwxw"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -134,6 +135,27 @@ vertical_alignment = 1
 
 [node name="coin conversion display" type="HBoxContainer" parent="full layout"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
 
 [node name="gold to silver conversion" type="VBoxContainer" parent="full layout/coin conversion display"]
 layout_mode = 2
+
+[node name="display node" type="Control" parent="full layout/coin conversion display/gold to silver conversion"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="full layout/coin conversion display/gold to silver conversion/display node"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Control" type="Control" parent="full layout/coin conversion display/gold to silver conversion/display node/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="full layout/coin conversion display/gold to silver conversion/display node/VBoxContainer/Control"]
+layout_mode = 0
+offset_left = -98.0
+offset_top = 59.0
+offset_right = 1.0
+offset_bottom = 92.0
+texture = ExtResource("7_1rwxw")
