@@ -1,0 +1,83 @@
+[gd_scene load_steps=3 format=3 uid="uid://bk4sup2o4or00"]
+
+[ext_resource type="Texture2D" uid="uid://cld0emutf706g" path="res://Placeholders/banner.png" id="2_jaewt"]
+[ext_resource type="Texture2D" uid="uid://4lyagpeux4hr" path="res://Placeholders/banner1.png" id="2_wxypu"]
+
+[node name="Main" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Banner" type="Sprite2D" parent="."]
+position = Vector2(-0.94441223, 1.1920929e-07)
+scale = Vector2(0.59994215, 0.6)
+texture = ExtResource("2_jaewt")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+offset_left = 1.0
+offset_top = 229.0
+offset_right = 511.0
+offset_bottom = 283.0
+theme_override_constants/separation = 30
+
+[node name="Wish premium" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Wish x1
+1 premium coin
+"
+
+[node name="Wish 1" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Wish x1
+100 coins
+"
+
+[node name="Wish 10" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Wish x10
+1000 coins"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -506.0
+offset_top = -324.0
+offset_right = -416.0
+offset_bottom = 324.0
+color = Color(1, 1, 1, 0.6666667)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -200.0
+offset_right = 100.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+
+[node name="TextureButton3" type="TextureButton" parent="ColorRect/VBoxContainer"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+texture_normal = ExtResource("2_wxypu")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TextureButton2" type="TextureButton" parent="ColorRect/VBoxContainer"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+texture_normal = ExtResource("2_wxypu")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TextureButton" type="TextureButton" parent="ColorRect/VBoxContainer"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+texture_normal = ExtResource("2_wxypu")
+ignore_texture_size = true
+stretch_mode = 0
