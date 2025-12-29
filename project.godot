@@ -12,6 +12,7 @@ config_version=5
 
 config/name="cozy cat resort"
 run/main_scene="uid://dal6ahd0v764d"
+run/main_scene="uid://bb00m10lkwj2b"
 config/features=PackedStringArray("4.5", "Mobile")
 config/icon="res://icon.svg"
 
