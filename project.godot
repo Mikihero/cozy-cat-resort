@@ -27,9 +27,10 @@ window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 window/stretch/scale_mode="integer"
 
+
 [gui]
 
-theme/custom_font="uid://bshut8qxqe6ct"
+theme/custom_font="uid://godib3f4j271"
 
 [rendering]
 
