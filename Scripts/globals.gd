@@ -1,4 +1,5 @@
 extends Node
 
-var placeholder_diamond_catcoin = 10
-var placeholder_gold_catcoin = 1000
+var CatCoins: int = 0
+var GoldCatCoins: int = 0
+var DiamondCatCoins :int = 0
