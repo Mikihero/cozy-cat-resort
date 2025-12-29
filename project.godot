@@ -15,6 +15,10 @@ run/main_scene="uid://be5h4kc6xc1ur"
 config/features=PackedStringArray("4.5", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Globals="*res://Scripts/globals.gd"
+
 [gui]
 
 theme/custom_font="uid://bshut8qxqe6ct"
