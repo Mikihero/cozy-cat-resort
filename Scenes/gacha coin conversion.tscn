@@ -1,9 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://yk6m8hxqmvdp"]
+[gd_scene load_steps=8 format=3 uid="uid://yk6m8hxqmvdp"]
 
-[ext_resource type="Texture2D" uid="uid://bi4ngf0fqyv3k" path="res://Placeholders/silver coin.png" id="1_eqp3x"]
-[ext_resource type="Texture2D" uid="uid://d2pt3shydhe8b" path="res://Assets/ui/simple-background.png" id="1_y4ply"]
-[ext_resource type="Texture2D" uid="uid://c65b2itdwqnxt" path="res://Placeholders/gold coin.png" id="2_721si"]
-[ext_resource type="Texture2D" uid="uid://h66oo5mpsyq8" path="res://Placeholders/diamond coin.png" id="3_s7llh"]
+[ext_resource type="Texture2D" uid="uid://cdeu75b8dm33c" path="res://Assets/ui/coins/silver-coin.png" id="1_785vh"]
 [ext_resource type="Texture2D" uid="uid://ba2h4xc8re76n" path="res://Placeholders/gold to silver conversion.png" id="4_s7llh"]
 [ext_resource type="Texture2D" uid="uid://bie1ndfy5q2im" path="res://Placeholders/diamond to gold conversion.png" id="5_785vh"]
 [ext_resource type="FontFile" uid="uid://bshut8qxqe6ct" path="res://Fonts/Silver.ttf" id="6_5lr0d"]
@@ -25,22 +22,15 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 772.0
-offset_bottom = 585.0
+offset_right = 388.0
+offset_bottom = 311.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="simpleBackground" type="NinePatchRect" parent="full layout"]
-layout_mode = 2
-texture = ExtResource("1_y4ply")
-region_rect = Rect2(0, 0, 21, 21)
-patch_margin_left = 2
-patch_margin_top = 2
-patch_margin_right = 2
-patch_margin_bottom = 2
-
 [node name="coin display container" type="HBoxContainer" parent="full layout"]
 layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
 alignment = 1
 
 [node name="silver coins" type="HBoxContainer" parent="full layout/coin display container"]
@@ -51,7 +41,8 @@ layout_mode = 2
 [node name="TextureRect" type="TextureRect" parent="full layout/coin display container/silver coins"]
 layout_mode = 2
 size_flags_horizontal = 0
-texture = ExtResource("1_eqp3x")
+size_flags_vertical = 0
+texture = ExtResource("1_785vh")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="full layout/coin display container/silver coins"]
 custom_minimum_size = Vector2(100, 100)
@@ -69,7 +60,6 @@ layout_mode = 2
 [node name="TextureRect" type="TextureRect" parent="full layout/coin display container/golden coins"]
 layout_mode = 2
 size_flags_horizontal = 0
-texture = ExtResource("2_721si")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="full layout/coin display container/golden coins"]
 custom_minimum_size = Vector2(100, 100)
@@ -87,7 +77,6 @@ layout_mode = 2
 [node name="TextureRect" type="TextureRect" parent="full layout/coin display container/diamond coins"]
 layout_mode = 2
 size_flags_horizontal = 0
-texture = ExtResource("3_s7llh")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="full layout/coin display container/diamond coins"]
 custom_minimum_size = Vector2(100, 100)
