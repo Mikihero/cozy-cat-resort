@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ieepm2cojo2e"
-path="res://.godot/imported/button_dark_pressed.png-626a65221d5ae7a4f8ac1cbad932b942.ctex"
+uid="uid://bj7kjw3q1e58e"
+path="res://.godot/imported/gacha-button-golden-presed.png-60db789af382f00d9e407e55e4252283.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/ui/button_dark_pressed.png"
-dest_files=["res://.godot/imported/button_dark_pressed.png-626a65221d5ae7a4f8ac1cbad932b942.ctex"]
+source_file="res://Assets/ui/gacha/gacha-button-golden-presed.png"
+dest_files=["res://.godot/imported/gacha-button-golden-presed.png-60db789af382f00d9e407e55e4252283.ctex"]
 
 [params]
 
