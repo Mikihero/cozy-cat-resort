@@ -1,7 +1,5 @@
 extends Node2D
 
-
-
 var entities = [];
 
 var width = 0
@@ -11,8 +9,8 @@ var height = 0
 func _ready() -> void:
 	var foreground: TileMapLayer = self.get_node("TileMapForeground");
 	get_free_tiles()
-			
-	pass # Replace with function body.	
+
+	pass # Replace with function body.
 
 func get_best_path(source: Vector2i, destination: Vector2i) -> Array[Vector2i]:
 	var h = func (n: Vector2i) -> int:
@@ -21,20 +19,20 @@ func get_best_path(source: Vector2i, destination: Vector2i) -> Array[Vector2i]:
 	var closed = self.entities.map(func(m): return m.position);
 	#print(closed)
 	var from = {};
-	
+
 	var g_score = {
 		source: 0
 	};
 	var f_score = {
 		source: h.call(source)
 	};
-	
+
 	while !open.is_empty():
 		var current = f_score.find_key(f_score.values().min());
 		#print(current)
 		#print("g:", g_score, "\nf: ", f_score)
 		if current == destination:
-			
+
 			var path: Array[Vector2i] = [current];
 			while from.has(current):
 				current = from[current];
@@ -45,9 +43,9 @@ func get_best_path(source: Vector2i, destination: Vector2i) -> Array[Vector2i]:
 		open.remove_at(open.find(current))
 		f_score.erase(current)
 		var neighbors = [
-			current + Vector2i(0, 1), 
-			current + Vector2i(0, -1), 
-			current + Vector2i(1, 0), 
+			current + Vector2i(0, 1),
+			current + Vector2i(0, -1),
+			current + Vector2i(1, 0),
 			current + Vector2i(-1, 0)
 		].filter(func(v): return (v.x >=0 && v.y >= 0 && v.x < width && v.y < height));
 		#print("n: ", neighbors)
@@ -65,15 +63,15 @@ func get_best_path(source: Vector2i, destination: Vector2i) -> Array[Vector2i]:
 	var path: Array[Vector2i] = [];
 	return path;
 
-func get_free_tiles() -> Array[Vector2i]: 
+func get_free_tiles() -> Array[Vector2i]:
 	var background: TileMapLayer = self.get_node("TileMapBackground");
-	var border_tiles = (self.get_node("TileMapBackgroundBorder") as TileMapLayer).get_used_cells();	
+	var border_tiles = (self.get_node("TileMapBackgroundBorder") as TileMapLayer).get_used_cells();
 	var positions = background.get_used_cells().filter(func(c): return !border_tiles.has(c));
-	
-	print(border_tiles);	
-	print(background.get_used_cells().size(), "     ", border_tiles.size())
+
+	print(border_tiles);
+	print(background.get_used_cells().size(), " ", border_tiles.size())
 	print(positions.size())
-	
+
 	return Array();
 
 func add_entity(entity: MapEntity):
@@ -81,5 +79,5 @@ func add_entity(entity: MapEntity):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	
+
 	pass

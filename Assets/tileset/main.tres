@@ -1,6 +1,6 @@
 [gd_resource type="TileSet" load_steps=4 format=3 uid="uid://bve2eymgqa6k4"]
 
-[ext_resource type="Texture2D" uid="uid://bb8fbctg66bmf" path="res://Assets/tileset/spr_tileset_sunnysideworld_16px.png" id="1_ka4hy"]
+[ext_resource type="Texture2D" uid="uid://hjtrg6uyi58" path="res://Assets/tileset/spr_tileset_sunnysideworld_16px.png" id="1_ka4hy"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_bo1nx"]
 tile_data = PackedInt32Array(0, 3407872, 3, 65536, 3407872, 4, 131072, 3407872, 5)

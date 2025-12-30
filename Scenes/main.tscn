@@ -1,23 +1,17 @@
-[gd_scene load_steps=5 format=4 uid="uid://460ht54ok3sx"]
+[gd_scene load_steps=4 format=4 uid="uid://460ht54ok3sx"]
 
 [ext_resource type="Script" uid="uid://cxfhelhwdtnup" path="res://Scripts/map.gd" id="1_bo1nx"]
-[ext_resource type="Texture2D" uid="uid://bb8fbctg66bmf" path="res://Assets/tileset/spr_tileset_sunnysideworld_16px.png" id="1_jjgbg"]
 [ext_resource type="TileSet" uid="uid://bve2eymgqa6k4" path="res://Assets/tileset/main.tres" id="2_8gbba"]
+[ext_resource type="SpriteFrames" uid="uid://oduw4bmqr0w7" path="res://Assets/anim/orange_worker.tres" id="3_8gbba"]
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_bo1nx"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bo1nx"]
-atlas = ExtResource("1_jjgbg")
-region = Rect2(624, 720, 16, 16)
 
 [node name="Main" type="Node2D"]
-scale = Vector2(5, 5)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(512, 512)
-scale = Vector2(0.99999994, 0.99999994)
-zoom = Vector2(0.1, 0.1)
+position = Vector2(192, 108)
 
 [node name="Map" type="Node2D" parent="."]
-scale = Vector2(0.99999994, 0.99999994)
 script = ExtResource("1_bo1nx")
 
 [node name="TileMapBackground" type="TileMapLayer" parent="Map"]
@@ -49,7 +43,8 @@ tile_set = ExtResource("2_8gbba")
 tile_set = ExtResource("2_8gbba")
 collision_enabled = false
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Player" type="AnimatedSprite2D" parent="."]
 position = Vector2(7.9999995, 7.9999995)
 scale = Vector2(0.99999994, 0.99999994)
-texture = SubResource("AtlasTexture_bo1nx")
+sprite_frames = ExtResource("3_8gbba")
+animation = &"idle"
