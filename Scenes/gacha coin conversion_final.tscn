@@ -1,13 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://cn0sjrrdd23m4"]
+[gd_scene load_steps=9 format=3 uid="uid://cn0sjrrdd23m4"]
 
 [ext_resource type="Texture2D" uid="uid://d2pt3shydhe8b" path="res://Assets/ui/simple-background.png" id="1_wmlle"]
+[ext_resource type="Script" uid="uid://bqv06wkuhatl5" path="res://Scripts/coin conversion manager.gd" id="2_4qnvh"]
 [ext_resource type="PackedScene" uid="uid://gltssceucsnb" path="res://Scenes/examples/coin_display.tscn" id="2_wmlle"]
 [ext_resource type="StyleBox" uid="uid://ykbqjul20drt" path="res://Assets/ui/styles/simple-basic.tres" id="4_10b1h"]
 [ext_resource type="Texture2D" uid="uid://drhinxb0pn2ro" path="res://Placeholders/diamond to gold conversion final.png" id="4_iisca"]
 [ext_resource type="StyleBox" uid="uid://douabvrad66ov" path="res://Assets/ui/styles/brown-pressed.tres" id="5_1rwxw"]
-[ext_resource type="Script" uid="uid://clc2qbvo05mg8" path="res://Scripts/convert_golden_to_silver_button.gd" id="6_1rwxw"]
 [ext_resource type="Texture2D" uid="uid://b8b3fahbjp4wm" path="res://Placeholders/gold to silver conversion final.png" id="7_1rwxw"]
-[ext_resource type="Script" uid="uid://dsofqsmx22701" path="res://Scripts/convert_diamond_to_golden_button.gd" id="8_2ckbf"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2ckbf"]
 
@@ -40,6 +39,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("2_4qnvh")
 
 [node name="coin display" parent="full layout" instance=ExtResource("2_wmlle")]
 layout_mode = 2
@@ -98,7 +98,6 @@ theme_override_styles/disabled_mirrored = ExtResource("4_10b1h")
 theme_override_styles/focus = SubResource("StyleBoxTexture_2ckbf")
 text = "Convert"
 icon_alignment = 1
-script = ExtResource("6_1rwxw")
 
 [node name="diamond to golden" type="VBoxContainer" parent="full layout/coin conversion display/coin conversion display"]
 layout_mode = 2
@@ -134,4 +133,29 @@ theme_override_styles/disabled_mirrored = ExtResource("4_10b1h")
 theme_override_styles/focus = SubResource("StyleBoxTexture_2ckbf")
 text = "Convert"
 icon_alignment = 1
-script = ExtResource("8_2ckbf")
+
+[node name="quick convert setting" type="Control" parent="full layout"]
+layout_mode = 2
+
+[node name="quick convert container" type="HBoxContainer" parent="full layout/quick convert setting"]
+layout_mode = 0
+offset_left = 130.0
+offset_top = 156.0
+offset_right = 258.0
+offset_bottom = 196.0
+
+[node name="quick convert checkbox" type="CheckBox" parent="full layout/quick convert setting/quick convert container"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="quick convert text" type="RichTextLabel" parent="full layout/quick convert setting/quick convert container"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Skip confirmation"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="full layout/coin conversion display/coin conversion display/gold to silver conversion/convert golden to silver button" to="full layout" method="_on_convert_golden_to_silver_pressed"]
+[connection signal="pressed" from="full layout/coin conversion display/coin conversion display/diamond to golden/convert diamond to golden button" to="full layout" method="_on_convert_diamond_to_golden_button_pressed"]

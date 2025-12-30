@@ -12,7 +12,6 @@ func _process(delta: float) -> void:
 	pass
 
 func _button_pressed() -> void:
-	if Globals.DiamondCatCoins - 1 < 0:
-		Globals.DiamondCatCoins -= 1
-		Globals.GoldCatCoins += 10
+	Globals.DiamondCatCoins -= 1
+	Globals.GoldCatCoins += 10
 	pass
