@@ -17,7 +17,7 @@ func _on_diamond_pressed() -> void:
 	coin_type = "diamond"
 	if (Globals.DiamondCatCoins >= 10):
 		var popup_instance = popup_scene.instantiate()
-		popup_instance.message_text = "Are you sure you want to spend 1 diamond catcoin?"
+		popup_instance.message_text = "Are you sure you want to spend 10 diamond catcoins?"
 		popup_instance.action_to_execute = check_funds
 		add_child(popup_instance)
 	else:
@@ -56,7 +56,7 @@ func _on_cancel_pressed() -> void:
 
 func _on_cat_gacha_pressed() -> void:
 	selected_banner = "cat"
-	cat_gacha.z_index = 1
+	cat_gacha.z_index = 0
 	material_gacha.z_index = -1
 	banner_image.texture = banner_cat
 
@@ -64,5 +64,5 @@ func _on_cat_gacha_pressed() -> void:
 func _on_material_gacha_pressed() -> void:
 	selected_banner = "materials"
 	cat_gacha.z_index = -1
-	material_gacha.z_index = 1
+	material_gacha.z_index = 0
 	banner_image.texture = banner_material
