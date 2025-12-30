@@ -8,14 +8,15 @@ var save_thread: Thread;
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	var ent: Array[MapEntity] = [];
 	var bg: TileMapLayer = self.get_node("TileMapBackground");
 	var used = bg.get_used_cells();
 	width = used.map(func(v): return v.x).max() + 1;
 	height = used.map(func(v): return v.y).max() + 1;
-	
+	if !FileAccess.file_exists("user://save.json"):
+		self.save_to_file();
 	var save_file = FileAccess.open("user://save.json", FileAccess.READ);
 	var data = JSON.parse_string(save_file.get_line());
-	var ent: Array[MapEntity] = [];
 	(data.get("entities") as Array).map(MapEntity.deserialize).map(func(e: MapEntity): ent.push_back(e));
 	print("load:", ent);
 	self.entities = ent;
