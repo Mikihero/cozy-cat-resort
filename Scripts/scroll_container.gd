@@ -45,23 +45,6 @@ func update_preview_slot():
 			card.select_btn.text = "Select"
 			card.modulate = Color(1, 1, 1)
 	
-"""
-func refresh_album():
-	var cards = list_container.get_children()
-	
-	for i in range(cards.size()):
-		var card = cards[i]
-		card.set_selected_mode(i == 0)
-		
-		var btn = card.select_btn
-		if not btn.pressed.is_connected(_on_select_pressed):
-			btn.pressed.connect(_on_select_pressed.bind(card))
-
-func _on_select_pressed(clicked_card):
-	var old_index = clicked_card.get_index()
-	list_container.move_child(clicked_card,0)
-	refresh_album()
-"""
 func _gui_input(event):
 	if event is InputEventScreenDrag:
 		accept_event()
