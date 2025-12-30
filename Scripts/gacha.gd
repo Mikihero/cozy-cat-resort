@@ -3,8 +3,8 @@ extends Node2D
 @export var banner_cat: Texture2D
 @export var banner_material: Texture2D
 
-@onready var popup_scene = preload("res://Scenes/confirm.tscn")
-@onready var ok_scene = preload("res://Scenes/ok.tscn")
+@onready var popup_scene = preload("res://Scenes/examples/confirm.tscn")
+@onready var ok_scene = preload("res://Scenes/examples/ok.tscn")
 @onready var wishing_scene = preload("res://Scenes/wishing.tscn")
 @onready var banner_image = $"Banner image"
 @onready var cat_gacha = $"Cat gacha"
