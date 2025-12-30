@@ -157,5 +157,5 @@ text = "Skip confirmation"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="pressed" from="full layout/coin conversion display/coin conversion display/gold to silver conversion/convert golden to silver button" to="full layout" method="_on_convert_golden_to_silver_pressed"]
+[connection signal="pressed" from="full layout/coin conversion display/coin conversion display/gold to silver conversion/convert golden to silver button" to="full layout" method="_on_convert_golden_to_silver_button_pressed"]
 [connection signal="pressed" from="full layout/coin conversion display/coin conversion display/diamond to golden/convert diamond to golden button" to="full layout" method="_on_convert_diamond_to_golden_button_pressed"]

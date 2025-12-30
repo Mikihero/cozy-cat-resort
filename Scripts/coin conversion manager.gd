@@ -1,6 +1,6 @@
 extends VBoxContainer
 
-@onready var quickConvertCheckbox = $"convert setting/quick convert container/quick convert checkbox"
+# @onready var quickConvertCheckbox = $"convert setting/quick convert container/quick convert checkbox"
 @onready var confirm_scene = preload("res://Scenes/examples/confirm.tscn")
 @onready var ok_scene = preload("res://Scenes/examples/ok.tscn")
 
@@ -20,7 +20,8 @@ func _on_convert_golden_to_silver_button_pressed() -> void:
 		var ok_scene_instance = ok_scene.instantiate()
 		ok_scene_instance.message_text = "Not enough golden coins."
 		add_child(ok_scene_instance)
-	if quickConvertCheckbox.button_pressed:	
+		return
+	if $"quick convert setting/quick convert container/quick convert checkbox".button_pressed:	
 		_do_conversion("golden")
 	else:
 		var confirm_scene_instance = confirm_scene.instantiate()
