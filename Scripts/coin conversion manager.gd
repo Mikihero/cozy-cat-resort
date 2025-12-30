@@ -48,7 +48,7 @@ func do_conversion(from: String) -> void:
 	if from == "golden":
 		Globals.GoldCatCoins -= 1
 		Globals.CatCoins += 10
-	if from == "diamond":
+	elif from == "diamond":
 		Globals.DiamondCatCoins -= 1
 		Globals.GoldCatCoins += 10
 	else:
