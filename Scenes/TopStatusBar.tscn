@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://bstrwgy5nhygs"]
+[gd_scene load_steps=6 format=3 uid="uid://bstrwgy5nhygs"]
 
-[ext_resource type="Script" path="res://Scenes/top_status_bar.gd" id="1_fc0x8"]
-[ext_resource type="Texture2D" uid="uid://bc71hterjdpwo" path="res://Graphics/coin.png" id="1_i0ev7"]
+[ext_resource type="Script" uid="uid://dlxvxe0l3yj3v" path="res://Scenes/top_status_bar.gd" id="1_fc0x8"]
+[ext_resource type="Texture2D" uid="uid://ctrijwaomomj2" path="res://Assets/ui/coins/silver-coin.png" id="2_nrwpc"]
+[ext_resource type="Texture2D" uid="uid://dhjp6el51wqh6" path="res://Assets/ui/coins/golden-coin.png" id="3_fkwq8"]
 [ext_resource type="Texture2D" uid="uid://d2pt3shydhe8b" path="res://Assets/ui/simple-background.png" id="3_wamkq"]
+[ext_resource type="Texture2D" uid="uid://dcitos7xyk562" path="res://Assets/ui/coins/platinum-coin.png" id="4_rd0du"]
 
 [node name="Top Status Bar" type="Control"]
 layout_mode = 3
@@ -33,10 +35,10 @@ alignment = 1
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/MarginContainer/HBoxContainer/Coin status"]
-custom_minimum_size = Vector2(20, 0)
+custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 size_flags_horizontal = 0
-texture = ExtResource("1_i0ev7")
+texture = ExtResource("2_nrwpc")
 expand_mode = 1
 stretch_mode = 5
 
@@ -56,10 +58,10 @@ justification_flags = 0
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/MarginContainer/HBoxContainer/Coin status2"]
-custom_minimum_size = Vector2(20, 0)
+custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 size_flags_horizontal = 0
-texture = ExtResource("1_i0ev7")
+texture = ExtResource("3_fkwq8")
 expand_mode = 1
 stretch_mode = 5
 
@@ -79,10 +81,10 @@ justification_flags = 0
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/MarginContainer/HBoxContainer/Coin status3"]
-custom_minimum_size = Vector2(20, 0)
+custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 size_flags_horizontal = 0
-texture = ExtResource("1_i0ev7")
+texture = ExtResource("4_rd0du")
 expand_mode = 1
 stretch_mode = 5
 

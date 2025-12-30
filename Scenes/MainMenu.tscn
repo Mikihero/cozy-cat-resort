@@ -1,0 +1,65 @@
+[gd_scene load_steps=6 format=3 uid="uid://c8qsqmsig3f5k"]
+
+[ext_resource type="Texture2D" uid="uid://d2pt3shydhe8b" path="res://Assets/ui/simple-background.png" id="1_8saeu"]
+[ext_resource type="StyleBox" uid="uid://ykbqjul20drt" path="res://Assets/ui/styles/simple-basic.tres" id="2_ghw46"]
+[ext_resource type="StyleBox" uid="uid://douabvrad66ov" path="res://Assets/ui/styles/brown-pressed.tres" id="3_df05h"]
+[ext_resource type="Script" uid="uid://bnbpadveshlxe" path="res://Scenes/start_button.gd" id="4_ghw46"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8um5k"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="simpleBackground" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -42.0
+offset_right = 96.0
+offset_bottom = 42.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_8saeu")
+region_rect = Rect2(0, 0, 21, 21)
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="startButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -68.0
+offset_top = -20.0
+offset_right = 68.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = ExtResource("2_ghw46")
+theme_override_styles/normal_mirrored = ExtResource("2_ghw46")
+theme_override_styles/pressed = ExtResource("3_df05h")
+theme_override_styles/pressed_mirrored = ExtResource("3_df05h")
+theme_override_styles/hover = ExtResource("2_ghw46")
+theme_override_styles/hover_mirrored = ExtResource("2_ghw46")
+theme_override_styles/hover_pressed = ExtResource("3_df05h")
+theme_override_styles/hover_pressed_mirrored = ExtResource("3_df05h")
+theme_override_styles/disabled = ExtResource("2_ghw46")
+theme_override_styles/disabled_mirrored = ExtResource("2_ghw46")
+theme_override_styles/focus = SubResource("StyleBoxTexture_8um5k")
+text = "Start game"
+icon_alignment = 1
+script = ExtResource("4_ghw46")
