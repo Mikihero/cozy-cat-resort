@@ -23,6 +23,8 @@ Globals="*res://Scripts/globals.gd"
 
 window/size/viewport_width=384
 window/size/viewport_height=216
+window/size/window_width_override=1920
+window/size/window_height_override=1080
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 window/stretch/scale_mode="integer"
@@ -34,6 +36,10 @@ enabled=PackedStringArray("res://addons/admob/plugin.cfg")
 [gui]
 
 theme/custom_font="uid://godib3f4j271"
+
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
 
 [rendering]
 
