@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://hjtrg6uyi58"
-path="res://.godot/imported/spr_tileset_sunnysideworld_16px.png-99ff4c16a094b7eb739092a49dcbc03a.ctex"
+uid="uid://g6rr8ljiftt3"
+path="res://.godot/imported/platinum-coin-anim.png-06fa2b71aef1adc424a8f0a5e6d6f5e7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/tileset/spr_tileset_sunnysideworld_16px.png"
-dest_files=["res://.godot/imported/spr_tileset_sunnysideworld_16px.png-99ff4c16a094b7eb739092a49dcbc03a.ctex"]
+source_file="res://Assets/ui/coins/platinum-coin-anim.png"
+dest_files=["res://.godot/imported/platinum-coin-anim.png-06fa2b71aef1adc424a8f0a5e6d6f5e7.ctex"]
 
 [params]
 
