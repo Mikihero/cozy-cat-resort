@@ -1,14 +1,15 @@
 class_name Cat extends AnimatedSprite2D
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	self.play("idle")
-	pass # Replace with function body.
-
 var path: Array[Vector2i];
 var queuedActions: Array[PlayerAction];
-	
+var targetSelector: selector
+
+func _ready() -> void:
+	self.play("idle")
+	targetSelector = self.get_parent().get_node("selector") as selector;
+	targetSelector.hide_selector()
+	pass
+
 func _physics_process(delta: float) -> void:
 	if !queuedActions.is_empty():
 		update_action(delta);
@@ -17,27 +18,33 @@ func _physics_process(delta: float) -> void:
 			self.play("idle")
 
 func update_action(delta:float):
+	# setup first call
 	var currentAction = queuedActions[0]
 	if (!currentAction.hasStarted):
 		currentAction.hasStarted = true;
 		currentAction.hasFinished = false
 		self.play(currentAction.getAnimName())
+		
+	targetSelector.set_selector_position(currentAction.actionPlayerPos, Vector2i(1, 1))
+	#progress and call correct update function
 	if (currentAction.isDurationable):
 		currentAction.duration -= delta
 	
-	#call correct update function
 	match currentAction.actionEnum:
 		currentAction.ActionEnums.idle:
 			pass
 		currentAction.ActionEnums.walk:
 			move_update(delta)
 	
-	if (currentAction.duration<0) || (currentAction.hasFinished):
+	# finish when duration ends or hasFinished flag is set
+	if (currentAction.duration<0 && currentAction.isDurationable) || (currentAction.hasFinished):
 		finishAction()
 	pass
 
 func finishAction():
 	queuedActions.pop_front()
+	if (queuedActions.size() == 0):
+		targetSelector.cool_hide_selector()
 
 func move_update(delta:float):
 	if (path.is_empty()):
@@ -63,8 +70,15 @@ func move(whereTo: Vector2i):
 	pass
 
 func onMapPressed(mapCoord: Vector2i):
-	move(mapCoord);
-	var newAction: PlayerAction = PlayerAction.new();
-	newAction.actionEnum = newAction.ActionEnums.walk
-	newAction.duration = 0;
-	queuedActions.append(newAction)
+	if (queuedActions.size() == 0):
+		move(mapCoord);
+		var newAction: PlayerAction = PlayerAction.new();
+		newAction.actionEnum = newAction.ActionEnums.walk
+		newAction.duration = 0;
+		newAction.actionPlayerPos = mapCoord
+		queuedActions.append(newAction)
+	else:
+		if (queuedActions[0].actionEnum == queuedActions[0].ActionEnums.walk):
+			move(mapCoord);
+			queuedActions[0].actionPlayerPos = mapCoord
+	

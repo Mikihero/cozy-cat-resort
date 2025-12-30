@@ -8,7 +8,7 @@ enum ActionEnums {
 }
 
 var actionEnum: ActionEnums
-var actionPlayerPos: Vector2
+var actionPlayerPos: Vector2i
 var actionActionStuff: Rect2
 var hasStarted: bool
 var hasFinished:bool

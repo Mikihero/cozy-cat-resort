@@ -1,24 +1,41 @@
-[gd_scene load_steps=10 format=4 uid="uid://460ht54ok3sx"]
+[gd_scene load_steps=16 format=4 uid="uid://460ht54ok3sx"]
 
 [ext_resource type="Script" uid="uid://cxfhelhwdtnup" path="res://Scripts/map.gd" id="1_bo1nx"]
 [ext_resource type="TileSet" uid="uid://bve2eymgqa6k4" path="res://Assets/tileset/main.tres" id="2_8gbba"]
 [ext_resource type="SpriteFrames" uid="uid://oduw4bmqr0w7" path="res://Assets/anim/orange_worker.tres" id="3_8gbba"]
 [ext_resource type="Script" uid="uid://dj5m3lddroqsl" path="res://Scripts/player.gd" id="4_jjvhh"]
-[ext_resource type="Texture2D" uid="uid://b64tt3bouwhya" path="res://Assets/ui/main_map/selection1.png" id="5_344ge"]
-[ext_resource type="Texture2D" uid="uid://bdl1oes5rxcr" path="res://Assets/ui/main_map/selection4.png" id="6_ynf5e"]
-[ext_resource type="Texture2D" uid="uid://d3ot3l7mvj07q" path="res://Assets/ui/main_map/selection5.png" id="7_hptm8"]
-[ext_resource type="Texture2D" uid="uid://checlsv0l5x27" path="res://Assets/ui/main_map/selection8.png" id="8_d1ilt"]
+[ext_resource type="Texture2D" uid="uid://cdel0arw7r2at" path="res://Assets/ui/main_map/selector-bottom1.png" id="5_6iyac"]
+[ext_resource type="Script" uid="uid://ib3ergcug187" path="res://Scenes/selector.gd" id="5_fdnlq"]
+[ext_resource type="Texture2D" uid="uid://cql7g2db2sqsy" path="res://Assets/ui/main_map/selector-bottom2.png" id="6_fdnlq"]
+[ext_resource type="Texture2D" uid="uid://b3i16076l5ys0" path="res://Assets/ui/main_map/selector-bottom3.png" id="7_jkdf5"]
+[ext_resource type="Texture2D" uid="uid://bdwg5kgoyg1te" path="res://Assets/ui/main_map/selector-bottom4.png" id="8_wsu2k"]
+[ext_resource type="Texture2D" uid="uid://chbe33ghgcs7t" path="res://Assets/ui/main_map/selector-top1.png" id="9_k12tt"]
+[ext_resource type="Texture2D" uid="uid://badderfpr5r2f" path="res://Assets/ui/main_map/selector-top2.png" id="10_h1bgf"]
+[ext_resource type="Texture2D" uid="uid://l3vh20gvl1ah" path="res://Assets/ui/main_map/selector-top3.png" id="11_b3802"]
+[ext_resource type="Texture2D" uid="uid://bjscyu3b7bagv" path="res://Assets/ui/main_map/selector-top4.png" id="12_fevyy"]
 
-[sub_resource type="AnimatedTexture" id="AnimatedTexture_6iyac"]
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_hibaj"]
 frames = 4
 speed_scale = 9.0
-frame_0/texture = ExtResource("5_344ge")
+frame_0/texture = ExtResource("5_6iyac")
 frame_0/duration = 3.0
-frame_1/texture = ExtResource("6_ynf5e")
+frame_1/texture = ExtResource("6_fdnlq")
 frame_1/duration = 1.0
-frame_2/texture = ExtResource("7_hptm8")
+frame_2/texture = ExtResource("7_jkdf5")
 frame_2/duration = 3.0
-frame_3/texture = ExtResource("8_d1ilt")
+frame_3/texture = ExtResource("8_wsu2k")
+frame_3/duration = 1.0
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_pdsj5"]
+frames = 4
+speed_scale = 9.0
+frame_0/texture = ExtResource("9_k12tt")
+frame_0/duration = 3.0
+frame_1/texture = ExtResource("10_h1bgf")
+frame_1/duration = 1.0
+frame_2/texture = ExtResource("11_b3802")
+frame_2/duration = 3.0
+frame_3/texture = ExtResource("12_fevyy")
 frame_3/duration = 1.0
 
 [node name="Main" type="Node2D"]
@@ -66,16 +83,29 @@ sprite_frames = ExtResource("3_8gbba")
 animation = &"walk"
 script = ExtResource("4_jjvhh")
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="selector" type="Node2D" parent="."]
+position = Vector2(192, 113)
+script = ExtResource("5_fdnlq")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="Node2D"]
-z_index = 2
-offset_left = 170.0
-offset_top = 106.0
-offset_right = 198.0
-offset_bottom = 136.0
-texture = SubResource("AnimatedTexture_6iyac")
+[node name="bottom" type="NinePatchRect" parent="selector"]
+z_index = 1
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+texture = SubResource("AnimatedTexture_hibaj")
 patch_margin_left = 14
-patch_margin_top = 14
+patch_margin_top = 1
 patch_margin_right = 14
-patch_margin_bottom = 14
+patch_margin_bottom = 15
+
+[node name="top" type="NinePatchRect" parent="selector"]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+texture = SubResource("AnimatedTexture_pdsj5")
+patch_margin_left = 14
+patch_margin_top = 15
+patch_margin_right = 14
+patch_margin_bottom = 1
