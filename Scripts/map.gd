@@ -95,7 +95,8 @@ func paint_entity(e: MapEntity):
 					non_blocking.set_cell(e.area.position + Vector2i(-1, -2), 0, Vector2i(17, 0), 1);
 					non_blocking.set_cell(e.area.position + Vector2i(0, -2), 0, Vector2i(27, 5));
 					non_blocking.set_cell(e.area.position + Vector2i(1, -3), 0, Vector2i(29, 5));
-					#self.add_child(Smoke.new(e.area.position + Vector2i(1, -4)))
+					self.add_child(Smoke.new(e.area.position + Vector2i(1, -3)))
+
 
 func get_best_path(source: Vector2i, destination: Vector2i) -> Array[Vector2i]:
 	var h = func (n: Vector2i) -> int:
@@ -136,7 +137,7 @@ func get_best_path(source: Vector2i, destination: Vector2i) -> Array[Vector2i]:
 		].filter(func(v):
 			return (v.x >=0 && v.y >= 0 && v.x < width && v.y < height) &&\
 			self.is_tile_free(v) &&\
-			!self.entities.any(func(e: MapEntity): return e.get_area().encloses(Rect2i(v, Vector2i(1, 1))))
+			!self.entities.any(func(e: MapEntity): return e.get_area().encloses(Rect2i(v, Vector2i(1, 1)))) 
 		);
 		for neighbor in neighbors:
 
@@ -164,6 +165,11 @@ func is_tile_free(coords: Vector2i) -> bool:
 		return false;
 	if (self.get_node("TileMapBackgroundBorder") as TileMapLayer).get_cell_atlas_coords(coords) != Vector2i(-1, -1):
 		return false;
+	var foreground = self.get_node("TileMapForegroundBlocking") as TileMapLayer;
+	if foreground.get_cell_atlas_coords(coords) != Vector2i(-1, -1) &&\
+		foreground.get_cell_tile_data(coords).z_index == 0:
+		return false;
+		
 
 	return true;
 
