@@ -42,6 +42,23 @@ func get_area() -> Rect2i:
 			ret.position.y -= (ret.size.y - 1)
 	return ret;
 
+func get_sprite_area() -> Rect2i:
+	var ret = self.area;
+	match self.type:
+		Type.TREE:
+			if self.area.size.x == 2:
+				ret.position.y -= 1;
+				ret.size.y += 1;
+			else:
+				ret.position.y -= 1;
+				ret.size.y += 1;
+		Type.HOUSE:
+			match self.area.size:
+				Vector2i(3, 3):
+					ret.position.y -= 2;
+			
+	return ret;
+
 enum Type {
 	TREE = 0,
 	ROCK = 1,

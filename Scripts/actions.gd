@@ -4,12 +4,12 @@ enum ActionEnums {
 	idle,
 	walk,
 	axe,
-	pickaxe
+	pickaxe,
+	work
 }
 
 var actionEnum: ActionEnums
-var actionPlayerPos: Vector2i
-var actionActionStuff: Rect2
+var actionPlayerRect: Rect2i
 var hasStarted: bool
 var hasFinished:bool
 var isDurationable:bool
@@ -25,4 +25,6 @@ func getAnimName()->String:
 			return "axe"
 		ActionEnums.pickaxe:
 			return "pickaxe"
+		ActionEnums.work:
+			return "work"
 	return "idle";

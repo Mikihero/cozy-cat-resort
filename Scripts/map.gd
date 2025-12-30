@@ -1,6 +1,6 @@
 class_name Map extends Node2D
 
-var entities = [];
+var entities: Array[MapEntity] = [];
 
 var width = 0
 var height = 0
@@ -15,7 +15,8 @@ func _ready() -> void:
 	
 	var save_file = FileAccess.open("user://save.json", FileAccess.READ);
 	var data = JSON.parse_string(save_file.get_line());
-	var ent = (data.get("entities") as Array).map(MapEntity.deserialize);
+	var ent: Array[MapEntity] = [];
+	(data.get("entities") as Array).map(MapEntity.deserialize).map(func(e: MapEntity): ent.push_back(e));
 	print("load:", ent);
 	self.entities = ent;
 	
@@ -193,8 +194,7 @@ func _input(event: InputEvent) -> void:
 			var camera = (self.get_parent().get_node("Camera2D") as Camera2D);
 			var time = Time.get_ticks_msec() / 1000.0 - touch_start_time;
 			if time < TAP_THRESHOLD && !has_moved:
-				self.add_child(Smoke.new(Vector2i(7, 7)));
-				player.onMapPressed(self.translare_px_to_coords(event.position + camera.position - Vector2(192, 108)));
+				player.onMapPressed(self.translate_px_to_coords(event.position + camera.position - Vector2(192, 108)));
 	pass
 
 func _notification(what: int) -> void:
@@ -211,7 +211,7 @@ func translate_coords_to_px(pos: Array[Vector2i]) -> Array[Vector2i]:
 		ret.append(self.translate_coord_to_px(p));
 	return ret
 
-func translare_px_to_coords(pos: Vector2i) -> Vector2i:
+func translate_px_to_coords(pos: Vector2i) -> Vector2i:
 	return Vector2i(pos / 16)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

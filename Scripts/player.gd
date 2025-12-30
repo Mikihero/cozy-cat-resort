@@ -24,7 +24,8 @@ func update_action(delta:float):
 		currentAction.hasFinished = false
 		self.play(currentAction.getAnimName())
 		
-	targetSelector.set_selector_position(currentAction.actionPlayerPos, Vector2i(1, 1))
+	targetSelector.set_selector_position(currentAction.actionPlayerRect);
+
 	#progress and call correct update function
 	if (currentAction.isDurationable):
 		currentAction.duration -= delta
@@ -34,6 +35,8 @@ func update_action(delta:float):
 			pass
 		currentAction.ActionEnums.walk:
 			move_update(delta)
+		currentAction.ActionEnums.axe:
+			pass
 	
 	# finish when duration ends or hasFinished flag is set
 	if (currentAction.duration<0 && currentAction.isDurationable) || (currentAction.hasFinished):
@@ -67,7 +70,7 @@ enum MoveResult {
 func move(whereTo: Vector2i) -> MoveResult:
 	var map = self.get_parent().get_node("Map") as Map;
 	var result: MoveResult;
-	path = map.get_best_path(map.translare_px_to_coords(self.position), whereTo);
+	path = map.get_best_path(map.translate_px_to_coords(self.position), whereTo);
 	if path.is_empty():
 		var points_to_try = [
 			whereTo + Vector2i(-1, 0),
@@ -76,7 +79,7 @@ func move(whereTo: Vector2i) -> MoveResult:
 			whereTo + Vector2i(1, 0),
 		];
 		for p in points_to_try:
-			p = map.get_best_path(map.translare_px_to_coords(self.position), p);
+			p = map.get_best_path(map.translate_px_to_coords(self.position), p);
 			if p.is_empty():
 				continue
 			if path.is_empty() || p.size() < path.size():
@@ -94,14 +97,37 @@ func move(whereTo: Vector2i) -> MoveResult:
 
 func schedule_map_action(target: Vector2i):
 	var map = self.get_parent().get_node("Map") as Map;
+	
+	var index = map.entities.find_custom(func(e: MapEntity): return e.area.encloses(Rect2i(target, Vector2i.ONE)));
+	if index == -1:
+		return;
+	
+	var action = PlayerAction.new();
+	action.actionPlayerRect = map.entities.get(index).get_sprite_area();
+	match map.entities.get(index).type:
+		MapEntity.Type.TREE:
+			action.actionEnum = action.ActionEnums.axe;
+			action.duration = 5;
+		MapEntity.Type.ROCK:
+			action.actionEnum = action.ActionEnums.pickaxe;
+			action.duration = 10;
+		MapEntity.Type.HOUSE:
+			action.actionEnum = action.ActionEnums.work;
+			action.duration = 5;
+		_: return;
+	queuedActions.append(action);
+		
 
 func onMapPressed(mapCoord: Vector2i):
 	if (queuedActions.size() == 0):
+		var map = self.get_parent().get_node("Map") as Map;
 		var res = move(mapCoord);
 		var newAction: PlayerAction = PlayerAction.new();
 		newAction.actionEnum = newAction.ActionEnums.walk
 		newAction.duration = 0;
-		newAction.actionPlayerPos = mapCoord
+		newAction.actionPlayerRect = Rect2i(map.translate_px_to_coords(path.back()), Vector2i.ONE) \
+		if !path.is_empty() else Rect2i(mapCoord, Vector2i.ONE);
+
 		queuedActions.append(newAction)
 		match res:
 			MoveResult.NEAREST_BLOCK:
@@ -110,4 +136,4 @@ func onMapPressed(mapCoord: Vector2i):
 	else:
 		if (queuedActions[0].actionEnum == queuedActions[0].ActionEnums.walk):
 			move(mapCoord);
-			queuedActions[0].actionPlayerPos = mapCoord
+			queuedActions[0].actionPlayerRect.position = mapCoord
