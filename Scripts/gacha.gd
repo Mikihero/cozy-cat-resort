@@ -27,7 +27,7 @@ func _on_wish_premium_pressed() -> void:
 
 func _on_wish_1_pressed() -> void:
 	coin_type = "gold"
-	if (Globals.DiamondCatCoins >= 1):
+	if (Globals.GoldCatCoins >= 100):
 		var popup_instance = popup_scene.instantiate()
 		popup_instance.message_text = "Are you sure you want to spend 100 gold catcoins?"
 		popup_instance.action_to_execute = check_funds

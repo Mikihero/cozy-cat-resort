@@ -5,7 +5,7 @@ var action_to_execute: Callable
 
 
 func  _ready() -> void:			
-	$PanelContainer/VBoxContainer/Message.text = message_text
+	$ColorRect/PanelContainer/VBoxContainer/Message.text = message_text
 
 func _on_cancel_pressed() -> void:
 	queue_free()
