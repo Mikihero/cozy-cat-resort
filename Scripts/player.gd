@@ -8,7 +8,7 @@ func _ready() -> void:
 
 var path: Array[Vector2i];
 var queuedActions: Array[PlayerAction];
-	
+
 func _physics_process(delta: float) -> void:
 	if !queuedActions.is_empty():
 		update_action(delta);
@@ -24,14 +24,14 @@ func update_action(delta:float):
 		self.play(currentAction.getAnimName())
 	if (currentAction.isDurationable):
 		currentAction.duration -= delta
-	
+
 	#call correct update function
 	match currentAction.actionEnum:
 		currentAction.ActionEnums.idle:
 			pass
 		currentAction.ActionEnums.walk:
 			move_update(delta)
-	
+
 	if (currentAction.duration<0) || (currentAction.hasFinished):
 		finishAction()
 	pass
@@ -60,6 +60,7 @@ func move(whereTo: Vector2i):
 	path = map.translate_coords_to_px(path);
 	if path.size() >= 2 && self.position.direction_to(path.get(0)) == -self.position.direction_to(path.get(1)):
 		path.pop_front()
+
 	pass
 
 func onMapPressed(mapCoord: Vector2i):

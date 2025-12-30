@@ -1,15 +1,38 @@
 class_name MapEntity
 
-var position;
+var area;
+var type: MapEntity.Type;
+var texture;
 
-func _init(position: Vector2i):
-	self.position = position
+func _init(area: Rect2i, type: Type, texture: Vector2i):
+	self.area = area
+	self.type = type
+	self.texture = texture
 	pass
+
+func _to_string() -> String:
+	return str(self.area) + " " + str(self.type)
+
+func serialize() -> String:
+	return JSON.stringify({
+		"position_x": area.position.x,
+		"position_y": area.position.y,
+		"size_x": area.size.x,
+		"size_y": area.size.y,
+		"type": type,
+		"texture_x": texture.x,
+		"texture_y": texture.y
+	});
 	
+static func deserialize(str: String) -> MapEntity:
+	var data: Dictionary = JSON.parse_string(str);
+	return MapEntity.new(
+		Rect2i(data.get("position_x"), data.get("position_y"), data.get("size_x"), data.get("size_y")), 
+		Type.keys().find_custom(func(v): return (v as int) == (data.get("type") as int)),
+		Vector2i(data.get("texture_x"), data.get("texture_y"))
+	);
+
 enum Type {
-	Border,
-	Water,
-	Tree,
-	Rock,
-	House
+	TREE,
+	ROCK,
 }
