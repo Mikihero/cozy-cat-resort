@@ -73,7 +73,7 @@ tile_set = ExtResource("2_8gbba")
 
 [node name="TileMapForegroundBlocking" type="TileMapLayer" parent="Map"]
 z_index = 2
-tile_map_data = PackedByteArray("AAALAAYAAAApAAUAAAAMAAYAAAApAAUAAAANAAYAAAApAAUAAAAOAAYAAAApAAUAAAA=")
+tile_map_data = PackedByteArray("AAALAAYAAAApAAUAAAAMAAYAAAApAAUAAAANAAYAAAApAAUAAAA=")
 tile_set = ExtResource("2_8gbba")
 collision_enabled = false
 

@@ -24,7 +24,7 @@ func update_action(delta:float):
 		currentAction.hasFinished = false
 		self.play(currentAction.getAnimName())
 		
-	targetSelector.set_selector_position(currentAction.actionPlayerRect);
+	targetSelector.set_selector_global_position(currentAction.actionPlayerRect);
 
 	#progress and call correct update function
 	if (currentAction.isDurationable):
@@ -36,6 +36,8 @@ func update_action(delta:float):
 		currentAction.ActionEnums.walk:
 			move_update(delta)
 		currentAction.ActionEnums.axe:
+			self.flip_h = self.position.direction_to(currentAction.actionPlayerRect.position).x < 0
+			
 			pass
 	
 	# finish when duration ends or hasFinished flag is set
@@ -70,16 +72,14 @@ enum MoveResult {
 func move(whereTo: Vector2i) -> MoveResult:
 	var map = self.get_parent().get_node("Map") as Map;
 	var result: MoveResult;
-	path = map.get_best_path(map.translate_px_to_coords(self.position), whereTo);
+	path = map.get_best_path(Map.translate_px_to_coords(self.position), whereTo);
 	if path.is_empty():
 		var points_to_try = [
 			whereTo + Vector2i(-1, 0),
-			whereTo + Vector2i(0, 1),
-			whereTo + Vector2i(0, -1),
 			whereTo + Vector2i(1, 0),
 		];
 		for p in points_to_try:
-			p = map.get_best_path(map.translate_px_to_coords(self.position), p);
+			p = map.get_best_path(Map.translate_px_to_coords(self.position), p);
 			if p.is_empty():
 				continue
 			if path.is_empty() || p.size() < path.size():
@@ -90,7 +90,7 @@ func move(whereTo: Vector2i) -> MoveResult:
 			result = MoveResult.NEAREST_BLOCK;
 	else:
 		result = MoveResult.REACH_TARGET;
-	path = map.translate_coords_to_px(path);
+	path = Map.translate_coords_to_px(path);
 	if path.size() >= 2 && self.position.direction_to(path.get(0)) == -self.position.direction_to(path.get(1)):
 		path.pop_front()
 	return result;
@@ -103,7 +103,7 @@ func schedule_map_action(target: Vector2i):
 		return;
 	
 	var action = PlayerAction.new();
-	action.actionPlayerRect = map.entities.get(index).get_sprite_area();
+	action.actionPlayerRect = map.entities.get(index).get_sprite_area_in_global_coords();
 	match map.entities.get(index).type:
 		MapEntity.Type.TREE:
 			action.actionEnum = action.ActionEnums.axe;
@@ -120,13 +120,12 @@ func schedule_map_action(target: Vector2i):
 
 func onMapPressed(mapCoord: Vector2i):
 	if (queuedActions.size() == 0):
-		var map = self.get_parent().get_node("Map") as Map;
 		var res = move(mapCoord);
 		var newAction: PlayerAction = PlayerAction.new();
 		newAction.actionEnum = newAction.ActionEnums.walk
 		newAction.duration = 0;
-		newAction.actionPlayerRect = Rect2i(map.translate_px_to_coords(path.back()), Vector2i.ONE) \
-		if !path.is_empty() else Rect2i(mapCoord, Vector2i.ONE);
+		newAction.actionPlayerRect = Rect2i(path.back(), Vector2i(24, 24)) \
+		if !path.is_empty() else Rect2i(Map.translate_coord_to_px(mapCoord), Vector2i(24, 24));
 
 		queuedActions.append(newAction)
 		match res:
@@ -136,4 +135,4 @@ func onMapPressed(mapCoord: Vector2i):
 	else:
 		if (queuedActions[0].actionEnum == queuedActions[0].ActionEnums.walk):
 			move(mapCoord);
-			queuedActions[0].actionPlayerRect.position = mapCoord
+			queuedActions[0].actionPlayerRect.position = Map.translate_coord_to_px(mapCoord)

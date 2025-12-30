@@ -202,16 +202,16 @@ func _notification(what: int) -> void:
 		self.save_to_file();
 		get_tree().quit();
 
-func translate_coord_to_px(pos: Vector2i) -> Vector2i:
+static func translate_coord_to_px(pos: Vector2i) -> Vector2i:
 	return pos * 16 + Vector2i(8, 8);
 
-func translate_coords_to_px(pos: Array[Vector2i]) -> Array[Vector2i]:
+static func translate_coords_to_px(pos: Array[Vector2i]) -> Array[Vector2i]:
 	var ret: Array[Vector2i] = [];
 	for p in pos:
-		ret.append(self.translate_coord_to_px(p));
+		ret.append(Map.translate_coord_to_px(p));
 	return ret
 
-func translate_px_to_coords(pos: Vector2i) -> Vector2i:
+static func translate_px_to_coords(pos: Vector2i) -> Vector2i:
 	return Vector2i(pos / 16)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -222,7 +222,6 @@ func _process(delta: float) -> void:
 func save_to_file():
 	var save_file = FileAccess.open("user://save.json", FileAccess.WRITE);
 	var ent = self.get_entities();
-	print(ent.size());
 	var data = {
 		"entities": ent.map(func(e: MapEntity): return e.serialize())
 	};

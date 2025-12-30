@@ -2,14 +2,14 @@ class_name selector extends Node2D
 
 var bottom: NinePatchRect
 var top: NinePatchRect
-var map: Map
+#var map: Map
 var animTime: float
 var isShown: bool = false
 
 func _ready():
 	bottom = $bottom as NinePatchRect
 	top = $top as NinePatchRect
-	map = self.get_parent().get_node("Map") as Map;
+	#map = self.get_parent().get_node("Map") as Map;
 	animTime = 0.
 	self.hide()
 
@@ -26,8 +26,16 @@ func _process(delta: float):
 			isShown = false
 
 func set_selector_position(rect: Rect2i):
-	var pixelPos = map.translate_coord_to_px(rect.position) + Vector2i(5, 2);
-	var pixelSize:Vector2i = map.translate_coord_to_px(rect.size) + Vector2i(6, 8);
+	self.set_selector_global_position(
+		Rect2i(
+			Map.translate_coord_to_px(rect.position), 
+			Map.translate_coord_to_px(rect.size)
+		)
+	);
+
+func set_selector_global_position(rect: Rect2i):
+	var pixelPos = rect.position + Vector2i(5, 2);
+	var pixelSize:Vector2i = rect.size + Vector2i(6, 8);
 	top.size = pixelSize
 	bottom.size = pixelSize
 	self.position = pixelPos
