@@ -1,0 +1,99 @@
+[gd_scene load_steps=8 format=3 uid="uid://bypyg2i4u4j7e"]
+
+[ext_resource type="Script" uid="uid://dl8cit7xrc3q1" path="res://Scripts/gacha.gd" id="1_ym5em"]
+[ext_resource type="Texture2D" uid="uid://cld0emutf706g" path="res://Placeholders/banner_blue.png" id="2_jaewt"]
+[ext_resource type="Texture2D" uid="uid://4lyagpeux4hr" path="res://Placeholders/banner1.png" id="2_wxypu"]
+[ext_resource type="Texture2D" uid="uid://bi4txrgwnx82l" path="res://Placeholders/banner_pink.png" id="3_t80qp"]
+[ext_resource type="Texture2D" uid="uid://bsoutbx64rf61" path="res://Placeholders/banner_purple.png" id="4_gy7bo"]
+[ext_resource type="Texture2D" uid="uid://by2xn5empnkgq" path="res://Placeholders/banner2.png" id="4_k8vgs"]
+[ext_resource type="Texture2D" uid="uid://xo63bh8dh4rs" path="res://Placeholders/banner3.png" id="5_6oi3p"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_ym5em")
+bg_blue = ExtResource("2_jaewt")
+bg_pink = ExtResource("3_t80qp")
+bg_purple = ExtResource("4_gy7bo")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(192, 108)
+
+[node name="Banner" type="Sprite2D" parent="."]
+position = Vector2(192, 108)
+scale = Vector2(0.19998072, 0.20000002)
+texture = ExtResource("2_jaewt")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+offset_left = 8.0
+offset_top = 176.0
+offset_right = 376.0
+offset_bottom = 210.0
+theme_override_constants/separation = 30
+
+[node name="Wish premium" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Wish x1
+1 Diamond Catcoin
+"
+
+[node name="Wish 1" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Wish x1
+100 Gold Catcoins
+"
+
+[node name="Wish 10" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Wish x10
+1000 Gold Catcoins"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = 40.0
+offset_right = 130.0
+offset_bottom = 160.0
+color = Color(1, 1, 1, 0.6666667)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.5
+offset_top = -72.0
+offset_right = 35.5
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Banner1" type="TextureButton" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture_normal = ExtResource("2_wxypu")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Banner2" type="TextureButton" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture_normal = ExtResource("4_k8vgs")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Banner3" type="TextureButton" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture_normal = ExtResource("5_6oi3p")
+ignore_texture_size = true
+stretch_mode = 4
+
+[connection signal="pressed" from="HBoxContainer/Wish premium" to="." method="_on_wish_premium_pressed"]
+[connection signal="pressed" from="HBoxContainer/Wish 1" to="." method="_on_wish_1_pressed"]
+[connection signal="pressed" from="HBoxContainer/Wish 10" to="." method="_on_wish_10_pressed"]
+[connection signal="pressed" from="ColorRect/VBoxContainer/Banner1" to="." method="_on_banner_1_pressed"]
+[connection signal="pressed" from="ColorRect/VBoxContainer/Banner2" to="." method="_on_banner_2_pressed"]
+[connection signal="pressed" from="ColorRect/VBoxContainer/Banner3" to="." method="_on_banner_3_pressed"]

@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://dal6ahd0v764d"]
+[gd_scene load_steps=9 format=3 uid="uid://dal6ahd0v764d"]
 
 [ext_resource type="Script" uid="uid://bbcjsrylkt4cr" path="res://Scenes/add_coins.gd" id="1_6l7je"]
 [ext_resource type="PackedScene" uid="uid://bstrwgy5nhygs" path="res://Scenes/TopStatusBar.tscn" id="1_52fb6"]
 [ext_resource type="Texture2D" uid="uid://d2pt3shydhe8b" path="res://Assets/ui/simple-background.png" id="2_iacmt"]
 [ext_resource type="StyleBox" uid="uid://ykbqjul20drt" path="res://Assets/ui/styles/simple-basic.tres" id="2_x6ack"]
 [ext_resource type="StyleBox" uid="uid://douabvrad66ov" path="res://Assets/ui/styles/brown-pressed.tres" id="3_iacmt"]
+[ext_resource type="Script" uid="uid://pihs4mkkyf00" path="res://Scenes/example_text_button_2.gd" id="6_6ev3c"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6ev3c"]
 
@@ -92,3 +93,4 @@ theme_override_styles/disabled_mirrored = ExtResource("2_x6ack")
 theme_override_styles/focus = SubResource("StyleBoxTexture_maf8m")
 text = "Wish"
 icon_alignment = 1
+script = ExtResource("6_6ev3c")
