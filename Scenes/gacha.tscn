@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://bik6bgpqf1hde"]
 
-[ext_resource type="Script" path="res://Scripts/gacha.gd" id="1_ym5em"]
+[ext_resource type="Script" uid="uid://dl8cit7xrc3q1" path="res://Scripts/gacha.gd" id="1_ym5em"]
 [ext_resource type="Texture2D" uid="uid://cld0emutf706g" path="res://Placeholders/banner_blue.png" id="2_jaewt"]
 [ext_resource type="Texture2D" uid="uid://4lyagpeux4hr" path="res://Placeholders/banner1.png" id="2_wxypu"]
 [ext_resource type="Texture2D" uid="uid://bi4txrgwnx82l" path="res://Placeholders/banner_pink.png" id="3_t80qp"]
@@ -107,10 +107,9 @@ scale = Vector2(0.1997396, 0.19814815)
 texture = ExtResource("2_jaewt")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-offset_left = 434.0
-offset_top = 46.0
-offset_right = 1140.0
-offset_bottom = 134.0
+offset_left = -28.0
+offset_right = 678.0
+offset_bottom = 88.0
 theme_override_constants/separation = 30
 
 [node name="Wish premium" type="Button" parent="HBoxContainer"]

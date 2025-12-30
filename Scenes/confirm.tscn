@@ -1,24 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://j1plthunuobk"]
+[gd_scene load_steps=6 format=3 uid="uid://j1plthunuobk"]
 
 [ext_resource type="Script" uid="uid://b5f3dt0cqk252" path="res://Scripts/confirm.gd" id="1_02xmp"]
+[ext_resource type="StyleBox" uid="uid://ykbqjul20drt" path="res://Assets/ui/styles/simple-basic.tres" id="2_rsoxr"]
+[ext_resource type="StyleBox" uid="uid://cbif8uak1xd8c" path="res://Assets/ui/styles/simple-dark.tres" id="3_qndtx"]
+[ext_resource type="StyleBox" uid="uid://douabvrad66ov" path="res://Assets/ui/styles/brown-pressed.tres" id="4_jagrg"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_d2hsj"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 script = ExtResource("1_02xmp")
-
-[node name="ColorRect" type="ColorRect" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -329.25
-offset_top = -195.75
-offset_right = 329.25
-offset_bottom = 195.75
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 anchors_preset = 8
@@ -26,20 +16,25 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -330.0
-offset_top = -197.5
-offset_right = 329.5
-offset_bottom = 195.5
+offset_left = -96.0
+offset_top = -54.0
+offset_right = 96.0
+offset_bottom = 54.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = ExtResource("2_rsoxr")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_constants/separation = 16
+alignment = 1
 
 [node name="Message" type="Label" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 70
+theme_override_font_sizes/font_size = 16
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
@@ -48,28 +43,43 @@ autowrap_mode = 3
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_constants/separation = 100
+theme_override_constants/separation = 20
 
 [node name="Cancel" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(200, 0)
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 50
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = ExtResource("3_qndtx")
+theme_override_styles/normal_mirrored = ExtResource("3_qndtx")
+theme_override_styles/pressed = ExtResource("4_jagrg")
+theme_override_styles/pressed_mirrored = ExtResource("4_jagrg")
+theme_override_styles/hover = ExtResource("3_qndtx")
+theme_override_styles/hover_mirrored = ExtResource("3_qndtx")
+theme_override_styles/hover_pressed = ExtResource("4_jagrg")
+theme_override_styles/hover_pressed_mirrored = ExtResource("4_jagrg")
+theme_override_styles/disabled = ExtResource("3_qndtx")
+theme_override_styles/disabled_mirrored = ExtResource("3_qndtx")
+theme_override_styles/focus = SubResource("StyleBoxTexture_d2hsj")
 text = "Cancel"
+icon_alignment = 1
 
 [node name="Confirm" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(200, 0)
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 50
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = ExtResource("3_qndtx")
+theme_override_styles/normal_mirrored = ExtResource("3_qndtx")
+theme_override_styles/pressed = ExtResource("4_jagrg")
+theme_override_styles/pressed_mirrored = ExtResource("4_jagrg")
+theme_override_styles/hover = ExtResource("3_qndtx")
+theme_override_styles/hover_mirrored = ExtResource("3_qndtx")
+theme_override_styles/hover_pressed = ExtResource("4_jagrg")
+theme_override_styles/hover_pressed_mirrored = ExtResource("4_jagrg")
+theme_override_styles/disabled = ExtResource("3_qndtx")
+theme_override_styles/disabled_mirrored = ExtResource("3_qndtx")
+theme_override_styles/focus = SubResource("StyleBoxTexture_d2hsj")
 text = "Confirm"
-
-[node name="OK" type="Button" parent="PanelContainer/VBoxContainer"]
-visible = false
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 50
-text = "OK"
+icon_alignment = 1
 
 [connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/Confirm" to="." method="_on_confirm_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/OK" to="." method="_on_ok_pressed"]
