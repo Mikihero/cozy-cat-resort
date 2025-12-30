@@ -1,12 +1,33 @@
-[gd_scene load_steps=8 format=3 uid="uid://bypyg2i4u4j7e"]
+[gd_scene load_steps=17 format=3 uid="uid://bik6bgpqf1hde"]
 
-[ext_resource type="Script" uid="uid://dl8cit7xrc3q1" path="res://Scripts/gacha.gd" id="1_ym5em"]
+[ext_resource type="Script" path="res://Scripts/gacha.gd" id="1_ym5em"]
 [ext_resource type="Texture2D" uid="uid://cld0emutf706g" path="res://Placeholders/banner_blue.png" id="2_jaewt"]
 [ext_resource type="Texture2D" uid="uid://4lyagpeux4hr" path="res://Placeholders/banner1.png" id="2_wxypu"]
 [ext_resource type="Texture2D" uid="uid://bi4txrgwnx82l" path="res://Placeholders/banner_pink.png" id="3_t80qp"]
 [ext_resource type="Texture2D" uid="uid://bsoutbx64rf61" path="res://Placeholders/banner_purple.png" id="4_gy7bo"]
 [ext_resource type="Texture2D" uid="uid://by2xn5empnkgq" path="res://Placeholders/banner2.png" id="4_k8vgs"]
 [ext_resource type="Texture2D" uid="uid://xo63bh8dh4rs" path="res://Placeholders/banner3.png" id="5_6oi3p"]
+[ext_resource type="StyleBox" uid="uid://ykbqjul20drt" path="res://Assets/ui/styles/simple-basic.tres" id="5_7ff22"]
+[ext_resource type="Texture2D" uid="uid://d2pt3shydhe8b" path="res://Assets/ui/simple-background.png" id="5_gy7bo"]
+[ext_resource type="StyleBox" uid="uid://douabvrad66ov" path="res://Assets/ui/styles/brown-pressed.tres" id="6_dtsfm"]
+[ext_resource type="StyleBox" uid="uid://cbif8uak1xd8c" path="res://Assets/ui/styles/simple-dark.tres" id="8_7ff22"]
+[ext_resource type="Texture2D" uid="uid://do8vjs02wg07y" path="res://Assets/ui/button_dark.png" id="8_q6iwu"]
+[ext_resource type="Texture2D" uid="uid://bd2458fnbm0dl" path="res://Assets/ui/cancel.png" id="12_7ff22"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_c3777"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_q6iwu"]
+texture = ExtResource("8_q6iwu")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dtsfm"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_ym5em")
@@ -14,19 +35,82 @@ bg_blue = ExtResource("2_jaewt")
 bg_pink = ExtResource("3_t80qp")
 bg_purple = ExtResource("4_gy7bo")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-visible = false
+[node name="Material gacha" type="Button" parent="."]
+offset_left = -171.0
+offset_top = -44.0
+offset_right = -109.0
+offset_bottom = -22.0
+theme_override_styles/normal = ExtResource("8_7ff22")
+theme_override_styles/normal_mirrored = ExtResource("8_7ff22")
+theme_override_styles/pressed = ExtResource("6_dtsfm")
+theme_override_styles/pressed_mirrored = ExtResource("6_dtsfm")
+theme_override_styles/hover = ExtResource("8_7ff22")
+theme_override_styles/hover_mirrored = ExtResource("8_7ff22")
+theme_override_styles/hover_pressed = ExtResource("6_dtsfm")
+theme_override_styles/hover_pressed_mirrored = ExtResource("6_dtsfm")
+theme_override_styles/disabled = ExtResource("8_7ff22")
+theme_override_styles/disabled_mirrored = ExtResource("8_7ff22")
+theme_override_styles/focus = SubResource("StyleBoxTexture_c3777")
+icon_alignment = 1
+
+[node name="simpleBackground" type="NinePatchRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -142.87503
+offset_top = -91.0
+offset_right = 142.87503
+offset_bottom = 91.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_gy7bo")
+region_rect = Rect2(0, 0, 21, 21)
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="Cat gacha" type="Button" parent="."]
+offset_left = -171.0
+offset_top = -71.0
+offset_right = -109.0
+offset_bottom = -49.0
+theme_override_styles/normal = ExtResource("8_7ff22")
+theme_override_styles/normal_mirrored = ExtResource("8_7ff22")
+theme_override_styles/pressed = ExtResource("6_dtsfm")
+theme_override_styles/pressed_mirrored = ExtResource("6_dtsfm")
+theme_override_styles/hover = ExtResource("8_7ff22")
+theme_override_styles/hover_mirrored = ExtResource("8_7ff22")
+theme_override_styles/hover_pressed = ExtResource("6_dtsfm")
+theme_override_styles/hover_pressed_mirrored = ExtResource("6_dtsfm")
+theme_override_styles/disabled = ExtResource("8_7ff22")
+theme_override_styles/disabled_mirrored = ExtResource("8_7ff22")
+theme_override_styles/focus = SubResource("StyleBoxTexture_c3777")
+icon_alignment = 1
+
+[node name="Label" type="Label" parent="."]
+offset_left = 32.0
+offset_top = -67.0
+offset_right = 105.0
+offset_bottom = -50.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_q6iwu")
+text = "Gacha details"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Banner" type="Sprite2D" parent="."]
-position = Vector2(-0.94441223, 1.1920929e-07)
-scale = Vector2(0.59994215, 0.6)
+visible = false
+position = Vector2(192.25, 108)
+scale = Vector2(0.1997396, 0.19814815)
 texture = ExtResource("2_jaewt")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-offset_left = -112.0
-offset_top = 216.0
-offset_right = 548.0
-offset_bottom = 304.0
+offset_left = 434.0
+offset_top = 46.0
+offset_right = 1140.0
+offset_bottom = 134.0
 theme_override_constants/separation = 30
 
 [node name="Wish premium" type="Button" parent="HBoxContainer"]
@@ -53,10 +137,10 @@ text = "Wish x10
 1000 Gold Catcoins"
 
 [node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -506.0
-offset_top = -324.0
-offset_right = -416.0
-offset_bottom = 324.0
+offset_left = -715.0
+offset_top = -452.0
+offset_right = -625.0
+offset_bottom = 196.0
 color = Color(1, 1, 1, 0.6666667)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ColorRect"]
@@ -94,6 +178,31 @@ layout_mode = 2
 texture_normal = ExtResource("5_6oi3p")
 ignore_texture_size = true
 stretch_mode = 0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="exampleCancelIconButton" type="Button" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 130.0
+offset_top = -99.0
+offset_right = 150.20001
+offset_bottom = -79.19998
+grow_horizontal = 0
+theme_override_styles/normal = ExtResource("5_7ff22")
+theme_override_styles/normal_mirrored = ExtResource("5_7ff22")
+theme_override_styles/pressed = ExtResource("6_dtsfm")
+theme_override_styles/pressed_mirrored = ExtResource("6_dtsfm")
+theme_override_styles/hover = ExtResource("5_7ff22")
+theme_override_styles/hover_mirrored = ExtResource("5_7ff22")
+theme_override_styles/hover_pressed = ExtResource("6_dtsfm")
+theme_override_styles/hover_pressed_mirrored = ExtResource("6_dtsfm")
+theme_override_styles/disabled = ExtResource("5_7ff22")
+theme_override_styles/disabled_mirrored = ExtResource("5_7ff22")
+theme_override_styles/focus = SubResource("StyleBoxTexture_dtsfm")
+icon = ExtResource("12_7ff22")
+icon_alignment = 1
 
 [connection signal="pressed" from="HBoxContainer/Wish premium" to="." method="_on_wish_premium_pressed"]
 [connection signal="pressed" from="HBoxContainer/Wish 1" to="." method="_on_wish_1_pressed"]
