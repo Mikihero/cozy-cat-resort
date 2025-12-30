@@ -85,7 +85,6 @@ texture = ExtResource("1_ka4hy")
 12:2/0/z_index = 1
 14:2/0 = 0
 15:2/0 = 0
-19:2/0 = 0
 20:2/0 = 0
 21:2/0 = 0
 22:2/0 = 0
@@ -185,7 +184,6 @@ texture = ExtResource("1_ka4hy")
 6:4/0 = 0
 7:4/0 = 0
 10:4/0 = 0
-11:4/0 = 0
 12:4/0 = 0
 14:4/0 = 0
 15:4/0 = 0
@@ -1815,6 +1813,7 @@ texture = ExtResource("1_ka4hy")
 6:5/1/flip_h = true
 6:5/1/flip_v = true
 55:2/0 = 0
+19:2/0 = 0
 
 [resource]
 sources/0 = SubResource("TileSetAtlasSource_bo1nx")

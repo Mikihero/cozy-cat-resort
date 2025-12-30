@@ -8,7 +8,6 @@ func _ready() -> void:
 	self.play("idle")
 	targetSelector = self.get_parent().get_node("selector") as selector;
 	targetSelector.hide_selector()
-	pass
 
 func _physics_process(delta: float) -> void:
 	if !queuedActions.is_empty():
@@ -39,7 +38,6 @@ func update_action(delta:float):
 	# finish when duration ends or hasFinished flag is set
 	if (currentAction.duration<0 && currentAction.isDurationable) || (currentAction.hasFinished):
 		finishAction()
-	pass
 
 func finishAction():
 	queuedActions.pop_front()
@@ -59,7 +57,6 @@ func move_update(delta:float):
 		self.position = path.get(0);
 	if self.position == Vector2(path.get(0)):
 		path.pop_front();
-	pass
 
 func move(whereTo: Vector2i):
 	var map = self.get_parent().get_node("Map") as Map;
@@ -68,9 +65,8 @@ func move(whereTo: Vector2i):
 	if path.size() >= 2 && self.position.direction_to(path.get(0)) == -self.position.direction_to(path.get(1)):
 		path.pop_front()
 
-	pass
-
 func onMapPressed(mapCoord: Vector2i):
+	print(mapCoord)
 	if (queuedActions.size() == 0):
 		move(mapCoord);
 		var newAction: PlayerAction = PlayerAction.new();
@@ -82,4 +78,3 @@ func onMapPressed(mapCoord: Vector2i):
 		if (queuedActions[0].actionEnum == queuedActions[0].ActionEnums.walk):
 			move(mapCoord);
 			queuedActions[0].actionPlayerPos = mapCoord
-	
