@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://c543ma0a1xuls"]
+
+[ext_resource type="Texture2D" uid="uid://d2pt3shydhe8b" path="res://Assets/ui/simple-background.png" id="1_5lush"]
+[ext_resource type="PackedScene" uid="uid://gltssceucsnb" path="res://Scenes/examples/coin display.tscn" id="2_wwimc"]
+
+[node name="WanderingTraderUi" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="simpleBackground" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_5lush")
+region_rect = Rect2(0, 0, 21, 21)
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="coin display" parent="." instance=ExtResource("2_wwimc")]
+layout_mode = 1
