@@ -1,9 +1,10 @@
-[gd_scene load_steps=20 format=4 uid="uid://460ht54ok3sx"]
+[gd_scene load_steps=17 format=4 uid="uid://460ht54ok3sx"]
 
 [ext_resource type="Script" uid="uid://cxfhelhwdtnup" path="res://Scripts/map.gd" id="1_bo1nx"]
 [ext_resource type="Script" uid="uid://dm1c50euvawnu" path="res://Scripts/main.gd" id="1_jkdf5"]
 [ext_resource type="TileSet" uid="uid://bve2eymgqa6k4" path="res://Assets/tileset/main.tres" id="2_8gbba"]
 [ext_resource type="SpriteFrames" uid="uid://oduw4bmqr0w7" path="res://Assets/anim/orange_worker.tres" id="3_8gbba"]
+[ext_resource type="Script" uid="uid://bwg8udqdkanxr" path="res://Scripts/models/smoke.gd" id="3_jkdf5"]
 [ext_resource type="Script" uid="uid://dj5m3lddroqsl" path="res://Scripts/player.gd" id="4_jjvhh"]
 [ext_resource type="Texture2D" uid="uid://cdel0arw7r2at" path="res://Assets/ui/main_map/selector-bottom1.png" id="5_6iyac"]
 [ext_resource type="Script" path="res://Scenes/selector.gd" id="5_fdnlq"]
@@ -77,8 +78,14 @@ tile_set = ExtResource("2_8gbba")
 
 [node name="TileMapForegroundBlocking" type="TileMapLayer" parent="Map"]
 z_index = 2
+tile_map_data = PackedByteArray("AAALAAYAAAApAAUAAAAMAAYAAAApAAUAAAANAAYAAAApAAUAAAAOAAYAAAApAAUAAAA=")
 tile_set = ExtResource("2_8gbba")
 collision_enabled = false
+
+[node name="Smoke" type="CPUParticles2D" parent="Map"]
+visible = false
+script = ExtResource("3_jkdf5")
+metadata/_custom_type_script = "uid://bwg8udqdkanxr"
 
 [node name="Player" type="AnimatedSprite2D" parent="."]
 position = Vector2(152, 104)

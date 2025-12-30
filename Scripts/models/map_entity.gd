@@ -32,7 +32,18 @@ static func deserialize(str: String) -> MapEntity:
 		Vector2i(data.get("texture_x"), data.get("texture_y"))
 	);
 
+func get_tiles():
+	pass
+	
+func get_area() -> Rect2i:
+	var ret = self.area;
+	match self.type:
+		Type.HOUSE: 
+			ret.position.y -= (ret.size.y - 1)
+	return ret;
+
 enum Type {
 	TREE = 0,
 	ROCK = 1,
+	HOUSE = 2,
 }

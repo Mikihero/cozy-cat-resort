@@ -66,21 +66,55 @@ func move_update(delta:float):
 	if self.position == Vector2(path.get(0)):
 		path.pop_front();
 
-func move(whereTo: Vector2i):
+enum MoveResult {
+	REACH_TARGET,
+	NEAREST_BLOCK,
+	FAILED
+}
+
+func move(whereTo: Vector2i) -> MoveResult:
 	var map = self.get_parent().get_node("Map") as Map;
+	var result: MoveResult;
 	path = map.get_best_path(map.translare_px_to_coords(self.position), whereTo);
+	if path.is_empty():
+		var points_to_try = [
+			whereTo + Vector2i(-1, 0),
+			whereTo + Vector2i(0, 1),
+			whereTo + Vector2i(0, -1),
+			whereTo + Vector2i(1, 0),
+		];
+		for p in points_to_try:
+			p = map.get_best_path(map.translare_px_to_coords(self.position), p);
+			if p.is_empty():
+				continue
+			if path.is_empty() || p.size() < path.size():
+				path = p;
+		if path.is_empty(): 
+			result = MoveResult.FAILED;
+		else:
+			result = MoveResult.NEAREST_BLOCK;
+	else:
+		result = MoveResult.REACH_TARGET;
 	path = map.translate_coords_to_px(path);
 	if path.size() >= 2 && self.position.direction_to(path.get(0)) == -self.position.direction_to(path.get(1)):
 		path.pop_front()
+	return result;
+
+func schedule_map_action(target: Vector2i):
+	var map = self.get_parent().get_node("Map") as Map;
 
 func onMapPressed(mapCoord: Vector2i):
 	if (queuedActions.size() == 0):
-		move(mapCoord);
+		var res = move(mapCoord);
 		var newAction: PlayerAction = PlayerAction.new();
 		newAction.actionEnum = newAction.ActionEnums.walk
 		newAction.duration = 0;
 		newAction.actionPlayerPos = mapCoord
 		queuedActions.append(newAction)
+		match res:
+			MoveResult.NEAREST_BLOCK:
+				self.schedule_map_action(mapCoord)
+		
 	else:
 		if (queuedActions[0].actionEnum == queuedActions[0].ActionEnums.walk):
 			move(mapCoord);
