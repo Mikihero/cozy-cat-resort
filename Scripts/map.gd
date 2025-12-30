@@ -4,7 +4,7 @@ var entities = [];
 
 var width = 0
 var height = 0
-var save_thread;
+var save_thread: Thread;
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -12,8 +12,16 @@ func _ready() -> void:
 	var last = bg.get_used_cells().back();
 	width = last.x + 1;
 	height = last.y + 1;
-
-	self.save_to_file();
+	
+	var save_file = FileAccess.open("user://save", FileAccess.READ);
+	var data = JSON.parse_string(save_file.get_line());
+	var ent = (data.get("entities") as Array).map(MapEntity.deserialize);
+	print("load:", ent);
+	self.entities = ent;
+	print(self.entities.size())
+	
+	self.paint_entities();
+	
 	save_thread = Thread.new();
 	save_thread.start(
 		func():
@@ -24,20 +32,13 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 const TREES = [
-	Rect2i(55,2,4,1),
-	Rect2i(56,3,2,1),
-	Rect2i(53,4,8,1),
-	Rect2i(54,5,6,1),
-	Rect2i(53,6,8,1),
-	Rect2i(56,7,2,1),
-	Rect2i(55,8,4,1),
-	Rect2i(51,1,2,2),
-	Rect2i(52,5,1,1),
+	Vector2i(55, 2),
+	Vector2i(52, 5),
 ];
 const ROCKS = [
-	Rect2i(49,30,1,1),
-	Rect2i(51,30,1,1),
-	Rect2i(53,30,1,1)
+	Vector2i(49,30),
+	Vector2i(51,30),
+	Vector2i(53,30)
 ];
 const HOUSES = [
 
@@ -50,20 +51,43 @@ func get_entities() -> Array[MapEntity]:
 		var data = blocking.get_cell_tile_data(c);
 		var atlas = blocking.get_cell_atlas_coords(c);
 		if data.z_index == 0:
-			var r = Rect2i(atlas, Vector2i(1, 1));
-
-			if TREES.any(func(t: Rect2i): return t.encloses(r)):
-				ent.push_back(MapEntity.new(Rect2i(c, Vector2i(1, 1)), MapEntity.Type.TREE, atlas))
-			if ROCKS.any(func(t: Rect2i): return t.encloses(r)):
-				ent.push_back(MapEntity.new(Rect2i(c, Vector2i(2, 2)), MapEntity.Type.ROCK, atlas))
+			if TREES.any(func(t: Vector2i): return t == atlas):
+				var w = 1 if c == Vector2i(52, 5) else 2;
+				ent.push_back(MapEntity.new(Rect2i(c, Vector2i(w, 1)), MapEntity.Type.TREE, atlas))
+				
+			if ROCKS.any(func(t: Vector2i): return t == atlas):
+				ent.push_back(MapEntity.new(Rect2i(c, Vector2i(2, 1)), MapEntity.Type.ROCK, atlas))
 
 	return ent;
+
+func add_entity(entity: MapEntity):
+		
+	pass
+
+func paint_entities():
+	self.entities.map(func(e: MapEntity): self.paint_entity(e));
+
+
+func paint_entity(e: MapEntity):
+	var foreground: TileMapLayer = self.get_node("TileMapForegroundBlocking");
+	match e.type:
+		MapEntity.Type.TREE:
+			if e.area.size.x == 2:
+				foreground.set_pattern(e.area.position - Vector2i(0, 1), foreground.tile_set.get_pattern(1))
+			else:
+				foreground.set_pattern(e.area.position - Vector2i(0, 2), foreground.tile_set.get_pattern(0))
+		MapEntity.Type.ROCK:
+			var offs = [
+				Vector2i(0, -1), Vector2i(1, -1),
+				Vector2i(0, 0), Vector2i(1, 0)
+			];
+			for o in offs:
+				foreground.set_cell(e.area.position + o, 0, e.texture + o)
 
 func get_best_path(source: Vector2i, destination: Vector2i) -> Array[Vector2i]:
 	var h = func (n: Vector2i) -> int:
 		return pow(destination.x - n.x,2) + pow(destination.y - n.y, 2)
 	var open = [source];
-	var closed = self.entities.map(func(m): return m.position);
 	var from = {};
 
 	var g_score = {
@@ -103,8 +127,7 @@ func get_best_path(source: Vector2i, destination: Vector2i) -> Array[Vector2i]:
 		);
 		#print("n: ", neighbors)
 		for neighbor in neighbors:
-			if closed.has(neighbor):
-				continue
+
 			var score = 	g_score[current]
 			#print("n: ", neighbor, " score: ", score)
 			if !g_score.has(neighbor) || score < g_score[neighbor]:
@@ -132,8 +155,7 @@ func is_tile_free(coords: Vector2i) -> bool:
 
 	return true;
 
-func add_entity(entity: MapEntity):
-	pass
+
 
 const TAP_THRESHOLD = 0.2;
 var touch_start_time = 0;
@@ -155,8 +177,12 @@ func _input(event: InputEvent) -> void:
 			var time = Time.get_ticks_msec() / 1000.0 - touch_start_time;
 			if time < TAP_THRESHOLD && !has_moved:
 				player.onMapPressed(self.translare_px_to_coords(event.position + camera.position - Vector2(192, 108)));
-
 	pass
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_WM_CLOSE_REQUEST || what == NOTIFICATION_APPLICATION_PAUSED:
+		self.save_to_file();
+		get_tree().quit();
 
 func translate_coord_to_px(pos: Vector2i) -> Vector2i:
 	return pos * 16 + Vector2i(8, 8);
@@ -172,20 +198,15 @@ func translare_px_to_coords(pos: Vector2i) -> Vector2i:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	self.entities = self.get_entities();
+	#self.entities = self.get_entities();
 	pass
 
 func save_to_file():
 	var save_file = FileAccess.open("user://save", FileAccess.WRITE);
 	var ent = self.get_entities();
+	print(ent.size());
 	var data = {
 		"entities": ent.map(func(e: MapEntity): return e.serialize())
 	};
 	data = JSON.stringify(data);
-	print(data)
 	save_file.store_string(data);
-
-func load_from_file():
-	#todo
-	pass
-

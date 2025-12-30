@@ -1,8 +1,8 @@
 class_name MapEntity
 
-var area;
+var area: Rect2i;
 var type: MapEntity.Type;
-var texture;
+var texture: Vector2i;
 
 func _init(area: Rect2i, type: Type, texture: Vector2i):
 	self.area = area
@@ -28,11 +28,11 @@ static func deserialize(str: String) -> MapEntity:
 	var data: Dictionary = JSON.parse_string(str);
 	return MapEntity.new(
 		Rect2i(data.get("position_x"), data.get("position_y"), data.get("size_x"), data.get("size_y")), 
-		Type.keys().find_custom(func(v): return (v as int) == (data.get("type") as int)),
+		Type.values().find_custom(func(v): return (v as int) == (data.get("type") as int)),
 		Vector2i(data.get("texture_x"), data.get("texture_y"))
 	);
 
 enum Type {
-	TREE,
-	ROCK,
+	TREE = 0,
+	ROCK = 1,
 }
