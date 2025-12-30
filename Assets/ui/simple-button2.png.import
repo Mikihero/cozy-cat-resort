@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://hjtrg6uyi58"
-path="res://.godot/imported/spr_tileset_sunnysideworld_16px.png-99ff4c16a094b7eb739092a49dcbc03a.ctex"
+uid="uid://db3tv3oj7o1f2"
+path="res://.godot/imported/simple-button2.png-97d903dc55da49cc583bf8a3b76d2509.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/tileset/spr_tileset_sunnysideworld_16px.png"
-dest_files=["res://.godot/imported/spr_tileset_sunnysideworld_16px.png-99ff4c16a094b7eb739092a49dcbc03a.ctex"]
+source_file="res://Assets/ui/simple-button2.png"
+dest_files=["res://.godot/imported/simple-button2.png-97d903dc55da49cc583bf8a3b76d2509.ctex"]
 
 [params]
 

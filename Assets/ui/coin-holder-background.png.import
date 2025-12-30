@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://hjtrg6uyi58"
-path="res://.godot/imported/spr_tileset_sunnysideworld_16px.png-99ff4c16a094b7eb739092a49dcbc03a.ctex"
+uid="uid://chhlpceoabnbi"
+path="res://.godot/imported/coin-holder-background.png-9fbacc5f8d645efd82e1ea3194915afd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/tileset/spr_tileset_sunnysideworld_16px.png"
-dest_files=["res://.godot/imported/spr_tileset_sunnysideworld_16px.png-99ff4c16a094b7eb739092a49dcbc03a.ctex"]
+source_file="res://Assets/ui/coin-holder-background.png"
+dest_files=["res://.godot/imported/coin-holder-background.png-9fbacc5f8d645efd82e1ea3194915afd.ctex"]
 
 [params]
 

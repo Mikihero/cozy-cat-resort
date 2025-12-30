@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://hjtrg6uyi58"
-path="res://.godot/imported/spr_tileset_sunnysideworld_16px.png-99ff4c16a094b7eb739092a49dcbc03a.ctex"
+uid="uid://ddajjknecxkte"
+path="res://.godot/imported/silver-coin-anim.png-83c5a055f302ffcfed4a2facdd0e965c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/tileset/spr_tileset_sunnysideworld_16px.png"
-dest_files=["res://.godot/imported/spr_tileset_sunnysideworld_16px.png-99ff4c16a094b7eb739092a49dcbc03a.ctex"]
+source_file="res://Assets/ui/coins/silver-coin-anim.png"
+dest_files=["res://.godot/imported/silver-coin-anim.png-83c5a055f302ffcfed4a2facdd0e965c.ctex"]
 
 [params]
 

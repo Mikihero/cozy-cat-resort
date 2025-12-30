@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://hjtrg6uyi58"
-path="res://.godot/imported/spr_tileset_sunnysideworld_16px.png-99ff4c16a094b7eb739092a49dcbc03a.ctex"
+uid="uid://dhjp6el51wqh6"
+path="res://.godot/imported/golden-coin.png-d80bc2a3db342dbf24f1913a5ec057b1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/tileset/spr_tileset_sunnysideworld_16px.png"
-dest_files=["res://.godot/imported/spr_tileset_sunnysideworld_16px.png-99ff4c16a094b7eb739092a49dcbc03a.ctex"]
+source_file="res://Assets/ui/coins/golden-coin.png"
+dest_files=["res://.godot/imported/golden-coin.png-d80bc2a3db342dbf24f1913a5ec057b1.ctex"]
 
 [params]
 
