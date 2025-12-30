@@ -1,9 +1,25 @@
-[gd_scene load_steps=5 format=4 uid="uid://460ht54ok3sx"]
+[gd_scene load_steps=10 format=4 uid="uid://460ht54ok3sx"]
 
 [ext_resource type="Script" uid="uid://cxfhelhwdtnup" path="res://Scripts/map.gd" id="1_bo1nx"]
 [ext_resource type="TileSet" uid="uid://bve2eymgqa6k4" path="res://Assets/tileset/main.tres" id="2_8gbba"]
 [ext_resource type="SpriteFrames" uid="uid://oduw4bmqr0w7" path="res://Assets/anim/orange_worker.tres" id="3_8gbba"]
 [ext_resource type="Script" uid="uid://dj5m3lddroqsl" path="res://Scripts/player.gd" id="4_jjvhh"]
+[ext_resource type="Texture2D" uid="uid://b64tt3bouwhya" path="res://Assets/ui/main_map/selection1.png" id="5_344ge"]
+[ext_resource type="Texture2D" uid="uid://bdl1oes5rxcr" path="res://Assets/ui/main_map/selection4.png" id="6_ynf5e"]
+[ext_resource type="Texture2D" uid="uid://d3ot3l7mvj07q" path="res://Assets/ui/main_map/selection5.png" id="7_hptm8"]
+[ext_resource type="Texture2D" uid="uid://checlsv0l5x27" path="res://Assets/ui/main_map/selection8.png" id="8_d1ilt"]
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_6iyac"]
+frames = 4
+speed_scale = 9.0
+frame_0/texture = ExtResource("5_344ge")
+frame_0/duration = 3.0
+frame_1/texture = ExtResource("6_ynf5e")
+frame_1/duration = 1.0
+frame_2/texture = ExtResource("7_hptm8")
+frame_2/duration = 3.0
+frame_3/texture = ExtResource("8_d1ilt")
+frame_3/duration = 1.0
 
 [node name="Main" type="Node2D"]
 
@@ -43,9 +59,23 @@ tile_set = ExtResource("2_8gbba")
 collision_enabled = false
 
 [node name="Player" type="AnimatedSprite2D" parent="."]
+z_index = 1
 position = Vector2(152, 104)
 scale = Vector2(0.99999994, 0.99999994)
 sprite_frames = ExtResource("3_8gbba")
-animation = &"idle"
-frame_progress = 0.4998101
+animation = &"walk"
 script = ExtResource("4_jjvhh")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Node2D"]
+z_index = 2
+offset_left = 170.0
+offset_top = 106.0
+offset_right = 198.0
+offset_bottom = 136.0
+texture = SubResource("AnimatedTexture_6iyac")
+patch_margin_left = 14
+patch_margin_top = 14
+patch_margin_right = 14
+patch_margin_bottom = 14

@@ -7,37 +7,64 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 var path: Array[Vector2i];
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass 
+var queuedActions: Array[PlayerAction];
 	
 func _physics_process(delta: float) -> void:
-	if !path.is_empty():
-		var prev = self.position;
-		#var d = -(self.position - Vector2(path.get(0)));
-		var d = self.position.direction_to(path.get(0))
-		#print("d:", d);
-		self.position += d * delta * (60./8.);
-		#print("dirs: ", self.position.direction_to(path.get(0)), prev.direction_to(path.get(0)))
-		if self.position.direction_to(path.get(0)) != prev.direction_to(path.get(0)) || d.length() < 0.1:
-			#print("overshot")
-			self.position = path.get(0);
-		if self.position == Vector2(path.get(0)):
-			path.pop_front();
-			if path.is_empty():
-				self.play("idle");
+	if !queuedActions.is_empty():
+		update_action(delta);
+	else:
+		if (self.animation.get_basename()!="idle"):
+			self.play("idle")
+
+func update_action(delta:float):
+	var currentAction = queuedActions[0]
+	if (!currentAction.hasStarted):
+		currentAction.hasStarted = true;
+		currentAction.hasFinished = false
+		self.play(currentAction.getAnimName())
+	if (currentAction.isDurationable):
+		currentAction.duration -= delta
+	
+	#call correct update function
+	match currentAction.actionEnum:
+		currentAction.ActionEnums.idle:
+			pass
+		currentAction.ActionEnums.walk:
+			move_update(delta)
+	
+	if (currentAction.duration<0) || (currentAction.hasFinished):
+		finishAction()
 	pass
 
-func move(position: Vector2i):
-	self.play("run");
+func finishAction():
+	queuedActions.pop_front()
+
+func move_update(delta:float):
+	if (path.is_empty()):
+		queuedActions[0].hasFinished = true
+		return
+	var prev = self.position;
+	var d = self.position.direction_to(path.get(0))
+	if (abs(d.x)>0):
+		self.flip_h = d.x<0
+	self.position += d * delta * 40.;
+	if self.position.direction_to(path.get(0)) != prev.direction_to(path.get(0)) || d.length() < 0.1:
+		self.position = path.get(0);
+	if self.position == Vector2(path.get(0)):
+		path.pop_front();
+	pass
+
+func move(whereTo: Vector2i):
 	var map = self.get_parent().get_node("Map") as Map;
-	path = map.get_best_path(map.translare_px_to_coords(self.position), position);
-	print(path)
+	path = map.get_best_path(map.translare_px_to_coords(self.position), whereTo);
 	path = map.translate_coords_to_px(path);
 	if path.size() >= 2 && self.position.direction_to(path.get(0)) == -self.position.direction_to(path.get(1)):
 		path.pop_front()
-	print(path);
-	#self.position = Vector2(path.back())
-	print(self.position)
-	
 	pass
+
+func onMapPressed(mapCoord: Vector2i):
+	move(mapCoord);
+	var newAction: PlayerAction = PlayerAction.new();
+	newAction.actionEnum = newAction.ActionEnums.walk
+	newAction.duration = 0;
+	queuedActions.append(newAction)

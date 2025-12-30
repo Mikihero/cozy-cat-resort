@@ -14,14 +14,13 @@ func _ready() -> void:
 	
 	get_free_tiles()
 
-	pass # Replace with function body.
+	pass
 
 func get_best_path(source: Vector2i, destination: Vector2i) -> Array[Vector2i]:
 	var h = func (n: Vector2i) -> int:
 		return pow(destination.x - n.x,2) + pow(destination.y - n.y, 2)
 	var open = [source];
 	var closed = self.entities.map(func(m): return m.position);
-	#print(closed)
 	var from = {};
 
 	var g_score = {
@@ -42,7 +41,6 @@ func get_best_path(source: Vector2i, destination: Vector2i) -> Array[Vector2i]:
 				current = from[current];
 				path.append(current)
 			path.reverse()
-			print(path)
 			return path
 		open.remove_at(open.find(current))
 		f_score.erase(current)
@@ -77,11 +75,6 @@ func get_free_tiles() -> Array[Vector2i]:
 	var background: TileMapLayer = self.get_node("TileMapBackground");
 	var border_tiles = (self.get_node("TileMapBackgroundBorder") as TileMapLayer).get_used_cells();
 	var positions = background.get_used_cells().filter(func(c): return !border_tiles.has(c));
-
-	print(border_tiles);
-	print(background.get_used_cells().size(), " ", border_tiles.size())
-	print(positions.size())
-
 	var ret: Array[Vector2i] = [];
 	return ret;
 
@@ -102,7 +95,6 @@ var has_moved = false;
 func _input(event: InputEvent) -> void:
 	if event is InputEventScreenDrag: 
 		has_moved = true;
-		print(event.relative);
 		var camera = (self.get_parent().get_node("Camera2D") as Camera2D);
 		camera.position -= event.relative;
 	
@@ -114,9 +106,8 @@ func _input(event: InputEvent) -> void:
 			var player: Cat = self.get_parent().get_node("Player");
 			var camera = (self.get_parent().get_node("Camera2D") as Camera2D);
 			var time = Time.get_ticks_msec() / 1000.0 - touch_start_time;
-			print(time);
 			if time < TAP_THRESHOLD && !has_moved:
-				player.move(self.translare_px_to_coords(event.position + camera.position - Vector2(192, 108)));
+				player.onMapPressed(self.translare_px_to_coords(event.position + camera.position - Vector2(192, 108)));
 	
 	pass
 
@@ -131,9 +122,3 @@ func translate_coords_to_px(pos: Array[Vector2i]) -> Array[Vector2i]:
 
 func translare_px_to_coords(pos: Vector2i) -> Vector2i:
 	return Vector2i(pos / 16)
-	
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-
-	pass
