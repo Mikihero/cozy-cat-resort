@@ -47,8 +47,10 @@ func check_funds():
 	print(Globals.DiamondCatCoins,"	", Globals.GoldCatCoins)
 	
 	var wishing_instance = wishing_scene.instantiate()
-	
 	get_tree().root.add_child(wishing_instance)	
+	
+	process_mode = PROCESS_MODE_DISABLED
+	wishing_instance.tree_exited.connect(func(): process_mode = PROCESS_MODE_INHERIT)
 
 func _on_cancel_pressed() -> void:
 	queue_free()
