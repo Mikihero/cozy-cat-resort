@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://c543ma0a1xuls"]
+[gd_scene load_steps=5 format=3 uid="uid://c543ma0a1xuls"]
 
 [ext_resource type="Texture2D" uid="uid://d2pt3shydhe8b" path="res://Assets/ui/simple-background.png" id="1_5lush"]
 [ext_resource type="PackedScene" uid="uid://gltssceucsnb" path="res://Scenes/examples/coin display.tscn" id="2_wwimc"]
+[ext_resource type="Texture2D" uid="uid://7e2adnlhpgp3" path="res://Assets/ui/wandering-trader/traded-item-background.png" id="3_mg1x1"]
+[ext_resource type="Texture2D" uid="uid://r2jm7c42ksne" path="res://Assets/resources/wood.png" id="4_bv8y1"]
 
 [node name="WanderingTraderUi" type="Control"]
 layout_mode = 3
@@ -27,3 +29,23 @@ patch_margin_bottom = 2
 
 [node name="coin display" parent="." instance=ExtResource("2_wwimc")]
 layout_mode = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 61.0
+offset_right = 80.0
+offset_bottom = 101.0
+
+[node name="item background texture" type="NinePatchRect" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("3_mg1x1")
+
+[node name="item texture" type="TextureRect" parent="HBoxContainer/item background texture"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 41.0
+offset_bottom = 41.0
+texture = ExtResource("4_bv8y1")

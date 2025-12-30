@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bndddqykn3d66"
-path="res://.godot/imported/background copy.png-5238bc8544717c0513c19288ccb8eedd.ctex"
+uid="uid://7e2adnlhpgp3"
+path="res://.godot/imported/traded-item-background.png-2f0666ea0df35c0432925709a9822e10.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/ui/background copy.png"
-dest_files=["res://.godot/imported/background copy.png-5238bc8544717c0513c19288ccb8eedd.ctex"]
+source_file="res://Assets/ui/wandering-trader/traded-item-background.png"
+dest_files=["res://.godot/imported/traded-item-background.png-2f0666ea0df35c0432925709a9822e10.ctex"]
 
 [params]
 
