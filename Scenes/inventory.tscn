@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://bb5lla61ni42s"]
+[gd_scene load_steps=5 format=3 uid="uid://bb5lla61ni42s"]
 
 [ext_resource type="Script" uid="uid://b0gemtouhxu6o" path="res://Scripts/inventory.gd" id="1_aqnmd"]
 [ext_resource type="Texture2D" uid="uid://d2pt3shydhe8b" path="res://Assets/ui/simple-background.png" id="1_k1vlg"]
-[ext_resource type="Texture2D" uid="uid://r2jm7c42ksne" path="res://Assets/resources/wood.png" id="3_o4ksx"]
 [ext_resource type="Texture2D" uid="uid://t47kd6d1ekhp" path="res://Assets/resources/watch_ad-normal.png" id="7_trvqw"]
 [ext_resource type="Texture2D" uid="uid://dlevh4uj5ftbv" path="res://Assets/resources/watch_ad-pressed.png" id="8_aqnmd"]
 
@@ -33,31 +32,43 @@ patch_margin_top = 2
 patch_margin_right = 2
 patch_margin_bottom = 2
 
-[node name="TextureRect3" type="TextureRect" parent="."]
-custom_minimum_size = Vector2(30, 0)
-layout_mode = 0
-offset_left = 18.0
-offset_top = 55.0
-offset_right = 48.0
-offset_bottom = 71.0
-texture = ExtResource("3_o4ksx")
-stretch_mode = 5
-
-[node name="VSeparator" type="VSeparator" parent="."]
-layout_mode = 0
-offset_left = 235.0
-offset_top = 39.0
-offset_right = 239.0
-offset_bottom = 200.0
-
 [node name="TextureButton" type="TextureButton" parent="."]
 layout_mode = 0
-offset_left = 260.0
-offset_top = 78.0
-offset_right = 358.0
-offset_bottom = 138.0
+offset_left = 228.0
+offset_top = 56.0
+offset_right = 326.0
+offset_bottom = 116.0
 texture_normal = ExtResource("7_trvqw")
 texture_pressed = ExtResource("8_aqnmd")
 stretch_mode = 5
 
-[connection signal="pressed" from="TextureButton" to="." method="_on_load_pressed"]
+[node name="TextureButton2" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 228.0
+offset_top = 137.0
+offset_right = 326.0
+offset_bottom = 197.0
+texture_normal = ExtResource("7_trvqw")
+texture_pressed = ExtResource("8_aqnmd")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 282.0
+offset_top = 49.0
+offset_right = 346.0
+offset_bottom = 78.0
+text = "Watch an ad
+to get coins"
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 283.0
+offset_top = 131.0
+offset_right = 347.0
+offset_bottom = 160.0
+text = "Use your coins
+to watch an ad"
+
+[connection signal="pressed" from="TextureButton" to="." method="watch_for_coins"]
+[connection signal="pressed" from="TextureButton2" to="." method="watch_for_coins"]

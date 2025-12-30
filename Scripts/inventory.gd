@@ -25,7 +25,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-func _on_load_pressed():
+func load_ad():
 	#free memory
 	if _rewarded_ad:
 		#always call this method on all AdFormats to free memory on Android/iOS
@@ -50,6 +50,16 @@ func _on_load_pressed():
 		
 	RewardedAdLoader.new().load(unit_id, AdRequest.new(), rewarded_ad_load_callback)
 	
+
+
+func pay_to_watch():
+	load_ad()
+	Globals.GoldCatCoins -= 8
+	on_user_earned_reward_listener.on_user_earned_reward = func(reward: RewardedItem):
+		pass
+
+func watch_for_coins():
+	load_ad()
 	on_user_earned_reward_listener.on_user_earned_reward = func(reward: RewardedItem):
 		Globals.GoldCatCoins += 8
 
