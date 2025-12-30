@@ -1,0 +1,105 @@
+[gd_scene load_steps=6 format=3 uid="uid://gltssceucsnb"]
+
+[ext_resource type="Texture2D" uid="uid://chhlpceoabnbi" path="res://Assets/ui/coin-holder-background.png" id="1_wsiki"]
+[ext_resource type="Texture2D" uid="uid://ccmfadiha73j8" path="res://Assets/ui/coin-holder-foreground.png" id="2_uq737"]
+[ext_resource type="Texture2D" uid="uid://ctrijwaomomj2" path="res://Assets/ui/coins/silver-coin.png" id="3_wi7sw"]
+[ext_resource type="Texture2D" uid="uid://dhjp6el51wqh6" path="res://Assets/ui/coins/golden-coin.png" id="4_bnkih"]
+[ext_resource type="Texture2D" uid="uid://dcitos7xyk562" path="res://Assets/ui/coins/platinum-coin.png" id="5_bdj0p"]
+
+[node name="coin display" type="HBoxContainer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+size_flags_horizontal = 4
+
+[node name="display node" type="Control" parent="."]
+layout_mode = 2
+
+[node name="background" type="Control" parent="display node"]
+anchors_preset = 0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="display node/background"]
+custom_minimum_size = Vector2(162, 22)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -162.0
+offset_top = 1.0
+offset_right = 162.0
+offset_bottom = 45.0
+grow_horizontal = 2
+texture = ExtResource("1_wsiki")
+
+[node name="foreground" type="Control" parent="display node"]
+anchors_preset = 0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="display node/foreground"]
+custom_minimum_size = Vector2(162, 22)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -162.0
+offset_right = 162.0
+offset_bottom = 44.0
+grow_horizontal = 2
+texture = ExtResource("2_uq737")
+
+[node name="silver coin sprite" type="TextureRect" parent="display node"]
+layout_mode = 0
+offset_left = -138.0
+offset_top = 10.0
+offset_right = -116.0
+offset_bottom = 32.0
+texture = ExtResource("3_wi7sw")
+
+[node name="golden coin sprite" type="TextureRect" parent="display node"]
+layout_mode = 0
+offset_left = -40.0
+offset_top = 10.0
+offset_right = -18.0
+offset_bottom = 32.0
+texture = ExtResource("4_bnkih")
+
+[node name="diamond coin sprite" type="TextureRect" parent="display node"]
+layout_mode = 0
+offset_left = 58.0
+offset_top = 10.0
+offset_right = 80.0
+offset_bottom = 32.0
+texture = ExtResource("5_bdj0p")
+
+[node name="silver coin amount" type="RichTextLabel" parent="display node"]
+layout_mode = 0
+offset_left = -107.0
+offset_top = 6.0
+offset_right = -57.0
+offset_bottom = 32.0
+theme_override_font_sizes/normal_font_size = 32
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="gold coin amount" type="RichTextLabel" parent="display node"]
+layout_mode = 0
+offset_left = -9.0
+offset_top = 6.0
+offset_right = 41.0
+offset_bottom = 32.0
+theme_override_font_sizes/normal_font_size = 32
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="diamond coint amount" type="RichTextLabel" parent="display node"]
+layout_mode = 0
+offset_left = 89.0
+offset_top = 6.0
+offset_right = 139.0
+offset_bottom = 32.0
+theme_override_font_sizes/normal_font_size = 32
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
