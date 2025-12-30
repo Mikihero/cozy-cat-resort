@@ -1,10 +1,24 @@
-[gd_scene load_steps=6 format=3 uid="uid://bb5lla61ni42s"]
+[gd_scene load_steps=17 format=3 uid="uid://0w7cbry6wogb"]
 
 [ext_resource type="Script" uid="uid://b0gemtouhxu6o" path="res://Scripts/inventory.gd" id="1_aqnmd"]
-[ext_resource type="Texture2D" uid="uid://d2pt3shydhe8b" path="res://Assets/ui/simple-background.png" id="1_k1vlg"]
+[ext_resource type="Texture2D" uid="uid://drxfbuygityce" path="res://Assets/ui/simple-button-wide-border.png" id="2_mgnjo"]
 [ext_resource type="PackedScene" uid="uid://gltssceucsnb" path="res://Scenes/examples/coin display.tscn" id="5_k1vlg"]
+[ext_resource type="StyleBox" uid="uid://ykbqjul20drt" path="res://Assets/ui/styles/simple-basic.tres" id="6_trvqw"]
+[ext_resource type="StyleBox" uid="uid://douabvrad66ov" path="res://Assets/ui/styles/brown-pressed.tres" id="7_aqnmd"]
 [ext_resource type="Texture2D" uid="uid://t47kd6d1ekhp" path="res://Assets/resources/watch_ad-normal.png" id="7_trvqw"]
 [ext_resource type="Texture2D" uid="uid://dlevh4uj5ftbv" path="res://Assets/resources/watch_ad-pressed.png" id="8_aqnmd"]
+[ext_resource type="Texture2D" uid="uid://bd2458fnbm0dl" path="res://Assets/ui/cancel.png" id="8_o4ksx"]
+[ext_resource type="Theme" uid="uid://b4akeoeqe8202" path="res://Assets/scroll_theme.tres" id="9_2rjgx"]
+[ext_resource type="Texture2D" uid="uid://bxk3vjbbmqgqs" path="res://Assets/ui/traded-item-background-copy.png" id="9_5qg7d"]
+[ext_resource type="Texture2D" uid="uid://r2jm7c42ksne" path="res://Assets/resources/wood.png" id="10_bvt08"]
+[ext_resource type="Texture2D" uid="uid://cvg0kuspfw1r4" path="res://Assets/resources/stone.png" id="11_mgnjo"]
+[ext_resource type="Texture2D" uid="uid://bud7g7hnkpylr" path="res://Assets/resources/clay.png" id="12_bvt08"]
+[ext_resource type="Texture2D" uid="uid://d15i1ifkwt2ey" path="res://Assets/ui/some-holder.png" id="13_mgnjo"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5qg7d"]
+
+[sub_resource type="FontVariation" id="FontVariation_5qg7d"]
+spacing_top = -4
 
 [node name="Inventory" type="Control"]
 layout_mode = 3
@@ -26,14 +40,19 @@ offset_right = -4.0
 offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_k1vlg")
-region_rect = Rect2(0, 0, 21, 21)
-patch_margin_left = 2
-patch_margin_top = 2
-patch_margin_right = 2
-patch_margin_bottom = 2
+texture = ExtResource("2_mgnjo")
+region_rect = Rect2(0, 0, 42, 42)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
 
-[node name="TextureButton" type="TextureButton" parent="."]
+[node name="Control" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureButton" type="TextureButton" parent="Control"]
 layout_mode = 0
 offset_left = 228.0
 offset_top = 56.0
@@ -43,7 +62,21 @@ texture_normal = ExtResource("7_trvqw")
 texture_pressed = ExtResource("8_aqnmd")
 stretch_mode = 5
 
-[node name="TextureButton2" type="TextureButton" parent="."]
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 282.0
+offset_top = 49.0
+offset_right = 346.0
+offset_bottom = 78.0
+text = "Watch an ad
+to get coins"
+
+[node name="Control2" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureButton2" type="TextureButton" parent="Control2"]
 layout_mode = 0
 offset_left = 228.0
 offset_top = 137.0
@@ -53,20 +86,11 @@ texture_normal = ExtResource("7_trvqw")
 texture_pressed = ExtResource("8_aqnmd")
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="."]
-layout_mode = 0
-offset_left = 282.0
-offset_top = 49.0
-offset_right = 346.0
-offset_bottom = 78.0
-text = "Watch an ad
-to get coins"
-
-[node name="Label2" type="Label" parent="."]
+[node name="Label2" type="Label" parent="Control2"]
 layout_mode = 0
 offset_left = 283.0
 offset_top = 131.0
-offset_right = 347.0
+offset_right = 363.0
 offset_bottom = 160.0
 text = "Use your coins
 to watch an ad"
@@ -74,5 +98,255 @@ to watch an ad"
 [node name="coin display" parent="." instance=ExtResource("5_k1vlg")]
 layout_mode = 1
 
-[connection signal="pressed" from="TextureButton" to="." method="watch_for_coins"]
-[connection signal="pressed" from="TextureButton2" to="." method="pay_to_watch"]
+[node name="exampleCancelIconButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 360.0
+offset_top = 2.0
+offset_right = 375.0
+offset_bottom = 17.0
+scale = Vector2(1.5, 1.5)
+theme_override_styles/normal = ExtResource("6_trvqw")
+theme_override_styles/normal_mirrored = ExtResource("6_trvqw")
+theme_override_styles/pressed = ExtResource("7_aqnmd")
+theme_override_styles/pressed_mirrored = ExtResource("7_aqnmd")
+theme_override_styles/hover = ExtResource("6_trvqw")
+theme_override_styles/hover_mirrored = ExtResource("6_trvqw")
+theme_override_styles/hover_pressed = ExtResource("7_aqnmd")
+theme_override_styles/hover_pressed_mirrored = ExtResource("7_aqnmd")
+theme_override_styles/disabled = ExtResource("6_trvqw")
+theme_override_styles/disabled_mirrored = ExtResource("6_trvqw")
+theme_override_styles/focus = SubResource("StyleBoxTexture_5qg7d")
+icon = ExtResource("8_o4ksx")
+icon_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 0
+offset_left = 32.0
+offset_top = 56.0
+offset_right = 176.0
+offset_bottom = 200.0
+theme = ExtResource("9_2rjgx")
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+theme_override_constants/separation = 7
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="CenterContainer" type="CenterContainer" parent="ScrollContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/HBoxContainer/CenterContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("9_5qg7d")
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="ScrollContainer/VBoxContainer/HBoxContainer/CenterContainer"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = ExtResource("10_bvt08")
+stretch_mode = 5
+
+[node name="CenterContainer4" type="CenterContainer" parent="ScrollContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/HBoxContainer/CenterContainer4"]
+custom_minimum_size = Vector2(60, 26)
+layout_mode = 2
+texture = ExtResource("13_mgnjo")
+stretch_mode = 5
+
+[node name="wood_count" type="Label" parent="ScrollContainer/VBoxContainer/HBoxContainer/CenterContainer4"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_5qg7d")
+theme_override_font_sizes/font_size = 32
+text = "100"
+horizontal_alignment = 1
+max_lines_visible = 1
+visible_characters = 5
+visible_ratio = 1.6666666
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="CenterContainer" type="CenterContainer" parent="ScrollContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/HBoxContainer2/CenterContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("9_5qg7d")
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="ScrollContainer/VBoxContainer/HBoxContainer2/CenterContainer"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = ExtResource("10_bvt08")
+stretch_mode = 5
+
+[node name="CenterContainer4" type="CenterContainer" parent="ScrollContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/HBoxContainer2/CenterContainer4"]
+custom_minimum_size = Vector2(60, 26)
+layout_mode = 2
+texture = ExtResource("13_mgnjo")
+stretch_mode = 5
+
+[node name="wood_count" type="Label" parent="ScrollContainer/VBoxContainer/HBoxContainer2/CenterContainer4"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_5qg7d")
+theme_override_font_sizes/font_size = 32
+text = "100"
+horizontal_alignment = 1
+max_lines_visible = 1
+visible_characters = 5
+visible_ratio = 1.6666666
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="CenterContainer" type="CenterContainer" parent="ScrollContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/HBoxContainer3/CenterContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("9_5qg7d")
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="ScrollContainer/VBoxContainer/HBoxContainer3/CenterContainer"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = ExtResource("12_bvt08")
+stretch_mode = 5
+
+[node name="CenterContainer4" type="CenterContainer" parent="ScrollContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/HBoxContainer3/CenterContainer4"]
+custom_minimum_size = Vector2(60, 26)
+layout_mode = 2
+texture = ExtResource("13_mgnjo")
+stretch_mode = 5
+
+[node name="wood_count" type="Label" parent="ScrollContainer/VBoxContainer/HBoxContainer3/CenterContainer4"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_5qg7d")
+theme_override_font_sizes/font_size = 32
+text = "100"
+horizontal_alignment = 1
+max_lines_visible = 1
+visible_characters = 5
+visible_ratio = 1.6666666
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="CenterContainer" type="CenterContainer" parent="ScrollContainer/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/HBoxContainer4/CenterContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("9_5qg7d")
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="ScrollContainer/VBoxContainer/HBoxContainer4/CenterContainer"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = ExtResource("10_bvt08")
+stretch_mode = 5
+
+[node name="CenterContainer4" type="CenterContainer" parent="ScrollContainer/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/HBoxContainer4/CenterContainer4"]
+custom_minimum_size = Vector2(60, 26)
+layout_mode = 2
+texture = ExtResource("13_mgnjo")
+stretch_mode = 5
+
+[node name="wood_count" type="Label" parent="ScrollContainer/VBoxContainer/HBoxContainer4/CenterContainer4"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_5qg7d")
+theme_override_font_sizes/font_size = 32
+text = "100"
+horizontal_alignment = 1
+max_lines_visible = 1
+visible_characters = 5
+visible_ratio = 1.6666666
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="CenterContainer" type="CenterContainer" parent="ScrollContainer/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/HBoxContainer5/CenterContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("9_5qg7d")
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="ScrollContainer/VBoxContainer/HBoxContainer5/CenterContainer"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = ExtResource("11_mgnjo")
+stretch_mode = 5
+
+[node name="CenterContainer4" type="CenterContainer" parent="ScrollContainer/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/HBoxContainer5/CenterContainer4"]
+custom_minimum_size = Vector2(60, 26)
+layout_mode = 2
+texture = ExtResource("13_mgnjo")
+stretch_mode = 5
+
+[node name="wood_count" type="Label" parent="ScrollContainer/VBoxContainer/HBoxContainer5/CenterContainer4"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_5qg7d")
+theme_override_font_sizes/font_size = 32
+text = "100"
+horizontal_alignment = 1
+max_lines_visible = 1
+visible_characters = 5
+visible_ratio = 1.6666666
+
+[node name="Overlay" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -102.0
+offset_top = -80.5
+offset_right = 102.0
+offset_bottom = 80.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 48
+text = "You'll have
+to wait a bit
+for your ad
+to load"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="Control/TextureButton" to="." method="watch_for_coins"]
+[connection signal="pressed" from="Control2/TextureButton2" to="." method="pay_to_watch"]

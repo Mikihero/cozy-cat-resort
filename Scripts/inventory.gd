@@ -10,6 +10,7 @@ func _ready() -> void:
 		print("on_ad_clicked")
 	_full_screen_content_callback.on_ad_dismissed_full_screen_content = func() -> void:
 		print("on_ad_dismissed_full_screen_content")
+		_enable()
 	_full_screen_content_callback.on_ad_failed_to_show_full_screen_content = func(ad_error : AdError) -> void:
 		print("on_ad_failed_to_show_full_screen_content")
 	_full_screen_content_callback.on_ad_impression = func() -> void:
@@ -25,7 +26,16 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
+func _disable():
+	process_mode = Node.PROCESS_MODE_DISABLED
+	$Overlay.show()
+
+func _enable():
+	process_mode = Node.PROCESS_MODE_INHERIT
+	$Overlay.hide()
+
 func load_ad():
+	_disable()
 	#free memory
 	if _rewarded_ad:
 		#always call this method on all AdFormats to free memory on Android/iOS
@@ -41,6 +51,7 @@ func load_ad():
 	var rewarded_ad_load_callback := RewardedAdLoadCallback.new()
 	rewarded_ad_load_callback.on_ad_failed_to_load = func(adError : LoadAdError) -> void:
 		print(adError.message)
+		_enable()
 
 	rewarded_ad_load_callback.on_ad_loaded = func(rewarded_ad : RewardedAd) -> void:
 		print("rewarded ad loaded" + str(rewarded_ad._uid))
