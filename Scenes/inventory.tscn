@@ -1,0 +1,181 @@
+[gd_scene load_steps=12 format=3 uid="uid://bb5lla61ni42s"]
+
+[ext_resource type="Script" uid="uid://b0gemtouhxu6o" path="res://Scripts/inventory.gd" id="1_aqnmd"]
+[ext_resource type="Texture2D" uid="uid://d2pt3shydhe8b" path="res://Assets/ui/simple-background.png" id="1_k1vlg"]
+[ext_resource type="FontFile" uid="uid://godib3f4j271" path="res://fonts/m5x7.ttf" id="2_c5ffv"]
+[ext_resource type="StyleBox" uid="uid://ykbqjul20drt" path="res://Assets/ui/styles/simple-basic.tres" id="3_sd8fj"]
+[ext_resource type="StyleBox" uid="uid://douabvrad66ov" path="res://Assets/ui/styles/brown-pressed.tres" id="4_trvqw"]
+[ext_resource type="Texture2D" uid="uid://ctrijwaomomj2" path="res://Assets/ui/coins/silver-coin.png" id="5_aqnmd"]
+[ext_resource type="Texture2D" uid="uid://dhjp6el51wqh6" path="res://Assets/ui/coins/golden-coin.png" id="6_trvqw"]
+[ext_resource type="Texture2D" uid="uid://c25hdabv43dbk" path="res://Assets/ui/confirm.png" id="7_aqnmd"]
+[ext_resource type="Texture2D" uid="uid://dcitos7xyk562" path="res://Assets/ui/coins/platinum-coin.png" id="8_o4ksx"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_o4ksx"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5qg7d"]
+
+[node name="Inventory" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_aqnmd")
+
+[node name="simpleBackground" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_k1vlg")
+region_rect = Rect2(0, 0, 21, 21)
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 55.0
+offset_right = 144.0
+offset_bottom = 190.0
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 6
+alignment = 2
+
+[node name="exampleTextButton" type="Button" parent="ScrollContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_c5ffv")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = ExtResource("3_sd8fj")
+theme_override_styles/normal_mirrored = ExtResource("3_sd8fj")
+theme_override_styles/pressed = ExtResource("4_trvqw")
+theme_override_styles/pressed_mirrored = ExtResource("4_trvqw")
+theme_override_styles/hover = ExtResource("3_sd8fj")
+theme_override_styles/hover_mirrored = ExtResource("3_sd8fj")
+theme_override_styles/hover_pressed = ExtResource("4_trvqw")
+theme_override_styles/hover_pressed_mirrored = ExtResource("4_trvqw")
+theme_override_styles/disabled = ExtResource("3_sd8fj")
+theme_override_styles/disabled_mirrored = ExtResource("3_sd8fj")
+theme_override_styles/focus = SubResource("StyleBoxTexture_o4ksx")
+text = " Buy! "
+icon_alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 32
+text = "3"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(33, 33)
+layout_mode = 2
+texture = ExtResource("5_aqnmd")
+stretch_mode = 5
+
+[node name="VSeparator" type="VSeparator" parent="."]
+layout_mode = 0
+offset_left = 235.0
+offset_top = 39.0
+offset_right = 239.0
+offset_bottom = 200.0
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 309.0
+offset_top = 31.0
+offset_right = 342.0
+offset_bottom = 64.0
+texture = ExtResource("6_trvqw")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 283.0
+offset_top = 29.0
+offset_right = 323.0
+offset_bottom = 67.0
+theme_override_font_sizes/font_size = 48
+text = "8"
+
+[node name="exampeConfirmIconButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 298.0
+offset_top = 72.0
+offset_right = 328.0
+offset_bottom = 102.0
+theme_override_styles/normal = ExtResource("3_sd8fj")
+theme_override_styles/normal_mirrored = ExtResource("3_sd8fj")
+theme_override_styles/pressed = ExtResource("4_trvqw")
+theme_override_styles/pressed_mirrored = ExtResource("4_trvqw")
+theme_override_styles/hover = ExtResource("3_sd8fj")
+theme_override_styles/hover_mirrored = ExtResource("3_sd8fj")
+theme_override_styles/hover_pressed = ExtResource("4_trvqw")
+theme_override_styles/hover_pressed_mirrored = ExtResource("4_trvqw")
+theme_override_styles/disabled = ExtResource("3_sd8fj")
+theme_override_styles/disabled_mirrored = ExtResource("3_sd8fj")
+theme_override_styles/focus = SubResource("StyleBoxTexture_5qg7d")
+icon = ExtResource("7_aqnmd")
+icon_alignment = 1
+expand_icon = true
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 320.0
+offset_top = 129.0
+offset_right = 353.0
+offset_bottom = 162.0
+texture = ExtResource("8_o4ksx")
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 263.0
+offset_top = 126.0
+offset_right = 317.0
+offset_bottom = 164.0
+theme_override_font_sizes/font_size = 48
+text = "100"
+horizontal_alignment = 2
+
+[node name="exampeConfirmIconButton2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 284.0
+offset_top = 167.0
+offset_right = 340.0
+offset_bottom = 197.0
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = ExtResource("3_sd8fj")
+theme_override_styles/normal_mirrored = ExtResource("3_sd8fj")
+theme_override_styles/pressed = ExtResource("4_trvqw")
+theme_override_styles/pressed_mirrored = ExtResource("4_trvqw")
+theme_override_styles/hover = ExtResource("3_sd8fj")
+theme_override_styles/hover_mirrored = ExtResource("3_sd8fj")
+theme_override_styles/hover_pressed = ExtResource("4_trvqw")
+theme_override_styles/hover_pressed_mirrored = ExtResource("4_trvqw")
+theme_override_styles/disabled = ExtResource("3_sd8fj")
+theme_override_styles/disabled_mirrored = ExtResource("3_sd8fj")
+theme_override_styles/focus = SubResource("StyleBoxTexture_5qg7d")
+text = "15 zł"
+icon_alignment = 1
+expand_icon = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(191, 108)
+
+[connection signal="pressed" from="exampeConfirmIconButton" to="." method="_on_load_pressed"]
