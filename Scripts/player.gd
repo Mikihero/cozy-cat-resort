@@ -67,6 +67,7 @@ func move(whereTo: Vector2i):
 	path = map.translate_coords_to_px(path);
 	if path.size() >= 2 && self.position.direction_to(path.get(0)) == -self.position.direction_to(path.get(1)):
 		path.pop_front()
+
 	pass
 
 func onMapPressed(mapCoord: Vector2i):
