@@ -9,15 +9,16 @@ var save_thread: Thread;
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var bg: TileMapLayer = self.get_node("TileMapBackground");
-	var last = bg.get_used_cells().back();
-	width = last.x + 1;
-	height = last.y + 1;
+	var used = bg.get_used_cells();
+	width = used.map(func(v): return v.x).max() + 1;
+	height = used.map(func(v): return v.y).max() + 1;
 	
 	var save_file = FileAccess.open("user://save", FileAccess.READ);
 	var data = JSON.parse_string(save_file.get_line());
 	var ent = (data.get("entities") as Array).map(MapEntity.deserialize);
 	print("load:", ent);
 	self.entities = ent;
+	
 	print(self.entities.size())
 	
 	self.paint_entities();
@@ -32,7 +33,7 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 const TREES = [
-	Vector2i(55, 2),
+	Vector2i(53, 6),
 	Vector2i(52, 5),
 ];
 const ROCKS = [
@@ -125,7 +126,6 @@ func get_best_path(source: Vector2i, destination: Vector2i) -> Array[Vector2i]:
 			self.is_tile_free(v) &&\
 			!self.entities.any(func(e: MapEntity): return e.area.encloses(Rect2i(v, Vector2i(1, 1))))
 		);
-		#print("n: ", neighbors)
 		for neighbor in neighbors:
 
 			var score = 	g_score[current]
@@ -154,7 +154,6 @@ func is_tile_free(coords: Vector2i) -> bool:
 		return false;
 
 	return true;
-
 
 
 const TAP_THRESHOLD = 0.2;

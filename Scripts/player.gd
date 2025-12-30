@@ -66,7 +66,6 @@ func move(whereTo: Vector2i):
 		path.pop_front()
 
 func onMapPressed(mapCoord: Vector2i):
-	print(mapCoord)
 	if (queuedActions.size() == 0):
 		move(mapCoord);
 		var newAction: PlayerAction = PlayerAction.new();
