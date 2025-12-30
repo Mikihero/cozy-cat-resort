@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://460ht54ok3sx"]
+[gd_scene load_steps=19 format=4 uid="uid://460ht54ok3sx"]
 
 [ext_resource type="Script" uid="uid://cxfhelhwdtnup" path="res://Scripts/map.gd" id="1_bo1nx"]
 [ext_resource type="Script" uid="uid://dm1c50euvawnu" path="res://Scripts/main.gd" id="1_jkdf5"]
@@ -14,6 +14,8 @@
 [ext_resource type="Texture2D" uid="uid://badderfpr5r2f" path="res://Assets/ui/main_map/selector-top2.png" id="10_h1bgf"]
 [ext_resource type="Texture2D" uid="uid://l3vh20gvl1ah" path="res://Assets/ui/main_map/selector-top3.png" id="11_b3802"]
 [ext_resource type="Texture2D" uid="uid://bjscyu3b7bagv" path="res://Assets/ui/main_map/selector-top4.png" id="12_fevyy"]
+[ext_resource type="AudioStream" uid="uid://drd5slt012hmo" path="res://Music/inside-the-old-train-66350.mp3" id="15_wsu2k"]
+[ext_resource type="AudioStream" uid="uid://3favnsi8fmqr" path="res://Music/ocean-waves-376898.mp3" id="16_k12tt"]
 
 [sub_resource type="AnimatedTexture" id="AnimatedTexture_hibaj"]
 frames = 4
@@ -119,3 +121,27 @@ position = Vector2(-2, 56)
 [node name="Timer" type="Timer" parent="."]
 wait_time = 10.0
 autostart = true
+
+[node name="TrainSound" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(235, 57)
+stream = ExtResource("15_wsu2k")
+autoplay = true
+max_distance = 200.0
+
+[node name="AudioStreamPlayer2D3" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(674, 829)
+stream = ExtResource("16_k12tt")
+autoplay = true
+max_distance = 300.0
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(412, 865)
+stream = ExtResource("16_k12tt")
+autoplay = true
+max_distance = 300.0
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(153, 813)
+stream = ExtResource("16_k12tt")
+autoplay = true
+max_distance = 300.0
