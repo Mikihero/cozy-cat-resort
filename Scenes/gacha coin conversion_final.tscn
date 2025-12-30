@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://d2pt3shydhe8b" path="res://Assets/ui/simple-background.png" id="1_wmlle"]
 [ext_resource type="Script" uid="uid://bqv06wkuhatl5" path="res://Scripts/coin conversion manager.gd" id="2_4qnvh"]
-[ext_resource type="PackedScene" uid="uid://gltssceucsnb" path="res://Scenes/examples/coin_display.tscn" id="2_wmlle"]
+[ext_resource type="PackedScene" path="res://Scenes/examples/coin display.tscn" id="3_1rwxw"]
 [ext_resource type="StyleBox" uid="uid://ykbqjul20drt" path="res://Assets/ui/styles/simple-basic.tres" id="4_10b1h"]
 [ext_resource type="Texture2D" uid="uid://drhinxb0pn2ro" path="res://Placeholders/diamond to gold conversion final.png" id="4_iisca"]
 [ext_resource type="StyleBox" uid="uid://douabvrad66ov" path="res://Assets/ui/styles/brown-pressed.tres" id="5_1rwxw"]
@@ -41,7 +41,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_4qnvh")
 
-[node name="coin display" parent="full layout" instance=ExtResource("2_wmlle")]
+[node name="coin display" parent="full layout" instance=ExtResource("3_1rwxw")]
 layout_mode = 2
 
 [node name="coin conversion display" type="Control" parent="full layout"]
