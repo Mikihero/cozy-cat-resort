@@ -23,7 +23,7 @@ Globals="*res://Scripts/globals.gd"
 
 window/size/viewport_width=384
 window/size/viewport_height=216
-window/stretch/mode="viewport"
+window/stretch/mode="canvas_items"
 window/stretch/scale_mode="integer"
 
 [editor_plugins]
