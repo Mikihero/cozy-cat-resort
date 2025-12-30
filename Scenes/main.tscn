@@ -5,7 +5,7 @@
 [ext_resource type="SpriteFrames" uid="uid://oduw4bmqr0w7" path="res://Assets/anim/orange_worker.tres" id="3_8gbba"]
 [ext_resource type="Script" uid="uid://dj5m3lddroqsl" path="res://Scripts/player.gd" id="4_jjvhh"]
 [ext_resource type="Texture2D" uid="uid://cdel0arw7r2at" path="res://Assets/ui/main_map/selector-bottom1.png" id="5_6iyac"]
-[ext_resource type="Script" uid="uid://ib3ergcug187" path="res://Scenes/selector.gd" id="5_fdnlq"]
+[ext_resource type="Script" path="res://Scenes/selector.gd" id="5_fdnlq"]
 [ext_resource type="Texture2D" uid="uid://cql7g2db2sqsy" path="res://Assets/ui/main_map/selector-bottom2.png" id="6_fdnlq"]
 [ext_resource type="Texture2D" uid="uid://b3i16076l5ys0" path="res://Assets/ui/main_map/selector-bottom3.png" id="7_jkdf5"]
 [ext_resource type="Texture2D" uid="uid://bdwg5kgoyg1te" path="res://Assets/ui/main_map/selector-bottom4.png" id="8_wsu2k"]
@@ -68,6 +68,7 @@ scale = Vector2(0.9999999, 0.9999999)
 tile_set = ExtResource("2_8gbba")
 
 [node name="TileMapForegroundNonBlocking" type="TileMapLayer" parent="Map"]
+tile_map_data = PackedByteArray("AAAUAAkAAAARAAAAAQAUAAoAAAAMAAAAAAAUAAsAAAARAAAAAAAVAAkAAAAbAAUAAAAWAAgAAAAdAAUAAAA=")
 tile_set = ExtResource("2_8gbba")
 
 [node name="TileMapForegroundBlocking" type="TileMapLayer" parent="Map"]

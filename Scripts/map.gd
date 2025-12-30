@@ -13,7 +13,7 @@ func _ready() -> void:
 	width = used.map(func(v): return v.x).max() + 1;
 	height = used.map(func(v): return v.y).max() + 1;
 	
-	var save_file = FileAccess.open("user://save", FileAccess.READ);
+	var save_file = FileAccess.open("user://save.json", FileAccess.READ);
 	var data = JSON.parse_string(save_file.get_line());
 	var ent = (data.get("entities") as Array).map(MapEntity.deserialize);
 	print("load:", ent);
@@ -41,9 +41,7 @@ const ROCKS = [
 	Vector2i(51,30),
 	Vector2i(53,30)
 ];
-const HOUSES = [
-
-];
+const SMALL_HOUSE = Vector2i(21, 12);
 
 func get_entities() -> Array[MapEntity]:
 	var blocking = self.get_node("TileMapForegroundBlocking") as TileMapLayer;
@@ -52,13 +50,16 @@ func get_entities() -> Array[MapEntity]:
 		var data = blocking.get_cell_tile_data(c);
 		var atlas = blocking.get_cell_atlas_coords(c);
 		if data.z_index == 0:
-			if TREES.any(func(t: Vector2i): return t == atlas):
+			if TREES.find(atlas) != -1:
 				var w = 1 if c == Vector2i(52, 5) else 2;
 				ent.push_back(MapEntity.new(Rect2i(c, Vector2i(w, 1)), MapEntity.Type.TREE, atlas))
 				
-			if ROCKS.any(func(t: Vector2i): return t == atlas):
+			if ROCKS.find(atlas) != -1:
 				ent.push_back(MapEntity.new(Rect2i(c, Vector2i(2, 1)), MapEntity.Type.ROCK, atlas))
 
+			if SMALL_HOUSE == atlas:
+				ent.push_back(MapEntity.new(Rect2i(c + Vector2i(0, 1), Vector2i(3, 3)), MapEntity.Type.HOUSE, atlas));
+								
 	return ent;
 
 func add_entity(entity: MapEntity):
@@ -84,6 +85,17 @@ func paint_entity(e: MapEntity):
 			];
 			for o in offs:
 				foreground.set_cell(e.area.position + o, 0, e.texture + o)
+		MapEntity.Type.HOUSE:
+			var non_blocking: TileMapLayer = self.get_node("TileMapForegroundNonBlocking");
+			match e.area.size:
+				Vector2i(3, 3): #small
+					foreground.set_pattern(e.area.position - Vector2i(1, 3), foreground.tile_set.get_pattern(2));
+					non_blocking.set_cell(e.area.position + Vector2i(-1, 0), 0, Vector2i(17, 0));
+					non_blocking.set_cell(e.area.position + Vector2i(-1, -1), 0, Vector2i(12, 0));
+					non_blocking.set_cell(e.area.position + Vector2i(-1, -2), 0, Vector2i(17, 0), 1);
+					non_blocking.set_cell(e.area.position + Vector2i(0, -2), 0, Vector2i(27, 5));
+					non_blocking.set_cell(e.area.position + Vector2i(1, -3), 0, Vector2i(29, 5));
+					#self.add_child(Smoke.new(e.area.position + Vector2i(1, -4)))
 
 func get_best_path(source: Vector2i, destination: Vector2i) -> Array[Vector2i]:
 	var h = func (n: Vector2i) -> int:
@@ -124,7 +136,7 @@ func get_best_path(source: Vector2i, destination: Vector2i) -> Array[Vector2i]:
 		].filter(func(v):
 			return (v.x >=0 && v.y >= 0 && v.x < width && v.y < height) &&\
 			self.is_tile_free(v) &&\
-			!self.entities.any(func(e: MapEntity): return e.area.encloses(Rect2i(v, Vector2i(1, 1))))
+			!self.entities.any(func(e: MapEntity): return e.get_area().encloses(Rect2i(v, Vector2i(1, 1))))
 		);
 		for neighbor in neighbors:
 
@@ -175,6 +187,7 @@ func _input(event: InputEvent) -> void:
 			var camera = (self.get_parent().get_node("Camera2D") as Camera2D);
 			var time = Time.get_ticks_msec() / 1000.0 - touch_start_time;
 			if time < TAP_THRESHOLD && !has_moved:
+				self.add_child(Smoke.new(Vector2i(7, 7)));
 				player.onMapPressed(self.translare_px_to_coords(event.position + camera.position - Vector2(192, 108)));
 	pass
 
@@ -201,7 +214,7 @@ func _process(delta: float) -> void:
 	pass
 
 func save_to_file():
-	var save_file = FileAccess.open("user://save", FileAccess.WRITE);
+	var save_file = FileAccess.open("user://save.json", FileAccess.WRITE);
 	var ent = self.get_entities();
 	print(ent.size());
 	var data = {
