@@ -1,23 +1,30 @@
-[gd_scene load_steps=17 format=3 uid="uid://bik6bgpqf1hde"]
+[gd_scene load_steps=24 format=3 uid="uid://bik6bgpqf1hde"]
 
 [ext_resource type="Script" uid="uid://dl8cit7xrc3q1" path="res://Scripts/gacha.gd" id="1_ym5em"]
-[ext_resource type="Texture2D" uid="uid://cld0emutf706g" path="res://Placeholders/banner_blue.png" id="2_jaewt"]
-[ext_resource type="Texture2D" uid="uid://4lyagpeux4hr" path="res://Placeholders/banner1.png" id="2_wxypu"]
-[ext_resource type="Texture2D" uid="uid://bi4txrgwnx82l" path="res://Placeholders/banner_pink.png" id="3_t80qp"]
-[ext_resource type="Texture2D" uid="uid://bsoutbx64rf61" path="res://Placeholders/banner_purple.png" id="4_gy7bo"]
-[ext_resource type="Texture2D" uid="uid://by2xn5empnkgq" path="res://Placeholders/banner2.png" id="4_k8vgs"]
-[ext_resource type="Texture2D" uid="uid://xo63bh8dh4rs" path="res://Placeholders/banner3.png" id="5_6oi3p"]
+[ext_resource type="Texture2D" uid="uid://ctrijwaomomj2" path="res://Assets/ui/coins/silver-coin.png" id="3_ypptq"]
 [ext_resource type="StyleBox" uid="uid://ykbqjul20drt" path="res://Assets/ui/styles/simple-basic.tres" id="5_7ff22"]
 [ext_resource type="Texture2D" uid="uid://d2pt3shydhe8b" path="res://Assets/ui/simple-background.png" id="5_gy7bo"]
 [ext_resource type="StyleBox" uid="uid://douabvrad66ov" path="res://Assets/ui/styles/brown-pressed.tres" id="6_dtsfm"]
+[ext_resource type="Texture2D" uid="uid://4yw4h0crn6lj" path="res://Assets/ui/gacha/gacha-background.png" id="7_6i3p3"]
+[ext_resource type="Texture2D" uid="uid://pukoumjkhafk" path="res://Assets/ui/gacha/cat-gacha.png" id="8_6bmla"]
+[ext_resource type="Texture2D" uid="uid://dfasx3yichyhw" path="res://Assets/ui/gacha/cat-button.png" id="8_6i3p3"]
 [ext_resource type="StyleBox" uid="uid://cbif8uak1xd8c" path="res://Assets/ui/styles/simple-dark.tres" id="8_7ff22"]
-[ext_resource type="Texture2D" uid="uid://do8vjs02wg07y" path="res://Assets/ui/button_dark.png" id="8_q6iwu"]
+[ext_resource type="FontFile" uid="uid://godib3f4j271" path="res://fonts/m5x7.ttf" id="8_q6iwu"]
+[ext_resource type="Texture2D" uid="uid://cpdk14tcbcnu7" path="res://Assets/ui/gacha/cat-button-pressed.png" id="9_6bmla"]
+[ext_resource type="Texture2D" uid="uid://odlenh6qbtux" path="res://Assets/ui/simple-button3.png" id="9_32v0n"]
+[ext_resource type="Texture2D" uid="uid://f3q25f7e427m" path="res://Assets/ui/arrow.png" id="10_32v0n"]
 [ext_resource type="Texture2D" uid="uid://bd2458fnbm0dl" path="res://Assets/ui/cancel.png" id="12_7ff22"]
+[ext_resource type="Texture2D" uid="uid://bbm2ct80aev27" path="res://Assets/ui/gacha/gacha-button-golden-top.png" id="13_1f0ig"]
+[ext_resource type="Texture2D" uid="uid://c6mfmlxbyp5ge" path="res://Assets/ui/gacha/gacha-button-golden-normal.png" id="13_uxxd0"]
+[ext_resource type="Texture2D" uid="uid://bj7kjw3q1e58e" path="res://Assets/ui/gacha/gacha-button-golden-presed.png" id="14_1f0ig"]
+[ext_resource type="Texture2D" uid="uid://0qsfy2n2r1lm" path="res://Assets/ui/gacha/gacha-button-platinum-top.png" id="16_s4w3m"]
+[ext_resource type="Texture2D" uid="uid://cowc73lu1pk6" path="res://Assets/ui/gacha/gacha-button-platinum-normal.png" id="17_ypptq"]
+[ext_resource type="Texture2D" uid="uid://s6okolgcm8hb" path="res://Assets/ui/gacha/gacha-button-platinum-pressed.png" id="18_6i3p3"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_c3777"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_q6iwu"]
-texture = ExtResource("8_q6iwu")
+texture = ExtResource("9_32v0n")
 texture_margin_left = 2.0
 texture_margin_top = 2.0
 texture_margin_right = 2.0
@@ -31,38 +38,19 @@ expand_margin_bottom = 4.0
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_ym5em")
-bg_blue = ExtResource("2_jaewt")
-bg_pink = ExtResource("3_t80qp")
-bg_purple = ExtResource("4_gy7bo")
+banner_cat = ExtResource("8_6bmla")
+banner_material = ExtResource("3_ypptq")
 
-[node name="Material gacha" type="Button" parent="."]
-offset_left = -171.0
-offset_top = -44.0
-offset_right = -109.0
-offset_bottom = -22.0
-theme_override_styles/normal = ExtResource("8_7ff22")
-theme_override_styles/normal_mirrored = ExtResource("8_7ff22")
-theme_override_styles/pressed = ExtResource("6_dtsfm")
-theme_override_styles/pressed_mirrored = ExtResource("6_dtsfm")
-theme_override_styles/hover = ExtResource("8_7ff22")
-theme_override_styles/hover_mirrored = ExtResource("8_7ff22")
-theme_override_styles/hover_pressed = ExtResource("6_dtsfm")
-theme_override_styles/hover_pressed_mirrored = ExtResource("6_dtsfm")
-theme_override_styles/disabled = ExtResource("8_7ff22")
-theme_override_styles/disabled_mirrored = ExtResource("8_7ff22")
-theme_override_styles/focus = SubResource("StyleBoxTexture_c3777")
-icon_alignment = 1
-
-[node name="simpleBackground" type="NinePatchRect" parent="."]
+[node name="background" type="NinePatchRect" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -142.87503
-offset_top = -91.0
-offset_right = 142.87503
-offset_bottom = 91.0
+offset_left = -147.0
+offset_top = -88.0
+offset_right = 138.75006
+offset_bottom = 94.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("5_gy7bo")
@@ -72,11 +60,39 @@ patch_margin_top = 2
 patch_margin_right = 2
 patch_margin_bottom = 2
 
-[node name="Cat gacha" type="Button" parent="."]
+[node name="banner background" type="TextureRect" parent="."]
+offset_left = -108.0
+offset_top = -52.0
+offset_right = -26.0
+offset_bottom = 14.0
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("7_6i3p3")
+
+[node name="Banner image" type="TextureRect" parent="."]
+offset_left = -108.0
+offset_top = -52.0
+offset_right = -26.0
+offset_bottom = 14.0
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("8_6bmla")
+
+[node name="Cat gacha" type="TextureButton" parent="."]
+z_index = 1
 offset_left = -171.0
 offset_top = -71.0
-offset_right = -109.0
+offset_right = -117.0
 offset_bottom = -49.0
+scale = Vector2(1.3, 1.3)
+texture_normal = ExtResource("8_6i3p3")
+texture_pressed = ExtResource("9_6bmla")
+
+[node name="Material gacha" type="Button" parent="."]
+z_index = -1
+offset_left = -171.0
+offset_top = -38.0
+offset_right = -119.46154
+offset_bottom = -16.0
+scale = Vector2(1.3, 1.3)
 theme_override_styles/normal = ExtResource("8_7ff22")
 theme_override_styles/normal_mirrored = ExtResource("8_7ff22")
 theme_override_styles/pressed = ExtResource("6_dtsfm")
@@ -90,97 +106,66 @@ theme_override_styles/disabled_mirrored = ExtResource("8_7ff22")
 theme_override_styles/focus = SubResource("StyleBoxTexture_c3777")
 icon_alignment = 1
 
-[node name="Label" type="Label" parent="."]
+[node name="gacha details background" type="NinePatchRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 32.0
+offset_top = -48.0
+offset_right = 107.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_32v0n")
+region_rect = Rect2(0, 0, 21, 21)
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="Gacha details holder" type="VBoxContainer" parent="."]
+offset_left = 35.0
+offset_top = -48.0
+offset_right = 104.0
+offset_bottom = 49.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Gacha details holder"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="Gacha details" type="Label" parent="Gacha details holder/ScrollContainer"]
+custom_minimum_size = Vector2(69, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_q6iwu")
+theme_override_font_sizes/font_size = 16
+text = "2%- featured cat
+50%- 50x resources: stone, wood, sand (each with the same probability)
+48%- 50-200x golden coins
+if within 49 gacha, the featured cat doesnt appear, the 50th gacha is guaranteed to be the featured cat."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Gacha details holder"]
+layout_mode = 2
+texture = ExtResource("10_32v0n")
+stretch_mode = 5
+
+[node name="Gacha info" type="Label" parent="."]
 offset_left = 32.0
 offset_top = -67.0
-offset_right = 105.0
+offset_right = 107.0
 offset_bottom = -50.0
 theme_override_styles/normal = SubResource("StyleBoxTexture_q6iwu")
 text = "Gacha details"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Banner" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(192.25, 108)
-scale = Vector2(0.1997396, 0.19814815)
-texture = ExtResource("2_jaewt")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-offset_left = -28.0
-offset_right = 678.0
-offset_bottom = 88.0
-theme_override_constants/separation = 30
-
-[node name="Wish premium" type="Button" parent="HBoxContainer"]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-theme_override_font_sizes/font_size = 35
-text = "Wish x1
-1 Diamond Catcoin
-"
-
-[node name="Wish 1" type="Button" parent="HBoxContainer"]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-theme_override_font_sizes/font_size = 35
-text = "Wish x1
-100 Gold Catcoins
-"
-
-[node name="Wish 10" type="Button" parent="HBoxContainer"]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-theme_override_font_sizes/font_size = 35
-text = "Wish x10
-1000 Gold Catcoins"
-
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -715.0
-offset_top = -452.0
-offset_right = -625.0
-offset_bottom = 196.0
-color = Color(1, 1, 1, 0.6666667)
-
-[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -100.0
-offset_top = -200.0
-offset_right = 100.0
-offset_bottom = 200.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 50
-
-[node name="Banner1" type="TextureButton" parent="ColorRect/VBoxContainer"]
-custom_minimum_size = Vector2(200, 100)
-layout_mode = 2
-texture_normal = ExtResource("2_wxypu")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="Banner2" type="TextureButton" parent="ColorRect/VBoxContainer"]
-custom_minimum_size = Vector2(200, 100)
-layout_mode = 2
-texture_normal = ExtResource("4_k8vgs")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="Banner3" type="TextureButton" parent="ColorRect/VBoxContainer"]
-custom_minimum_size = Vector2(200, 100)
-layout_mode = 2
-texture_normal = ExtResource("5_6oi3p")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="Camera2D" type="Camera2D" parent="."]
-
-[node name="exampleCancelIconButton" type="Button" parent="."]
+[node name="cancel" type="Button" parent="."]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -203,9 +188,66 @@ theme_override_styles/focus = SubResource("StyleBoxTexture_dtsfm")
 icon = ExtResource("12_7ff22")
 icon_alignment = 1
 
-[connection signal="pressed" from="HBoxContainer/Wish premium" to="." method="_on_wish_premium_pressed"]
-[connection signal="pressed" from="HBoxContainer/Wish 1" to="." method="_on_wish_1_pressed"]
-[connection signal="pressed" from="HBoxContainer/Wish 10" to="." method="_on_wish_10_pressed"]
-[connection signal="pressed" from="ColorRect/VBoxContainer/Banner1" to="." method="_on_banner_1_pressed"]
-[connection signal="pressed" from="ColorRect/VBoxContainer/Banner2" to="." method="_on_banner_2_pressed"]
-[connection signal="pressed" from="ColorRect/VBoxContainer/Banner3" to="." method="_on_banner_3_pressed"]
+[node name="Wish buttons" type="HBoxContainer" parent="."]
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -108.25001
+offset_top = 43.0
+offset_right = 41.749992
+offset_bottom = 43.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5, 1.5)
+theme_override_constants/separation = 10
+
+[node name="GoldDummy" type="Control" parent="Wish buttons"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Wish buttons/GoldDummy"]
+layout_mode = 0
+offset_right = 19.0
+offset_bottom = 18.0
+texture = ExtResource("13_1f0ig")
+stretch_mode = 2
+
+[node name="Gold" type="TextureButton" parent="Wish buttons/GoldDummy"]
+layout_mode = 0
+offset_left = -6.0
+offset_top = 13.0
+offset_right = 64.0
+offset_bottom = 29.0
+texture_normal = ExtResource("13_uxxd0")
+texture_pressed = ExtResource("14_1f0ig")
+stretch_mode = 0
+
+[node name="DiamondDummy" type="Control" parent="Wish buttons"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Wish buttons/DiamondDummy"]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 21.0
+offset_bottom = 16.0
+texture = ExtResource("16_s4w3m")
+expand_mode = 1
+
+[node name="Diamond" type="TextureButton" parent="Wish buttons/DiamondDummy"]
+layout_mode = 0
+offset_left = -4.0
+offset_top = 13.0
+offset_right = 66.0
+offset_bottom = 29.0
+texture_normal = ExtResource("17_ypptq")
+texture_pressed = ExtResource("18_6i3p3")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[connection signal="pressed" from="Cat gacha" to="." method="_on_cat_gacha_pressed"]
+[connection signal="pressed" from="Material gacha" to="." method="_on_material_gacha_pressed"]
+[connection signal="pressed" from="cancel" to="." method="_on_cancel_pressed"]
+[connection signal="pressed" from="Wish buttons/GoldDummy/Gold" to="." method="_on_gold_pressed"]
+[connection signal="pressed" from="Wish buttons/DiamondDummy/Diamond" to="." method="_on_diamond_pressed"]

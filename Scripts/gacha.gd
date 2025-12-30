@@ -1,20 +1,21 @@
 extends Node2D
 
-@export var bg_blue: Texture2D
-@export var bg_pink: Texture2D
-@export var bg_purple: Texture2D
+@export var banner_cat: Texture2D
+@export var banner_material: Texture2D
 
 @onready var popup_scene = preload("res://Scenes/confirm.tscn")
 @onready var ok_scene = preload("res://Scenes/ok.tscn")
 @onready var wishing_scene = preload("res://Scenes/wishing.tscn")
-@onready var backgrond_node = $Banner
+@onready var banner_image = $"Banner image"
+@onready var cat_gacha = $"Cat gacha"
+@onready var material_gacha = $"Material gacha"
 
 var coin_type = ""
+var selected_banner = "cat"
 
-
-func _on_wish_premium_pressed() -> void:
+func _on_diamond_pressed() -> void:
 	coin_type = "diamond"
-	if (Globals.DiamondCatCoins >= 1):
+	if (Globals.DiamondCatCoins >= 10):
 		var popup_instance = popup_scene.instantiate()
 		popup_instance.message_text = "Are you sure you want to spend 1 diamond catcoin?"
 		popup_instance.action_to_execute = check_funds
@@ -25,7 +26,7 @@ func _on_wish_premium_pressed() -> void:
 		add_child(ok_instance)
 
 
-func _on_wish_1_pressed() -> void:
+func _on_gold_pressed() -> void:
 	coin_type = "gold"
 	if (Globals.GoldCatCoins >= 100):
 		var popup_instance = popup_scene.instantiate()
@@ -40,23 +41,28 @@ func _on_wish_1_pressed() -> void:
 
 func check_funds():
 	if(coin_type == "diamond"):
-		Globals.DiamondCatCoins = Globals.DiamondCatCoins - 1
+		Globals.DiamondCatCoins = Globals.DiamondCatCoins - 10
 	elif (coin_type == "gold"):
 		Globals.GoldCatCoins = Globals.GoldCatCoins - 100
 	print(Globals.DiamondCatCoins,"	", Globals.GoldCatCoins)
 	
 	var wishing_instance = wishing_scene.instantiate()
 	
-	get_tree().root.add_child(wishing_instance)
-	
+	get_tree().root.add_child(wishing_instance)	
 
-func _on_banner_1_pressed() -> void:
-	backgrond_node.texture = bg_blue
-	
-
-func _on_banner_2_pressed() -> void:
-	backgrond_node.texture = bg_pink
+func _on_cancel_pressed() -> void:
+	queue_free()
 
 
-func _on_banner_3_pressed() -> void:
-	backgrond_node.texture = bg_purple	
+func _on_cat_gacha_pressed() -> void:
+	selected_banner = "cat"
+	cat_gacha.z_index = 1
+	material_gacha.z_index = -1
+	banner_image.texture = banner_cat
+
+
+func _on_material_gacha_pressed() -> void:
+	selected_banner = "materials"
+	cat_gacha.z_index = -1
+	material_gacha.z_index = 1
+	banner_image.texture = banner_material
