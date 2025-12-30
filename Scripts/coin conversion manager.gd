@@ -15,23 +15,41 @@ func _process(delta: float) -> void:
 	pass
 	
 func _on_convert_golden_to_silver_button_pressed() -> void:
-	print("chuj")
 	if Globals.GoldCatCoins - 1 < 0:
 		var ok_scene_instance = ok_scene.instantiate()
-		ok_scene_instance.message_text = "Not enough golden coins."
+		ok_scene_instance.message_text = "Not enough gold catcoins."
 		add_child(ok_scene_instance)
 		return
 	if $"quick convert setting/quick convert container/quick convert checkbox".button_pressed:	
-		_do_conversion("golden")
+		do_conversion("golden")
 	else:
 		var confirm_scene_instance = confirm_scene.instantiate()
 		confirm_scene_instance.message_text = "Are you sure you want to convert 1 gold catcoin?"
-		confirm_scene_instance.action_to_execute = _do_conversion
+		confirm_scene_instance.action_to_execute = do_conversion
 		confirm_scene_instance.arguments = "golden"
 		add_child(confirm_scene_instance)
 
 func _on_convert_diamond_to_golden_button_pressed() -> void:
-	pass	
+	if Globals.DiamondCatCoins - 1 < 0:
+		var ok_scene_instance = ok_scene.instantiate()
+		ok_scene_instance.message_text = "Not enough diamond catcoins."
+		add_child(ok_scene_instance)
+		return
+	if $"quick convert setting/quick convert container/quick convert checkbox".button_pressed:	
+		do_conversion("diamond")
+	else:
+		var confirm_scene_instance = confirm_scene.instantiate()
+		confirm_scene_instance.message_text = "Are you sure you want to convert 1 diamond catcoin?"
+		confirm_scene_instance.action_to_execute = do_conversion
+		confirm_scene_instance.arguments = "diamond"
+		add_child(confirm_scene_instance)
 
-func _do_conversion(from: String) -> void:
-	pass
+func do_conversion(from: String) -> void:
+	if from == "golden":
+		Globals.GoldCatCoins -= 1
+		Globals.CatCoins += 10
+	if from == "diamond":
+		Globals.DiamondCatCoins -= 1
+		Globals.GoldCatCoins += 10
+	else:
+		push_error("Conversion on invalid coin type: ", from)

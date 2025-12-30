@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://gltssceucsnb"]
+[gd_scene load_steps=7 format=3 uid="uid://btfyk6vqgxbph"]
 
 [ext_resource type="Script" uid="uid://cubnh62umt3ns" path="res://Scripts/coin display manager.gd" id="1_wi7sw"]
 [ext_resource type="Texture2D" uid="uid://chhlpceoabnbi" path="res://Assets/ui/coin-holder-background.png" id="1_wsiki"]
