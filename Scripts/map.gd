@@ -55,7 +55,9 @@ func get_best_path(source: Vector2i, destination: Vector2i) -> Array[Vector2i]:
 			#current + Vector2i(1, -1),
 			#current + Vector2i(-1, -1),
 			#current + Vector2i(-1, 1)
-		].filter(func(v): return (v.x >=0 && v.y >= 0 && v.x < width && v.y < height));
+		].filter(func(v): 
+			return (v.x >=0 && v.y >= 0 && v.x < width && v.y < height) #&& self.is_tile_free(v)
+		);
 		#print("n: ", neighbors)
 		for neighbor in neighbors:
 			if closed.has(neighbor):
@@ -83,6 +85,13 @@ func get_free_tiles() -> Array[Vector2i]:
 	var ret: Array[Vector2i] = [];
 	return ret;
 
+func is_tile_free(coords: Vector2i) -> bool:
+	if (self.get_node("TileMapBackground") as TileMapLayer).get_cell_atlas_coords(coords) == Vector2i(-1, -1):
+		return false;
+	if (self.get_node("TileMapBackgroundBorder") as TileMapLayer).get_cell_atlas_coords(coords) == Vector2i(-1, -1):
+		return false;
+		
+	return true;	
 func add_entity(entity: MapEntity):
 	pass
 

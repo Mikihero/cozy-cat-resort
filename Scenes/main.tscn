@@ -47,5 +47,5 @@ position = Vector2(152, 104)
 scale = Vector2(0.99999994, 0.99999994)
 sprite_frames = ExtResource("3_8gbba")
 animation = &"idle"
-frame_progress = 0.6705166
+frame_progress = 0.4998101
 script = ExtResource("4_jjvhh")

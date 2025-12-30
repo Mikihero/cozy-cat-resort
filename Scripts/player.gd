@@ -34,6 +34,8 @@ func move(position: Vector2i):
 	path = map.get_best_path(map.translare_px_to_coords(self.position), position);
 	print(path)
 	path = map.translate_coords_to_px(path);
+	if path.size() >= 2 && self.position.direction_to(path.get(0)) == -self.position.direction_to(path.get(1)):
+		path.pop_front()
 	print(path);
 	#self.position = Vector2(path.back())
 	print(self.position)
