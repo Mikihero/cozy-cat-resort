@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="cozy cat resort"
-run/main_scene="uid://bb5lla61ni42s"
+run/main_scene="uid://0w7cbry6wogb"
 config/features=PackedStringArray("4.5", "Mobile")
 config/icon="res://icon.svg"
 
@@ -23,6 +23,8 @@ Globals="*res://Scripts/globals.gd"
 
 window/size/viewport_width=384
 window/size/viewport_height=216
+window/size/window_width_override=1280
+window/size/window_height_override=720
 window/stretch/mode="canvas_items"
 window/stretch/scale_mode="integer"
 

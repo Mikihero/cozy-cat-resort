@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://fm5ij46j5pta"
-path="res://.godot/imported/vscroll_bar-pressed.png-7f64ed5f0b8427d8db788b8ae83c4ccf.ctex"
+path="res://.godot/imported/vscroll_bar-pressed.png-709fda7ba4dadc5010b833c3b1d99524.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Graphics/vscroll_bar-pressed.png"
-dest_files=["res://.godot/imported/vscroll_bar-pressed.png-7f64ed5f0b8427d8db788b8ae83c4ccf.ctex"]
+source_file="res://Assets/ui/vscroll_bar-pressed.png"
+dest_files=["res://.godot/imported/vscroll_bar-pressed.png-709fda7ba4dadc5010b833c3b1d99524.ctex"]
 
 [params]
 
