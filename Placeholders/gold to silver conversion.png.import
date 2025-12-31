@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bpbpamwvwed5q"
-path="res://.godot/imported/coin.png-571617fab8235d1902dd36b0210fa079.ctex"
+uid="uid://ba2h4xc8re76n"
+path="res://.godot/imported/gold to silver conversion.png-72f9b3a2562b0da3f120912e5ddda816.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Placeholders/coin.png"
-dest_files=["res://.godot/imported/coin.png-571617fab8235d1902dd36b0210fa079.ctex"]
+source_file="res://Placeholders/gold to silver conversion.png"
+dest_files=["res://.godot/imported/gold to silver conversion.png-72f9b3a2562b0da3f120912e5ddda816.ctex"]
 
 [params]
 
