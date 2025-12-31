@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://hjtrg6uyi58"
-path="res://.godot/imported/spr_tileset_sunnysideworld_16px.png-99ff4c16a094b7eb739092a49dcbc03a.ctex"
+uid="uid://dfasx3yichyhw"
+path="res://.godot/imported/cat-button.png-da092db0a9461d4b60e24ec82b2a53e2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/tileset/spr_tileset_sunnysideworld_16px.png"
-dest_files=["res://.godot/imported/spr_tileset_sunnysideworld_16px.png-99ff4c16a094b7eb739092a49dcbc03a.ctex"]
+source_file="res://Assets/ui/gacha/cat-button.png"
+dest_files=["res://.godot/imported/cat-button.png-da092db0a9461d4b60e24ec82b2a53e2.ctex"]
 
 [params]
 

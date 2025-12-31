@@ -1,7 +1,6 @@
 extends CanvasLayer
 
 var message_text = ""
-
 var action_to_execute: Callable
 
 
