@@ -3,8 +3,10 @@ extends Control
 var _rewarded_ad : RewardedAd
 var _full_screen_content_callback := FullScreenContentCallback.new()
 var on_user_earned_reward_listener := OnUserEarnedRewardListener.new()
+@onready var display = preload("res://Scenes/inventory_element.tscn")
 
 func _ready() -> void:
+	load_items()
 	MobileAds.initialize()
 	_full_screen_content_callback.on_ad_clicked = func() -> void:
 		print("on_ad_clicked")
@@ -21,6 +23,19 @@ func _ready() -> void:
 	#_on_load_pressed()
 	pass # Replace with function body.
 
+func load_items():
+	var items = {"wood": 100, "stone": 120, "clay": 0}
+	var textures = {"wood": preload("res://Assets/resources/wood.png"),
+		 			"stone": preload("res://Assets/resources/stone.png"),
+					"clay": preload("res://Assets/resources/clay.png")}
+	for item in items.keys():
+		var element = display.instantiate()
+		element.image = textures[item]
+		element.amount = items[item]
+		$ScrollContainer/InventoryElementsContainer.add_child(element)
+	
+		
+		
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
