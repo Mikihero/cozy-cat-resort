@@ -1,6 +1,6 @@
 extends Node
 
-var CatCoins: int = 0
+var CatCoins: int = 1000
 var GoldCatCoins: int = 0
 var DiamondCatCoins :int = 0
 

@@ -3,12 +3,12 @@
 [ext_resource type="Texture2D" uid="uid://d2pt3shydhe8b" path="res://Assets/ui/simple-background.png" id="1_5lush"]
 [ext_resource type="Script" uid="uid://cpmt8kr7rnh3m" path="res://Scripts/trade_manager.gd" id="2_bynap"]
 [ext_resource type="PackedScene" uid="uid://gltssceucsnb" path="res://Scenes/examples/coin display.tscn" id="2_wwimc"]
-[ext_resource type="StyleBox" uid="uid://ctx4kjqyma3uy" path="res://Assets/ui/styles/simple-dark.tres" id="3_140t8"]
+[ext_resource type="StyleBox" uid="uid://cbif8uak1xd8c" path="res://Assets/ui/styles/simple-dark.tres" id="3_140t8"]
 [ext_resource type="Texture2D" uid="uid://7e2adnlhpgp3" path="res://Assets/ui/wandering-trader/traded-item-background.png" id="3_mg1x1"]
 [ext_resource type="Texture2D" uid="uid://r2jm7c42ksne" path="res://Assets/resources/wood.png" id="4_bv8y1"]
 [ext_resource type="StyleBox" uid="uid://douabvrad66ov" path="res://Assets/ui/styles/brown-pressed.tres" id="4_ti1ra"]
 [ext_resource type="Texture2D" uid="uid://dcpdpybm41l13" path="res://Assets/ui/wandering-trader/arrow-right.png" id="5_bv8y1"]
-[ext_resource type="Script" uid="uid://cerhmdh200l4r" path="res://Scripts/TradeDisplay.gd" id="5_ti1ra"]
+[ext_resource type="Script" uid="uid://cerhmdh200l4r" path="res://Scripts/trade_display.gd" id="5_mfv16"]
 [ext_resource type="Texture2D" uid="uid://ctrijwaomomj2" path="res://Assets/ui/coins/silver-coin.png" id="6_ywle7"]
 [ext_resource type="Texture2D" uid="uid://bvh2pxo1q2i4h" path="res://Assets/ui/wandering-trader/arrow-right-pressed.png" id="7_ywle7"]
 [ext_resource type="Texture2D" uid="uid://ck28d5wkfew8n" path="res://Assets/ui/wandering-trader/traded-item-background-pressed.png" id="9_ucy5d"]
@@ -69,7 +69,7 @@ theme_override_styles/pressed = ExtResource("4_ti1ra")
 theme_override_styles/hover = ExtResource("3_140t8")
 theme_override_styles/hover_pressed = ExtResource("4_ti1ra")
 theme_override_styles/focus = SubResource("StyleBoxTexture_140t8")
-script = ExtResource("5_ti1ra")
+script = ExtResource("5_mfv16")
 arrow_texture_normal = ExtResource("5_bv8y1")
 arrow_texture_pressed = ExtResource("7_ywle7")
 item_background_normal = ExtResource("3_mg1x1")
@@ -256,7 +256,7 @@ theme_override_styles/pressed = ExtResource("4_ti1ra")
 theme_override_styles/hover = ExtResource("3_140t8")
 theme_override_styles/hover_pressed = ExtResource("4_ti1ra")
 theme_override_styles/focus = SubResource("StyleBoxTexture_140t8")
-script = ExtResource("5_ti1ra")
+script = ExtResource("5_mfv16")
 arrow_texture_normal = ExtResource("5_bv8y1")
 arrow_texture_pressed = ExtResource("7_ywle7")
 item_background_normal = ExtResource("3_mg1x1")
@@ -448,7 +448,7 @@ theme_override_styles/pressed = ExtResource("4_ti1ra")
 theme_override_styles/hover = ExtResource("3_140t8")
 theme_override_styles/hover_pressed = ExtResource("4_ti1ra")
 theme_override_styles/focus = SubResource("StyleBoxTexture_140t8")
-script = ExtResource("5_ti1ra")
+script = ExtResource("5_mfv16")
 arrow_texture_normal = ExtResource("5_bv8y1")
 arrow_texture_pressed = ExtResource("7_ywle7")
 item_background_normal = ExtResource("3_mg1x1")
@@ -635,7 +635,7 @@ theme_override_styles/pressed = ExtResource("4_ti1ra")
 theme_override_styles/hover = ExtResource("3_140t8")
 theme_override_styles/hover_pressed = ExtResource("4_ti1ra")
 theme_override_styles/focus = SubResource("StyleBoxTexture_140t8")
-script = ExtResource("5_ti1ra")
+script = ExtResource("5_mfv16")
 arrow_texture_normal = ExtResource("5_bv8y1")
 arrow_texture_pressed = ExtResource("7_ywle7")
 item_background_normal = ExtResource("3_mg1x1")
