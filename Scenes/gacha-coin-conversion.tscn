@@ -1,0 +1,192 @@
+[gd_scene load_steps=12 format=3 uid="uid://bnutk33x1fo7e"]
+
+[ext_resource type="Script" uid="uid://ci4qmi4esvlik" path="res://Scenes/gacha_coin_conversion.gd" id="1_na6ap"]
+[ext_resource type="Texture2D" uid="uid://d2pt3shydhe8b" path="res://Assets/ui/simple-background.png" id="1_wmlle"]
+[ext_resource type="Script" uid="uid://bqv06wkuhatl5" path="res://Scripts/coin conversion manager.gd" id="2_4qnvh"]
+[ext_resource type="PackedScene" path="res://Scenes/examples/coin display.tscn" id="3_1rwxw"]
+[ext_resource type="StyleBox" uid="uid://ykbqjul20drt" path="res://Assets/ui/styles/simple-basic.tres" id="4_10b1h"]
+[ext_resource type="Texture2D" uid="uid://drhinxb0pn2ro" path="res://Placeholders/diamond to gold conversion final.png" id="4_iisca"]
+[ext_resource type="StyleBox" uid="uid://douabvrad66ov" path="res://Assets/ui/styles/brown-pressed.tres" id="5_1rwxw"]
+[ext_resource type="Texture2D" uid="uid://b8b3fahbjp4wm" path="res://Placeholders/gold to silver conversion final.png" id="7_1rwxw"]
+[ext_resource type="Texture2D" uid="uid://bd2458fnbm0dl" path="res://Assets/ui/cancel.png" id="9_xogpu"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2ckbf"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1y2uo"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_na6ap")
+
+[node name="simpleBackground" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 8.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_wmlle")
+region_rect = Rect2(0, 0, 21, 21)
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="full layout" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_4qnvh")
+
+[node name="coin display" parent="full layout" instance=ExtResource("3_1rwxw")]
+layout_mode = 2
+
+[node name="coin conversion display" type="Control" parent="full layout"]
+layout_mode = 2
+
+[node name="coin conversion display" type="HBoxContainer" parent="full layout/coin conversion display"]
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = 52.0
+offset_right = 128.0
+offset_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="gold to silver conversion" type="VBoxContainer" parent="full layout/coin conversion display/coin conversion display"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="conversion texture" type="TextureRect" parent="full layout/coin conversion display/coin conversion display/gold to silver conversion"]
+custom_minimum_size = Vector2(99, 33)
+layout_mode = 2
+texture = ExtResource("7_1rwxw")
+
+[node name="gold to silver conversion rate" type="RichTextLabel" parent="full layout/coin conversion display/coin conversion display/gold to silver conversion"]
+custom_minimum_size = Vector2(32, 26)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 32
+text = "1 : 10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="convert golden to silver button" type="Button" parent="full layout/coin conversion display/coin conversion display/gold to silver conversion"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = ExtResource("4_10b1h")
+theme_override_styles/normal_mirrored = ExtResource("4_10b1h")
+theme_override_styles/pressed = ExtResource("5_1rwxw")
+theme_override_styles/pressed_mirrored = ExtResource("5_1rwxw")
+theme_override_styles/hover = ExtResource("4_10b1h")
+theme_override_styles/hover_mirrored = ExtResource("4_10b1h")
+theme_override_styles/hover_pressed = ExtResource("5_1rwxw")
+theme_override_styles/hover_pressed_mirrored = ExtResource("5_1rwxw")
+theme_override_styles/disabled = ExtResource("4_10b1h")
+theme_override_styles/disabled_mirrored = ExtResource("4_10b1h")
+theme_override_styles/focus = SubResource("StyleBoxTexture_2ckbf")
+text = "Convert"
+icon_alignment = 1
+
+[node name="diamond to golden" type="VBoxContainer" parent="full layout/coin conversion display/coin conversion display"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="conversion texture" type="TextureRect" parent="full layout/coin conversion display/coin conversion display/diamond to golden"]
+custom_minimum_size = Vector2(99, 33)
+layout_mode = 2
+texture = ExtResource("4_iisca")
+
+[node name="diamond to gold conversion rate" type="RichTextLabel" parent="full layout/coin conversion display/coin conversion display/diamond to golden"]
+custom_minimum_size = Vector2(32, 26)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 32
+text = "1 : 10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="convert diamond to golden button" type="Button" parent="full layout/coin conversion display/coin conversion display/diamond to golden"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = ExtResource("4_10b1h")
+theme_override_styles/normal_mirrored = ExtResource("4_10b1h")
+theme_override_styles/pressed = ExtResource("5_1rwxw")
+theme_override_styles/pressed_mirrored = ExtResource("5_1rwxw")
+theme_override_styles/hover = ExtResource("4_10b1h")
+theme_override_styles/hover_mirrored = ExtResource("4_10b1h")
+theme_override_styles/hover_pressed = ExtResource("5_1rwxw")
+theme_override_styles/hover_pressed_mirrored = ExtResource("5_1rwxw")
+theme_override_styles/disabled = ExtResource("4_10b1h")
+theme_override_styles/disabled_mirrored = ExtResource("4_10b1h")
+theme_override_styles/focus = SubResource("StyleBoxTexture_2ckbf")
+text = "Convert"
+icon_alignment = 1
+
+[node name="quick convert setting" type="Control" parent="full layout"]
+layout_mode = 2
+
+[node name="quick convert container" type="HBoxContainer" parent="full layout/quick convert setting"]
+layout_mode = 0
+offset_left = 130.0
+offset_top = 156.0
+offset_right = 258.0
+offset_bottom = 196.0
+
+[node name="quick convert checkbox" type="CheckBox" parent="full layout/quick convert setting/quick convert container"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="quick convert text" type="RichTextLabel" parent="full layout/quick convert setting/quick convert container"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Skip confirmation"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="exampleCancelIconButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 357.0
+offset_top = 4.0
+offset_right = 372.0
+offset_bottom = 19.0
+scale = Vector2(1.5, 1.5)
+theme_override_styles/normal = ExtResource("4_10b1h")
+theme_override_styles/normal_mirrored = ExtResource("4_10b1h")
+theme_override_styles/pressed = ExtResource("5_1rwxw")
+theme_override_styles/pressed_mirrored = ExtResource("5_1rwxw")
+theme_override_styles/hover = ExtResource("4_10b1h")
+theme_override_styles/hover_mirrored = ExtResource("4_10b1h")
+theme_override_styles/hover_pressed = ExtResource("5_1rwxw")
+theme_override_styles/hover_pressed_mirrored = ExtResource("5_1rwxw")
+theme_override_styles/disabled = ExtResource("4_10b1h")
+theme_override_styles/disabled_mirrored = ExtResource("4_10b1h")
+theme_override_styles/focus = SubResource("StyleBoxTexture_1y2uo")
+icon = ExtResource("9_xogpu")
+icon_alignment = 1
+
+[connection signal="pressed" from="full layout/coin conversion display/coin conversion display/gold to silver conversion/convert golden to silver button" to="full layout" method="_on_convert_golden_to_silver_button_pressed"]
+[connection signal="pressed" from="full layout/coin conversion display/coin conversion display/diamond to golden/convert diamond to golden button" to="full layout" method="_on_convert_diamond_to_golden_button_pressed"]
+[connection signal="pressed" from="exampleCancelIconButton" to="." method="_on_close_pressed"]

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="cozy cat resort"
-run/main_scene="uid://460ht54ok3sx"
+run/main_scene="uid://cn0sjrrdd23m4"
 config/features=PackedStringArray("4.5", "Mobile")
 config/icon="res://icon.svg"
 
@@ -26,7 +26,12 @@ window/size/viewport_height=216
 window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
 window/stretch/scale_mode="integer"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/admob/plugin.cfg")
 
 [gui]
 
@@ -41,3 +46,4 @@ pointing/emulate_touch_from_mouse=true
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"
 textures/vram_compression/import_etc2_astc=true
+environment/defaults/default_clear_color=Color(0.14767182, 0.14767182, 0.14767176, 1)
