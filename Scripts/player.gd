@@ -124,8 +124,8 @@ func schedule_map_action(target: Vector2i):
 			action.actionEnum = action.ActionEnums.work;
 			action.duration = 5;
 		_: return;
-	queuedActions.append(action);
 		
+	queuedActions.append(action);
 
 func onMapPressed(mapCoord: Vector2i):
 	if (queuedActions.size() == 0):

@@ -8,10 +8,14 @@ var moving = true
 var has_stopped = false
 var blocked = false
 var is_leader = false
+var has_cat = false
 
 func _ready():
 	detector.area_entered.connect(_on_area_entered)
 	detector.area_exited.connect(_on_area_exited)
+	
+	has_cat = true
+	get_node("Cart").play("with cat")
 	
 	play_bounce()
 
@@ -27,11 +31,18 @@ func _process(delta: float) -> void:
 	
 	if position.x > 400:
 		queue_free()
+	if ((!moving || blocked) && position.x>200 && has_cat):
+		get_rid_of_cat()
 		
 func start_wait_timer():
-	await get_tree().create_timer(10.0).timeout
+	await get_tree().create_timer(1.0).timeout
 	moving = true
-	
+
+func get_rid_of_cat():
+	get_node("Cart").play("no cat")
+	has_cat = false
+	get_parent().get_node("NPC controller").spawn_cat(position.x)
+
 func _on_area_entered(area):
 	if area.name == "BackArea" and area.get_parent() != self:
 		blocked = true

@@ -32,9 +32,6 @@ static func deserialize(str: String) -> MapEntity:
 		Vector2i(data.get("texture_x"), data.get("texture_y"))
 	);
 
-func get_tiles():
-	pass
-	
 func get_area() -> Rect2i:
 	var ret = self.area;
 	match self.type:
@@ -56,7 +53,6 @@ func get_sprite_area() -> Rect2i:
 			match self.area.size:
 				Vector2i(3, 3):
 					ret.position.y -= 2;
-			
 	return ret;
 
 func get_sprite_area_in_global_coords() -> Rect2i:
@@ -77,4 +73,5 @@ enum Type {
 	TREE = 0,
 	ROCK = 1,
 	HOUSE = 2,
+	CART_WORK = 3
 }
