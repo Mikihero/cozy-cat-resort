@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://drhinxb0pn2ro" path="res://Placeholders/diamond to gold conversion final.png" id="4_iisca"]
 [ext_resource type="StyleBox" uid="uid://douabvrad66ov" path="res://Assets/ui/styles/brown-pressed.tres" id="5_1rwxw"]
 [ext_resource type="StyleBox" uid="uid://cbif8uak1xd8c" path="res://Assets/ui/styles/simple-dark.tres" id="5_xogpu"]
-[ext_resource type="Texture2D" uid="uid://b8b3fahbjp4wm" path="res://Placeholders/gold to silver conversion final.png" id="7_1rwxw"]
+[ext_resource type="Texture2D" uid="uid://duld0grdjh4p3" path="res://Assets/ui/coin-conversion/gold-to-silver-conversion-final-v2.png" id="7_xogpu"]
 [ext_resource type="Texture2D" uid="uid://bd2458fnbm0dl" path="res://Assets/ui/cancel.png" id="9_xogpu"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2ckbf"]
@@ -73,6 +73,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
+theme_override_constants/separation = 6
 
 [node name="gold to silver conversion button" type="Button" parent="full layout/coin conversion display/coin conversion display"]
 layout_mode = 2
@@ -91,23 +92,62 @@ grow_vertical = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
 
-[node name="conversion texture" type="TextureRect" parent="full layout/coin conversion display/coin conversion display/gold to silver conversion button/gold to silver conversion"]
-custom_minimum_size = Vector2(99, 33)
+[node name="Control" type="Control" parent="full layout/coin conversion display/coin conversion display/gold to silver conversion button/gold to silver conversion"]
 layout_mode = 2
 size_flags_vertical = 3
-texture = ExtResource("7_1rwxw")
 
-[node name="gold to silver conversion rate" type="RichTextLabel" parent="full layout/coin conversion display/coin conversion display/gold to silver conversion button/gold to silver conversion"]
-custom_minimum_size = Vector2(32, 26)
+[node name="conversion texture" type="TextureRect" parent="full layout/coin conversion display/coin conversion display/gold to silver conversion button/gold to silver conversion/Control"]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 10.0
+offset_top = 9.0
+offset_right = 45.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3, 3)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("7_xogpu")
+stretch_mode = 5
+
+[node name="Control3" type="Control" parent="full layout/coin conversion display/coin conversion display/gold to silver conversion button/gold to silver conversion"]
 layout_mode = 2
+size_flags_vertical = 3
+
+[node name="gold to silver conversion rate" type="RichTextLabel" parent="full layout/coin conversion display/coin conversion display/gold to silver conversion button/gold to silver conversion/Control3"]
+custom_minimum_size = Vector2(32, 26)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
 theme_override_font_sizes/normal_font_size = 32
 text = "1 : 10"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="convert golden to silver button" type="Button" parent="full layout/coin conversion display/coin conversion display/gold to silver conversion button/gold to silver conversion"]
-custom_minimum_size = Vector2(100, 0)
+[node name="Control2" type="Control" parent="full layout/coin conversion display/coin conversion display/gold to silver conversion button/gold to silver conversion"]
 layout_mode = 2
+size_flags_vertical = 3
+
+[node name="convert golden to silver button" type="Button" parent="full layout/coin conversion display/coin conversion display/gold to silver conversion button/gold to silver conversion/Control2"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -21.0
+offset_right = 50.0
+offset_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = ExtResource("4_10b1h")
@@ -212,6 +252,6 @@ theme_override_styles/focus = SubResource("StyleBoxTexture_1y2uo")
 icon = ExtResource("9_xogpu")
 icon_alignment = 1
 
-[connection signal="pressed" from="full layout/coin conversion display/coin conversion display/gold to silver conversion button/gold to silver conversion/convert golden to silver button" to="full layout" method="_on_convert_golden_to_silver_button_pressed"]
+[connection signal="pressed" from="full layout/coin conversion display/coin conversion display/gold to silver conversion button/gold to silver conversion/Control2/convert golden to silver button" to="full layout" method="_on_convert_golden_to_silver_button_pressed"]
 [connection signal="pressed" from="full layout/coin conversion display/coin conversion display/diamond to gold conversion/diamond to gold/convert diamond to golden button" to="full layout" method="_on_convert_diamond_to_golden_button_pressed"]
 [connection signal="pressed" from="exampleCancelIconButton" to="." method="_on_close_pressed"]
