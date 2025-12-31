@@ -21,6 +21,12 @@ func _on_house_selected(house):
 	setup_house_details(house)
 	
 func setup_house_details(house):
+	if Globals.inventory.get("wood") < house.wood_cost:
+		wood_label.add_theme_color_override("font_color",Color.BROWN)
+	if Globals.inventory.get("clay") < house.clay_cost:
+		clay_label.add_theme_color_override("font_color",Color.BROWN)
+	if Globals.inventory.get("stone") < house.stone_cost:
+		stone_label.add_theme_color_override("font_color",Color.BROWN)
 	wood_label.text = str(house.wood_cost)
 	stone_label.text = str(house.stone_cost)
 	clay_label.text = str(house.clay_cost)
