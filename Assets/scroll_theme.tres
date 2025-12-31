@@ -1,0 +1,41 @@
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://b4akeoeqe8202"]
+
+[ext_resource type="Texture2D" uid="uid://30hbo3wqs7vm" path="res://Assets/ui/vscroll_bar.png" id="1_oug2e"]
+[ext_resource type="Texture2D" uid="uid://fm5ij46j5pta" path="res://Assets/ui/vscroll_bar-pressed.png" id="2_eljno"]
+[ext_resource type="Texture2D" uid="uid://dh4ku52ui1p1k" path="res://Assets/ui/vscroll_bar-highlight.png" id="2_ma78q"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ma78q"]
+texture = ExtResource("1_oug2e")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+region_rect = Rect2(0, 0, 6, 12)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ipyi6"]
+texture = ExtResource("2_ma78q")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3tsvm"]
+texture = ExtResource("2_eljno")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+region_rect = Rect2(0, 0, 6, 12)
+
+[resource]
+VScrollBar/icons/decrement = null
+VScrollBar/icons/decrement_highlight = null
+VScrollBar/icons/decrement_pressed = null
+VScrollBar/icons/increment = null
+VScrollBar/icons/increment_highlight = null
+VScrollBar/icons/increment_pressed = null
+VScrollBar/styles/grabber = SubResource("StyleBoxTexture_ma78q")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxTexture_ipyi6")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxTexture_3tsvm")
+VScrollBar/styles/scroll = null
+VScrollBar/styles/scroll_focus = null
