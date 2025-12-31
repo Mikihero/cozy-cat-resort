@@ -19,19 +19,16 @@ func _ready() -> void:
 		print("on_ad_impression")
 	_full_screen_content_callback.on_ad_showed_full_screen_content = func() -> void:
 		print("on_ad_showed_full_screen_content")
-		
-	#_on_load_pressed()
-	pass # Replace with function body.
+
 
 func load_items():
-	var items = {"wood": 100, "stone": 120, "clay": 0}
 	var textures = {"wood": preload("res://Assets/resources/wood.png"),
 		 			"stone": preload("res://Assets/resources/stone.png"),
 					"clay": preload("res://Assets/resources/clay.png")}
-	for item in items.keys():
+	for item in Globals.inventory.keys():
 		var element = display.instantiate()
 		element.image = textures[item]
-		element.amount = items[item]
+		element.resource_name = item
 		$ScrollContainer/InventoryElementsContainer.add_child(element)
 	
 		
