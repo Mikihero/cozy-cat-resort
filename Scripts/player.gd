@@ -1,5 +1,7 @@
 class_name Cat extends AnimatedSprite2D
 
+@onready var footsteps_sound = $Footsteps
+
 var path: Array[Vector2i];
 var queuedActions: Array[PlayerAction];
 var targetSelector: selector
@@ -15,6 +17,8 @@ func _physics_process(delta: float) -> void:
 	else:
 		if (self.animation.get_basename()!="idle"):
 			self.play("idle")
+			if footsteps_sound.playing:
+				footsteps_sound.stop()
 
 func update_action(delta:float):
 	# setup first call
@@ -24,6 +28,11 @@ func update_action(delta:float):
 		currentAction.hasFinished = false
 		self.play(currentAction.getAnimName())
 		
+		if currentAction.actionEnum == currentAction.ActionEnums.walk:
+			if !footsteps_sound.playing:
+				footsteps_sound.play()
+		
+	#targetSelector.set_selector_position(currentAction.actionPlayerPos, Vector2i(1, 1))
 	targetSelector.set_selector_global_position(currentAction.actionPlayerRect);
 
 	#progress and call correct update function
