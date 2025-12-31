@@ -1,6 +1,6 @@
 class_name Map extends Node2D
 
-var entities = [];
+var entities: Array[MapEntity] = [];
 
 var width = 0
 var height = 0
@@ -8,14 +8,16 @@ var save_thread: Thread;
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	var ent: Array[MapEntity] = [];
 	var bg: TileMapLayer = self.get_node("TileMapBackground");
 	var used = bg.get_used_cells();
 	width = used.map(func(v): return v.x).max() + 1;
 	height = used.map(func(v): return v.y).max() + 1;
-	
+	if !FileAccess.file_exists("user://save.json"):
+		self.save_to_file();
 	var save_file = FileAccess.open("user://save.json", FileAccess.READ);
 	var data = JSON.parse_string(save_file.get_line());
-	var ent = (data.get("entities") as Array).map(MapEntity.deserialize);
+	(data.get("entities") as Array).map(MapEntity.deserialize).map(func(e: MapEntity): ent.push_back(e));
 	print("load:", ent);
 	self.entities = ent;
 	
@@ -193,8 +195,7 @@ func _input(event: InputEvent) -> void:
 			var camera = (self.get_parent().get_node("Camera2D") as Camera2D);
 			var time = Time.get_ticks_msec() / 1000.0 - touch_start_time;
 			if time < TAP_THRESHOLD && !has_moved:
-				self.add_child(Smoke.new(Vector2i(7, 7)));
-				player.onMapPressed(self.translare_px_to_coords(event.position + camera.position - Vector2(192, 108)));
+				player.onMapPressed(self.translate_px_to_coords(event.position + camera.position - Vector2(192, 108)));
 	pass
 
 func _notification(what: int) -> void:
@@ -202,16 +203,16 @@ func _notification(what: int) -> void:
 		self.save_to_file();
 		get_tree().quit();
 
-func translate_coord_to_px(pos: Vector2i) -> Vector2i:
+static func translate_coord_to_px(pos: Vector2i) -> Vector2i:
 	return pos * 16 + Vector2i(8, 8);
 
-func translate_coords_to_px(pos: Array[Vector2i]) -> Array[Vector2i]:
+static func translate_coords_to_px(pos: Array[Vector2i]) -> Array[Vector2i]:
 	var ret: Array[Vector2i] = [];
 	for p in pos:
-		ret.append(self.translate_coord_to_px(p));
+		ret.append(Map.translate_coord_to_px(p));
 	return ret
 
-func translare_px_to_coords(pos: Vector2i) -> Vector2i:
+static func translate_px_to_coords(pos: Vector2i) -> Vector2i:
 	return Vector2i(pos / 16)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -222,7 +223,6 @@ func _process(delta: float) -> void:
 func save_to_file():
 	var save_file = FileAccess.open("user://save.json", FileAccess.WRITE);
 	var ent = self.get_entities();
-	print(ent.size());
 	var data = {
 		"entities": ent.map(func(e: MapEntity): return e.serialize())
 	};
