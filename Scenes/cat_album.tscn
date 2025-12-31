@@ -1,26 +1,28 @@
-[gd_scene load_steps=11 format=3 uid="uid://bycvbl6062x44"]
+[gd_scene load_steps=11 format=3 uid="uid://wgf3tn0khdnp"]
 
 [ext_resource type="Script" uid="uid://dyobabpohs3fe" path="res://Scripts/album.gd" id="1_g6llf"]
 [ext_resource type="Texture2D" uid="uid://d2pt3shydhe8b" path="res://Assets/ui/simple-background.png" id="2_bfts0"]
 [ext_resource type="StyleBox" uid="uid://ykbqjul20drt" path="res://Assets/ui/styles/simple-basic.tres" id="3_pdpnd"]
 [ext_resource type="StyleBox" uid="uid://douabvrad66ov" path="res://Assets/ui/styles/brown-pressed.tres" id="4_6vwvs"]
 [ext_resource type="Texture2D" uid="uid://bd2458fnbm0dl" path="res://Assets/ui/cancel.png" id="5_f75t2"]
-[ext_resource type="PackedScene" uid="uid://dcy051y6hstrs" path="res://Scenes/character_card.tscn" id="6_6vwvs"]
+[ext_resource type="PackedScene" path="res://Scenes/character_card.tscn" id="6_6vwvs"]
 [ext_resource type="Script" uid="uid://c47ms8vpwjujl" path="res://Scripts/cat_album_scroll.gd" id="6_kdnjl"]
 [ext_resource type="Texture2D" uid="uid://difnkfoip1rio" path="res://Placeholders/cat.png" id="7_f75t2"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_whfmd"]
-
 [sub_resource type="FontVariation" id="FontVariation_pdpnd"]
 spacing_glyph = 1
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_whfmd"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_g6llf")
 
 [node name="simpleBackground" type="NinePatchRect" parent="."]
-offset_right = 76.799995
-offset_bottom = 43.199997
-scale = Vector2(5, 5)
+offset_left = 16.0
+offset_top = 8.0
+offset_right = 192.0
+offset_bottom = 108.0
+scale = Vector2(2, 2)
 texture = ExtResource("2_bfts0")
 region_rect = Rect2(0, 0, 21, 21)
 patch_margin_left = 2
@@ -28,31 +30,11 @@ patch_margin_top = 2
 patch_margin_right = 2
 patch_margin_bottom = 2
 
-[node name="exampleCancelIconButton" type="Button" parent="."]
-offset_left = 337.0
-offset_top = 15.0
-offset_right = 357.40002
-offset_bottom = 35.0
-scale = Vector2(1.5, 1.5)
-theme_override_styles/normal = ExtResource("3_pdpnd")
-theme_override_styles/normal_mirrored = ExtResource("3_pdpnd")
-theme_override_styles/pressed = ExtResource("4_6vwvs")
-theme_override_styles/pressed_mirrored = ExtResource("4_6vwvs")
-theme_override_styles/hover = ExtResource("3_pdpnd")
-theme_override_styles/hover_mirrored = ExtResource("3_pdpnd")
-theme_override_styles/hover_pressed = ExtResource("4_6vwvs")
-theme_override_styles/hover_pressed_mirrored = ExtResource("4_6vwvs")
-theme_override_styles/disabled = ExtResource("3_pdpnd")
-theme_override_styles/disabled_mirrored = ExtResource("3_pdpnd")
-theme_override_styles/focus = SubResource("StyleBoxTexture_whfmd")
-icon = ExtResource("5_f75t2")
-icon_alignment = 1
-
 [node name="Label" type="Label" parent="."]
-offset_left = 18.0
-offset_top = 15.0
-offset_right = 215.0
-offset_bottom = 45.0
+offset_left = 32.0
+offset_top = 16.0
+offset_right = 229.0
+offset_bottom = 46.0
 theme_override_fonts/font = SubResource("FontVariation_pdpnd")
 theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = ExtResource("3_pdpnd")
@@ -63,9 +45,9 @@ vertical_alignment = 1
 clip_text = true
 
 [node name="HBoxScrollContainer" type="HBoxContainer" parent="."]
-offset_left = 19.0
+offset_left = 32.0
 offset_top = 56.0
-offset_right = 369.0
+offset_right = 360.0
 offset_bottom = 191.0
 script = ExtResource("6_kdnjl")
 
@@ -118,4 +100,24 @@ layout_mode = 2
 character_name = "veri veri silli car"
 character_image = ExtResource("7_f75t2")
 
-[connection signal="pressed" from="exampleCancelIconButton" to="." method="_on_cancel_button_pressed"]
+[node name="exampleCancelIconButton2" type="Button" parent="."]
+offset_left = 357.0
+offset_top = 4.0
+offset_right = 372.0
+offset_bottom = 19.0
+scale = Vector2(1.5, 1.5)
+theme_override_styles/normal = ExtResource("3_pdpnd")
+theme_override_styles/normal_mirrored = ExtResource("3_pdpnd")
+theme_override_styles/pressed = ExtResource("4_6vwvs")
+theme_override_styles/pressed_mirrored = ExtResource("4_6vwvs")
+theme_override_styles/hover = ExtResource("3_pdpnd")
+theme_override_styles/hover_mirrored = ExtResource("3_pdpnd")
+theme_override_styles/hover_pressed = ExtResource("4_6vwvs")
+theme_override_styles/hover_pressed_mirrored = ExtResource("4_6vwvs")
+theme_override_styles/disabled = ExtResource("3_pdpnd")
+theme_override_styles/disabled_mirrored = ExtResource("3_pdpnd")
+theme_override_styles/focus = SubResource("StyleBoxTexture_whfmd")
+icon = ExtResource("5_f75t2")
+icon_alignment = 1
+
+[connection signal="pressed" from="exampleCancelIconButton2" to="." method="_on_cancel_button_pressed"]

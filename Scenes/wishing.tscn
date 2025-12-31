@@ -48,6 +48,7 @@ shape = SubResource("CircleShape2D_xto2g")
 environment = SubResource("Environment_xto2g")
 
 [node name="Cat" type="Sprite2D" parent="."]
+visible = false
 scale = Vector2(0.1, 0.101)
 texture = ExtResource("3_dyupp")
 

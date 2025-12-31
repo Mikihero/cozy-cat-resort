@@ -1,5 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://cn0sjrrdd23m4"]
+[gd_scene load_steps=12 format=3 uid="uid://bnutk33x1fo7e"]
 
+[ext_resource type="Script" uid="uid://ci4qmi4esvlik" path="res://Scenes/gacha_coin_conversion.gd" id="1_na6ap"]
 [ext_resource type="Texture2D" uid="uid://d2pt3shydhe8b" path="res://Assets/ui/simple-background.png" id="1_wmlle"]
 [ext_resource type="Script" uid="uid://bqv06wkuhatl5" path="res://Scripts/coin conversion manager.gd" id="2_4qnvh"]
 [ext_resource type="PackedScene" path="res://Scenes/examples/coin display.tscn" id="3_1rwxw"]
@@ -7,8 +8,11 @@
 [ext_resource type="Texture2D" uid="uid://drhinxb0pn2ro" path="res://Placeholders/diamond to gold conversion final.png" id="4_iisca"]
 [ext_resource type="StyleBox" uid="uid://douabvrad66ov" path="res://Assets/ui/styles/brown-pressed.tres" id="5_1rwxw"]
 [ext_resource type="Texture2D" uid="uid://b8b3fahbjp4wm" path="res://Placeholders/gold to silver conversion final.png" id="7_1rwxw"]
+[ext_resource type="Texture2D" uid="uid://bd2458fnbm0dl" path="res://Assets/ui/cancel.png" id="9_xogpu"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2ckbf"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1y2uo"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -17,12 +21,17 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_na6ap")
 
 [node name="simpleBackground" type="NinePatchRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 8.0
+offset_right = -16.0
+offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_wmlle")
@@ -157,5 +166,27 @@ text = "Skip confirmation"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="exampleCancelIconButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 357.0
+offset_top = 4.0
+offset_right = 372.0
+offset_bottom = 19.0
+scale = Vector2(1.5, 1.5)
+theme_override_styles/normal = ExtResource("4_10b1h")
+theme_override_styles/normal_mirrored = ExtResource("4_10b1h")
+theme_override_styles/pressed = ExtResource("5_1rwxw")
+theme_override_styles/pressed_mirrored = ExtResource("5_1rwxw")
+theme_override_styles/hover = ExtResource("4_10b1h")
+theme_override_styles/hover_mirrored = ExtResource("4_10b1h")
+theme_override_styles/hover_pressed = ExtResource("5_1rwxw")
+theme_override_styles/hover_pressed_mirrored = ExtResource("5_1rwxw")
+theme_override_styles/disabled = ExtResource("4_10b1h")
+theme_override_styles/disabled_mirrored = ExtResource("4_10b1h")
+theme_override_styles/focus = SubResource("StyleBoxTexture_1y2uo")
+icon = ExtResource("9_xogpu")
+icon_alignment = 1
+
 [connection signal="pressed" from="full layout/coin conversion display/coin conversion display/gold to silver conversion/convert golden to silver button" to="full layout" method="_on_convert_golden_to_silver_button_pressed"]
 [connection signal="pressed" from="full layout/coin conversion display/coin conversion display/diamond to golden/convert diamond to golden button" to="full layout" method="_on_convert_diamond_to_golden_button_pressed"]
+[connection signal="pressed" from="exampleCancelIconButton" to="." method="_on_close_pressed"]
