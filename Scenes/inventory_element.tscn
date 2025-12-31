@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://b0rh1e1hodqq6"]
+
+[ext_resource type="Script" uid="uid://dr5awi805r5qc" path="res://Scripts/inventory_element.gd" id="1_2yt7f"]
+[ext_resource type="Texture2D" uid="uid://bxk3vjbbmqgqs" path="res://Assets/ui/traded-item-background-copy.png" id="1_oqktv"]
+[ext_resource type="Texture2D" uid="uid://r2jm7c42ksne" path="res://Assets/resources/wood.png" id="2_2yt7f"]
+[ext_resource type="Texture2D" uid="uid://d15i1ifkwt2ey" path="res://Assets/ui/some-holder.png" id="3_fyvfa"]
+
+[sub_resource type="FontVariation" id="FontVariation_5qg7d"]
+spacing_top = -4
+
+[node name="HBoxContainer" type="HBoxContainer"]
+theme_override_constants/separation = 10
+script = ExtResource("1_2yt7f")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("1_oqktv")
+stretch_mode = 5
+
+[node name="item_texture" type="TextureRect" parent="CenterContainer"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = ExtResource("2_2yt7f")
+stretch_mode = 5
+
+[node name="CenterContainer4" type="CenterContainer" parent="."]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer4"]
+custom_minimum_size = Vector2(60, 26)
+layout_mode = 2
+texture = ExtResource("3_fyvfa")
+stretch_mode = 5
+
+[node name="item_count" type="Label" parent="CenterContainer4"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_5qg7d")
+theme_override_font_sizes/font_size = 32
+text = "100"
+horizontal_alignment = 1
+max_lines_visible = 1
+visible_characters = 5
+visible_ratio = 1.6666666
