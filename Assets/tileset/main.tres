@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=6 format=3 uid="uid://bve2eymgqa6k4"]
+[gd_resource type="TileSet" load_steps=7 format=3 uid="uid://bve2eymgqa6k4"]
 
 [ext_resource type="Texture2D" uid="uid://hjtrg6uyi58" path="res://Assets/tileset/spr_tileset_sunnysideworld_16px.png" id="1_ka4hy"]
 
@@ -10,6 +10,9 @@ tile_data = PackedInt32Array(0, 3473408, 3, 65536, 3473408, 6, 131072, 3473408, 
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_nutyu"]
 tile_data = PackedInt32Array(0, 1310720, 15, 65536, 1310720, 11, 131072, 1310720, 12, 196608, 1310720, 13, 1, 1703936, 10, 65537, 1376256, 11, 131073, 1376256, 12, 196609, 2162688, 13, 2, 1572864, 15, 65538, 1048576, 10, 131074, 1572864, 12, 196610, 2621440, 27, 3, 1769472, 10, 65539, 1769472, 11, 131075, 1769472, 12, 196611, 2162688, 65549, 4, 1835008, 15, 65540, 1835008, 11, 131076, 1835008, 12, 196612, 1835008, 13)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_rn1d4"]
+tile_data = PackedInt32Array(0, 983040, 33, 65536, 983040, 35, 131072, 983040, 36, 196608, 983040, 37, 262144, 983040, 38, 65537, 1966080, 1610612771, 131073, 1048576, 36, 196609, 1507328, 36, 262145, 2162688, 37, 65538, 1966080, 1610612771, 131074, 1048576, 36, 196610, 1507328, 36, 262146, 786432, 13, 65539, 1966080, 1610612771, 131075, 1310720, 34, 196611, 1507328, 36, 262147, 1507328, 36, 4, 1114112, 33, 65540, 1114112, 35, 131076, 1114112, 36, 196612, 1114112, 37, 262148, 983040, 805306406)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bo1nx"]
 texture = ExtResource("1_ka4hy")
@@ -1867,3 +1870,4 @@ sources/0 = SubResource("TileSetAtlasSource_bo1nx")
 pattern_0 = SubResource("TileMapPattern_bo1nx")
 pattern_1 = SubResource("TileMapPattern_ka4hy")
 pattern_2 = SubResource("TileMapPattern_nutyu")
+pattern_3 = SubResource("TileMapPattern_rn1d4")
