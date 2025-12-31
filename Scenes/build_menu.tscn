@@ -1,0 +1,266 @@
+[gd_scene load_steps=17 format=3 uid="uid://dr7521tkostah"]
+
+[ext_resource type="Texture2D" uid="uid://d2pt3shydhe8b" path="res://Assets/ui/simple-background.png" id="1_16wyj"]
+[ext_resource type="Script" uid="uid://due5yeenjb5fd" path="res://Scripts/build_menu.gd" id="1_iua7j"]
+[ext_resource type="StyleBox" uid="uid://ykbqjul20drt" path="res://Assets/ui/styles/simple-basic.tres" id="2_f8evq"]
+[ext_resource type="StyleBox" uid="uid://douabvrad66ov" path="res://Assets/ui/styles/brown-pressed.tres" id="3_t747t"]
+[ext_resource type="Texture2D" uid="uid://bd2458fnbm0dl" path="res://Assets/ui/cancel.png" id="4_w5btg"]
+[ext_resource type="PackedScene" uid="uid://bex3jophini4o" path="res://Scenes/build_card.tscn" id="5_w5btg"]
+[ext_resource type="Theme" uid="uid://cnb7lg7g23rxi" path="res://Assets/scroll_theme.tres" id="6_1s7bi"]
+[ext_resource type="Texture2D" uid="uid://8dreqqtb2pxd" path="res://Assets/houses/red_house.png" id="6_iua7j"]
+[ext_resource type="Texture2D" uid="uid://coghhsp6si3o" path="res://Assets/houses/blue_house.png" id="7_levxy"]
+[ext_resource type="Texture2D" uid="uid://r2jm7c42ksne" path="res://Assets/resources/wood.png" id="9_levxy"]
+[ext_resource type="Texture2D" uid="uid://cvg0kuspfw1r4" path="res://Assets/resources/stone.png" id="10_v31xr"]
+[ext_resource type="Texture2D" uid="uid://bud7g7hnkpylr" path="res://Assets/resources/clay.png" id="11_cb7yr"]
+[ext_resource type="StyleBox" path="res://Assets/ui/styles/simple-dark.tres" id="12_cb7yr"]
+[ext_resource type="Texture2D" uid="uid://p1xerlbjebhe" path="res://Assets/ui/gacha/cat-icon.png" id="12_pt86d"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_iua7j"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_v31xr"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_iua7j")
+
+[node name="simpleBackground" type="NinePatchRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 20.2
+offset_top = 11.0
+offset_right = 158.44
+offset_bottom = 88.76
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("1_16wyj")
+region_rect = Rect2(0, 0, 21, 21)
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="cancel" type="Button" parent="."]
+offset_left = 343.0
+offset_top = 3.0
+offset_right = 363.40002
+offset_bottom = 23.0
+scale = Vector2(1.5, 1.5)
+theme_override_styles/normal = ExtResource("2_f8evq")
+theme_override_styles/normal_mirrored = ExtResource("2_f8evq")
+theme_override_styles/pressed = ExtResource("3_t747t")
+theme_override_styles/pressed_mirrored = ExtResource("3_t747t")
+theme_override_styles/hover = ExtResource("2_f8evq")
+theme_override_styles/hover_mirrored = ExtResource("2_f8evq")
+theme_override_styles/hover_pressed = ExtResource("3_t747t")
+theme_override_styles/hover_pressed_mirrored = ExtResource("3_t747t")
+theme_override_styles/disabled = ExtResource("2_f8evq")
+theme_override_styles/disabled_mirrored = ExtResource("2_f8evq")
+theme_override_styles/focus = SubResource("StyleBoxTexture_iua7j")
+icon = ExtResource("4_w5btg")
+icon_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 34.0
+offset_top = 22.0
+offset_right = 351.0
+offset_bottom = 194.0
+theme_override_constants/separation = 5
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
+text = "Build Menu"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+size_flags_vertical = 6
+theme = ExtResource("6_1s7bi")
+follow_focus = true
+vertical_scroll_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/MarginContainer"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+
+[node name="PanelContainer" parent="VBoxContainer/ScrollContainer/MarginContainer/HBoxContainer" instance=ExtResource("5_w5btg")]
+layout_mode = 2
+build_img = ExtResource("6_iua7j")
+wood_cost = 100
+stone_cost = 100
+clay_cost = 100
+cat_capacity = 2
+
+[node name="PanelContainer7" parent="VBoxContainer/ScrollContainer/MarginContainer/HBoxContainer" instance=ExtResource("5_w5btg")]
+layout_mode = 2
+build_img = ExtResource("7_levxy")
+wood_cost = 50
+stone_cost = 100
+clay_cost = 75
+cat_capacity = 4
+
+[node name="PanelContainer8" parent="VBoxContainer/ScrollContainer/MarginContainer/HBoxContainer" instance=ExtResource("5_w5btg")]
+layout_mode = 2
+build_img = ExtResource("7_levxy")
+wood_cost = 50
+stone_cost = 100
+clay_cost = 75
+cat_capacity = 3
+
+[node name="PanelContainer9" parent="VBoxContainer/ScrollContainer/MarginContainer/HBoxContainer" instance=ExtResource("5_w5btg")]
+layout_mode = 2
+build_img = ExtResource("7_levxy")
+wood_cost = 50
+stone_cost = 100
+clay_cost = 75
+cat_capacity = 4
+
+[node name="PanelContainer2" parent="VBoxContainer/ScrollContainer/MarginContainer/HBoxContainer" instance=ExtResource("5_w5btg")]
+layout_mode = 2
+build_img = ExtResource("6_iua7j")
+wood_cost = 100
+stone_cost = 100
+clay_cost = 100
+cat_capacity = 4
+
+[node name="PanelContainer10" parent="VBoxContainer/ScrollContainer/MarginContainer/HBoxContainer" instance=ExtResource("5_w5btg")]
+layout_mode = 2
+build_img = ExtResource("7_levxy")
+wood_cost = 50
+stone_cost = 100
+clay_cost = 75
+cat_capacity = 1
+
+[node name="PanelContainer6" parent="VBoxContainer/ScrollContainer/MarginContainer/HBoxContainer" instance=ExtResource("5_w5btg")]
+layout_mode = 2
+build_img = ExtResource("7_levxy")
+wood_cost = 50
+stone_cost = 100
+clay_cost = 75
+cat_capacity = 5
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2_f8evq")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 10
+
+[node name="SelectedHouse" parent="VBoxContainer/PanelContainer/MarginContainer/HBoxContainer" instance=ExtResource("5_w5btg")]
+layout_mode = 2
+
+[node name="MaterialsCost" type="VBoxContainer" parent="VBoxContainer/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Materials" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/MaterialsCost"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Required materials"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/MaterialsCost"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="WoodCost" type="HBoxContainer" parent="VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/MaterialsCost/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Wood" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/MaterialsCost/HBoxContainer/WoodCost"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/MaterialsCost/HBoxContainer/WoodCost"]
+layout_mode = 2
+texture = ExtResource("9_levxy")
+
+[node name="StoneCost" type="HBoxContainer" parent="VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/MaterialsCost/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Stone" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/MaterialsCost/HBoxContainer/StoneCost"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/MaterialsCost/HBoxContainer/StoneCost"]
+layout_mode = 2
+texture = ExtResource("10_v31xr")
+
+[node name="ClayCost" type="HBoxContainer" parent="VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/MaterialsCost/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Clay" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/MaterialsCost/HBoxContainer/ClayCost"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/MaterialsCost/HBoxContainer/ClayCost"]
+layout_mode = 2
+texture = ExtResource("11_cb7yr")
+
+[node name="Capacity" type="VBoxContainer" parent="VBoxContainer/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Capacity" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/Capacity"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Capacity"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/Capacity"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 8
+
+[node name="Capacity" type="HBoxContainer" parent="VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/Capacity/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Residents" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/Capacity/HBoxContainer/Capacity"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/Capacity/HBoxContainer/Capacity"]
+layout_mode = 2
+texture = ExtResource("12_pt86d")
+
+[node name="Spacer" type="Control" parent="VBoxContainer/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Build" type="Button" parent="VBoxContainer/PanelContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(40, 20)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = ExtResource("12_cb7yr")
+theme_override_styles/normal_mirrored = ExtResource("12_cb7yr")
+theme_override_styles/pressed = ExtResource("3_t747t")
+theme_override_styles/pressed_mirrored = ExtResource("3_t747t")
+theme_override_styles/hover = ExtResource("12_cb7yr")
+theme_override_styles/hover_mirrored = ExtResource("12_cb7yr")
+theme_override_styles/hover_pressed = ExtResource("3_t747t")
+theme_override_styles/hover_pressed_mirrored = ExtResource("3_t747t")
+theme_override_styles/disabled = ExtResource("12_cb7yr")
+theme_override_styles/disabled_mirrored = ExtResource("12_cb7yr")
+theme_override_styles/focus = SubResource("StyleBoxTexture_v31xr")
+text = "Build"
+icon_alignment = 1
+
+[connection signal="pressed" from="cancel" to="." method="_on_cancel_pressed"]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/Build" to="." method="_on_build_pressed"]

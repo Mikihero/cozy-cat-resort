@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://51v84hopesy6"]
+
+[ext_resource type="Script" uid="uid://bfs7s710etr18" path="res://Scripts/cart.gd" id="1_ovega"]
+[ext_resource type="Texture2D" uid="uid://d05k85dcc1uvu" path="res://Assets/resources/cart.png" id="1_s4t62"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ovega"]
+size = Vector2(10, 17)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ci2cr"]
+size = Vector2(14, 17)
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_ovega")
+
+[node name="Cart" type="Sprite2D" parent="."]
+texture = ExtResource("1_s4t62")
+
+[node name="FrontDetector" type="Area2D" parent="."]
+position = Vector2(8, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FrontDetector"]
+position = Vector2(4, -0.5)
+shape = SubResource("RectangleShape2D_ovega")
+
+[node name="BackArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BackArea"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_ci2cr")
