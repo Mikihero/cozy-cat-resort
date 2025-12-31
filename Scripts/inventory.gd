@@ -1,4 +1,4 @@
-extends Control
+extends CanvasLayer
 
 var _rewarded_ad : RewardedAd
 var _full_screen_content_callback := FullScreenContentCallback.new()

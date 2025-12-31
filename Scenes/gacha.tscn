@@ -1,15 +1,15 @@
-[gd_scene load_steps=25 format=3 uid="uid://bik6bgpqf1hde"]
+[gd_scene load_steps=25 format=3 uid="uid://croaidpq8ej8h"]
 
 [ext_resource type="Script" uid="uid://dl8cit7xrc3q1" path="res://Scripts/gacha.gd" id="1_ym5em"]
 [ext_resource type="Texture2D" uid="uid://ctrijwaomomj2" path="res://Assets/ui/coins/silver-coin.png" id="3_ypptq"]
 [ext_resource type="StyleBox" uid="uid://ykbqjul20drt" path="res://Assets/ui/styles/simple-basic.tres" id="5_7ff22"]
 [ext_resource type="Texture2D" uid="uid://d2pt3shydhe8b" path="res://Assets/ui/simple-background.png" id="5_gy7bo"]
-[ext_resource type="PackedScene" uid="uid://gltssceucsnb" path="res://Scenes/examples/coin display.tscn" id="5_s4w3m"]
+[ext_resource type="PackedScene" path="res://Scenes/examples/coin display.tscn" id="5_s4w3m"]
 [ext_resource type="StyleBox" uid="uid://douabvrad66ov" path="res://Assets/ui/styles/brown-pressed.tres" id="6_dtsfm"]
 [ext_resource type="Texture2D" uid="uid://4yw4h0crn6lj" path="res://Assets/ui/gacha/gacha-background.png" id="7_6i3p3"]
 [ext_resource type="Texture2D" uid="uid://pukoumjkhafk" path="res://Assets/ui/gacha/cat-gacha.png" id="8_6bmla"]
 [ext_resource type="Texture2D" uid="uid://dfasx3yichyhw" path="res://Assets/ui/gacha/cat-button.png" id="8_6i3p3"]
-[ext_resource type="StyleBox" uid="uid://cbif8uak1xd8c" path="res://Assets/ui/styles/simple-dark.tres" id="8_7ff22"]
+[ext_resource type="StyleBox" path="res://Assets/ui/styles/simple-dark.tres" id="8_7ff22"]
 [ext_resource type="FontFile" uid="uid://godib3f4j271" path="res://fonts/m5x7.ttf" id="8_q6iwu"]
 [ext_resource type="Texture2D" uid="uid://cpdk14tcbcnu7" path="res://Assets/ui/gacha/cat-button-pressed.png" id="9_6bmla"]
 [ext_resource type="Texture2D" uid="uid://odlenh6qbtux" path="res://Assets/ui/simple-button3.png" id="9_32v0n"]
@@ -37,7 +37,7 @@ expand_margin_bottom = 4.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dtsfm"]
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="CanvasLayer"]
 script = ExtResource("1_ym5em")
 banner_cat = ExtResource("8_6bmla")
 banner_material = ExtResource("3_ypptq")
@@ -62,41 +62,43 @@ patch_margin_right = 2
 patch_margin_bottom = 2
 
 [node name="coin display" parent="." instance=ExtResource("5_s4w3m")]
-offset_top = -108.99999
-offset_bottom = -108.99999
+offset_left = 1.5258789e-05
+offset_top = -1.0000033
+offset_right = 1.5258789e-05
+offset_bottom = -1.0000033
 scale = Vector2(0.8, 0.8)
 
 [node name="banner background" type="TextureRect" parent="."]
-offset_left = -108.0
-offset_top = -52.0
-offset_right = -26.0
-offset_bottom = 14.0
+offset_left = 92.0
+offset_top = 42.0
+offset_right = 174.0
+offset_bottom = 108.0
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("7_6i3p3")
 
 [node name="Banner image" type="TextureRect" parent="."]
-offset_left = -108.0
-offset_top = -52.0
-offset_right = -26.0
-offset_bottom = 14.0
+offset_left = 92.0
+offset_top = 42.0
+offset_right = 174.0
+offset_bottom = 108.0
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("8_6bmla")
 
 [node name="Cat gacha" type="TextureButton" parent="."]
-offset_left = -174.0
-offset_top = -71.0
-offset_right = -120.0
-offset_bottom = -49.0
+offset_left = 19.0
+offset_top = 41.0
+offset_right = 73.0
+offset_bottom = 63.0
 scale = Vector2(1.3, 1.3)
 texture_normal = ExtResource("8_6i3p3")
 texture_pressed = ExtResource("9_6bmla")
 
 [node name="Material gacha" type="Button" parent="."]
 z_index = -1
-offset_left = -174.0
-offset_top = -38.0
-offset_right = -122.46154
-offset_bottom = -16.0
+offset_left = 19.0
+offset_top = 74.0
+offset_right = 70.53846
+offset_bottom = 96.0
 scale = Vector2(1.3, 1.3)
 theme_override_styles/normal = ExtResource("8_7ff22")
 theme_override_styles/normal_mirrored = ExtResource("8_7ff22")
@@ -117,10 +119,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 32.0
-offset_top = -48.0
-offset_right = 107.0
-offset_bottom = 32.0
+offset_left = 33.0
+offset_top = -49.0
+offset_right = 108.0
+offset_bottom = 31.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("9_32v0n")
@@ -131,10 +133,10 @@ patch_margin_right = 2
 patch_margin_bottom = 2
 
 [node name="Gacha details holder" type="VBoxContainer" parent="."]
-offset_left = 35.0
-offset_top = -44.0
-offset_right = 104.0
-offset_bottom = 33.0
+offset_left = 228.0
+offset_top = 61.0
+offset_right = 297.0
+offset_bottom = 138.0
 theme_override_constants/separation = 0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Gacha details holder"]
@@ -162,10 +164,10 @@ texture = ExtResource("10_32v0n")
 stretch_mode = 5
 
 [node name="Gacha info" type="Label" parent="."]
-offset_left = 32.0
-offset_top = -63.0
-offset_right = 107.0
-offset_bottom = -46.0
+offset_left = 225.0
+offset_top = 42.0
+offset_right = 300.0
+offset_bottom = 59.0
 theme_override_styles/normal = SubResource("StyleBoxTexture_q6iwu")
 text = "Gacha details"
 horizontal_alignment = 1
@@ -175,10 +177,10 @@ vertical_alignment = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = 132.00002
-offset_top = -101.0
-offset_right = 152.20003
-offset_bottom = -81.19998
+offset_left = -60.0
+offset_top = 7.0
+offset_right = -39.799988
+offset_bottom = 26.800018
 grow_horizontal = 0
 scale = Vector2(1.3, 1.3)
 theme_override_styles/normal = ExtResource("5_7ff22")
@@ -196,16 +198,17 @@ icon = ExtResource("12_7ff22")
 icon_alignment = 1
 
 [node name="Wish buttons" type="HBoxContainer" parent="."]
-anchors_preset = 13
+anchors_preset = 7
 anchor_left = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -108.25001
-offset_top = 43.0
-offset_right = 41.749992
-offset_bottom = 43.0
+offset_left = -112.0
+offset_top = -70.0
+offset_right = 38.0
+offset_bottom = -70.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 scale = Vector2(1.5, 1.5)
 theme_override_constants/separation = 10
 
@@ -250,8 +253,6 @@ offset_right = 66.0
 offset_bottom = 29.0
 texture_normal = ExtResource("17_ypptq")
 texture_pressed = ExtResource("18_6i3p3")
-
-[node name="Camera2D" type="Camera2D" parent="."]
 
 [connection signal="pressed" from="Cat gacha" to="." method="_on_cat_gacha_pressed"]
 [connection signal="pressed" from="Material gacha" to="." method="_on_material_gacha_pressed"]

@@ -1,4 +1,4 @@
-extends Node2D
+extends CanvasLayer
 
 @onready var wood_label = $VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/MaterialsCost/HBoxContainer/WoodCost/Wood
 @onready var stone_label = $VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/MaterialsCost/HBoxContainer/StoneCost/Stone
@@ -34,8 +34,10 @@ func setup_house_details(house):
 	selected_house.build_img = house.build_img
 
 func _on_cancel_pressed() -> void:
+	get_tree().paused = false
 	queue_free()
 
 
 func _on_build_pressed() -> void:
+	get_tree().paused = false
 	queue_free()

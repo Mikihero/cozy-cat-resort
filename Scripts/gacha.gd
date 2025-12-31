@@ -1,4 +1,4 @@
-extends Node2D
+extends CanvasLayer
 
 @export var banner_cat: Texture2D
 @export var banner_material: Texture2D

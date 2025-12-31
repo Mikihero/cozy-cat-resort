@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://460ht54ok3sx"]
+[gd_scene load_steps=22 format=4 uid="uid://460ht54ok3sx"]
 
 [ext_resource type="Script" uid="uid://cxfhelhwdtnup" path="res://Scripts/map.gd" id="1_bo1nx"]
 [ext_resource type="Script" uid="uid://dm1c50euvawnu" path="res://Scripts/main.gd" id="1_jkdf5"]
@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://bjscyu3b7bagv" path="res://Assets/ui/main_map/selector-top4.png" id="12_fevyy"]
 [ext_resource type="AudioStream" uid="uid://drd5slt012hmo" path="res://Music/inside-the-old-train-66350.mp3" id="15_wsu2k"]
 [ext_resource type="AudioStream" uid="uid://3favnsi8fmqr" path="res://Music/ocean-waves-376898.mp3" id="16_k12tt"]
+[ext_resource type="Texture2D" uid="uid://dfasx3yichyhw" path="res://Assets/ui/gacha/cat-button.png" id="19_fevyy"]
 
 [sub_resource type="AnimatedTexture" id="AnimatedTexture_hibaj"]
 frames = 4
@@ -179,3 +180,42 @@ position = Vector2(153, 813)
 stream = ExtResource("16_k12tt")
 autoplay = true
 max_distance = 300.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="Buttons" type="HBoxContainer" parent="CanvasLayer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -247.0
+offset_top = -37.0
+offset_right = -86.0
+offset_bottom = -16.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(1.5, 1.5)
+
+[node name="Build" type="TextureButton" parent="CanvasLayer/Buttons"]
+custom_minimum_size = Vector2(40, 20)
+layout_mode = 2
+size_flags_vertical = 4
+texture_normal = ExtResource("19_fevyy")
+
+[node name="Inventory" type="TextureButton" parent="CanvasLayer/Buttons"]
+custom_minimum_size = Vector2(40, 20)
+layout_mode = 2
+size_flags_vertical = 4
+texture_normal = ExtResource("19_fevyy")
+
+[node name="Gacha" type="TextureButton" parent="CanvasLayer/Buttons"]
+custom_minimum_size = Vector2(40, 20)
+layout_mode = 2
+size_flags_vertical = 4
+texture_normal = ExtResource("19_fevyy")
+
+[connection signal="pressed" from="CanvasLayer/Buttons/Build" to="." method="_on_build_pressed"]
+[connection signal="pressed" from="CanvasLayer/Buttons/Inventory" to="." method="_on_inventory_pressed"]
+[connection signal="pressed" from="CanvasLayer/Buttons/Gacha" to="." method="_on_gacha_pressed"]

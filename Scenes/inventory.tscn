@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://x7iwbtuec5y8"]
+[gd_scene load_steps=11 format=3 uid="uid://butgojh6avs6o"]
 
 [ext_resource type="Script" uid="uid://b0gemtouhxu6o" path="res://Scripts/inventory.gd" id="1_aqnmd"]
 [ext_resource type="Texture2D" uid="uid://drxfbuygityce" path="res://Assets/ui/simple-button-wide-border.png" id="2_mgnjo"]
@@ -12,20 +12,10 @@
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5qg7d"]
 
-[node name="Inventory" type="Control"]
-custom_minimum_size = Vector2(384, 216)
-layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Inventory" type="CanvasLayer"]
 script = ExtResource("1_aqnmd")
 
 [node name="simpleBackground" type="NinePatchRect" parent="."]
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -43,6 +33,7 @@ patch_margin_right = 4
 patch_margin_bottom = 4
 
 [node name="Control" type="Control" parent="."]
+layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -67,6 +58,7 @@ text = "Watch an ad
 to get coins"
 
 [node name="Control2" type="Control" parent="."]
+layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -91,10 +83,10 @@ text = "Use your coins
 to watch an ad"
 
 [node name="coin display" parent="." instance=ExtResource("5_k1vlg")]
-layout_mode = 1
+offset_top = -1.0
+offset_bottom = -1.0
 
 [node name="exampleCancelIconButton" type="Button" parent="."]
-layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.95800006
 anchor_top = 0.071
@@ -121,7 +113,6 @@ icon_alignment = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 custom_minimum_size = Vector2(120, 0)
-layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.083000004
 anchor_top = 0.259
@@ -141,7 +132,6 @@ theme_override_constants/separation = 7
 
 [node name="Overlay" type="Label" parent="."]
 visible = false
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -163,6 +153,4 @@ for your ad
 to load"
 horizontal_alignment = 1
 
-[connection signal="pressed" from="Control/TextureButton" to="." method="watch_for_coins"]
-[connection signal="pressed" from="Control2/TextureButton2" to="." method="pay_to_watch"]
 [connection signal="pressed" from="exampleCancelIconButton" to="." method="_on_close_pressed"]

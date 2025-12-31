@@ -19,7 +19,7 @@
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_v31xr"]
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="CanvasLayer"]
 script = ExtResource("1_iua7j")
 
 [node name="simpleBackground" type="NinePatchRect" parent="."]
@@ -28,10 +28,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 20.2
-offset_top = 11.0
-offset_right = 158.44
-offset_bottom = 88.76
+offset_left = -171.8
+offset_top = -97.0
+offset_right = -33.559998
+offset_bottom = -19.23999
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(2.5, 2.5)
