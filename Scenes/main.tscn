@@ -48,6 +48,9 @@ script = ExtResource("1_jkdf5")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(245, 108)
+limit_left = 0
+limit_top = 0
+metadata/min_zoom = 0.0
 
 [node name="Map" type="Node2D" parent="."]
 script = ExtResource("1_bo1nx")

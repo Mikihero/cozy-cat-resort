@@ -2,17 +2,25 @@ class_name Map extends Node2D
 
 var entities: Array[MapEntity] = [];
 
-var width = 0
-var height = 0
+var width = 0;
+var height = 0;
 var save_thread: Thread;
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var ent: Array[MapEntity] = [];
 	var bg: TileMapLayer = self.get_node("TileMapBackground");
+	var cam: Camera2D = self.get_parent().get_node("Camera2D");
 	var used = bg.get_used_cells();
 	width = used.map(func(v): return v.x).max() + 1;
 	height = used.map(func(v): return v.y).max() + 1;
+	var px = Map.translate_coord_to_px(Vector2i(width-1, height-1));
+	cam.limit_bottom = px.y;
+	cam.limit_right = px.x;
+	cam.set_meta("min_zoom", maxf(
+		float(ProjectSettings.get_setting("display/window/size/viewport_height")) / float(px.y), 
+		float(ProjectSettings.get_setting("display/window/size/viewport_width")) / float(px.x)
+	));
 	if !FileAccess.file_exists("user://save.json"):
 		self.save_to_file();
 	var save_file = FileAccess.open("user://save.json", FileAccess.READ);
@@ -185,6 +193,12 @@ func _input(event: InputEvent) -> void:
 		has_moved = true;
 		var camera = (self.get_parent().get_node("Camera2D") as Camera2D);
 		camera.position -= event.relative;
+		
+	if event is InputEventMagnifyGesture:
+		var cam = self.get_parent().get_node("Camera2D") as Camera2D;
+
+		cam.zoom = Vector2.ONE * clampf(cam.zoom.x * event.factor, cam.get_meta("min_zoom", 1.0), 1.0);
+		
 
 	if event is InputEventScreenTouch:
 		if event.is_pressed():
@@ -196,6 +210,7 @@ func _input(event: InputEvent) -> void:
 			var time = Time.get_ticks_msec() / 1000.0 - touch_start_time;
 			if time < TAP_THRESHOLD && !has_moved:
 				player.onMapPressed(self.translate_px_to_coords(event.position + camera.position - Vector2(192, 108)));
+
 	pass
 
 func _notification(what: int) -> void:
