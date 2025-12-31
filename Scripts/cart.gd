@@ -25,7 +25,7 @@ func _process(delta: float) -> void:
 	if moving and not blocked:
 		position.x += speed * delta
 	
-	if position.x > 432:
+	if position.x > 400:
 		queue_free()
 		
 func start_wait_timer():
