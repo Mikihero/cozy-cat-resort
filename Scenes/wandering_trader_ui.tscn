@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c543ma0a1xuls"]
+[gd_scene load_steps=18 format=3 uid="uid://c543ma0a1xuls"]
 
 [ext_resource type="Texture2D" uid="uid://d2pt3shydhe8b" path="res://Assets/ui/simple-background.png" id="1_5lush"]
 [ext_resource type="PackedScene" uid="uid://gltssceucsnb" path="res://Scenes/examples/coin display.tscn" id="2_wwimc"]
@@ -11,6 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://ctrijwaomomj2" path="res://Assets/ui/coins/silver-coin.png" id="6_ywle7"]
 [ext_resource type="Texture2D" uid="uid://bvh2pxo1q2i4h" path="res://Assets/ui/wandering-trader/arrow-right-pressed.png" id="7_ywle7"]
 [ext_resource type="Texture2D" uid="uid://ck28d5wkfew8n" path="res://Assets/ui/wandering-trader/traded-item-background-pressed.png" id="9_ucy5d"]
+[ext_resource type="Texture2D" uid="uid://bse7v8ag4okq" path="res://Assets/ui/wandering-trader/price-tag-pressed.png" id="11_mfv16"]
+[ext_resource type="Texture2D" uid="uid://ddlttoup1lj50" path="res://Assets/ui/wandering-trader/price-tag.png" id="12_8bam3"]
 [ext_resource type="Script" uid="uid://bvdmwd624j3cm" path="res://Scripts/TradeDisplay2.gd" id="12_bynap"]
 [ext_resource type="Script" uid="uid://bhlw3wapb7w53" path="res://Scripts/TradeDisplay3.gd" id="13_8bam3"]
 [ext_resource type="Script" uid="uid://csc1dmvn2t501" path="res://Scripts/TradeDisplay4.gd" id="14_mfv16"]
@@ -58,7 +60,7 @@ size_flags_vertical = 3
 alignment = 1
 
 [node name="trade display 1" type="Button" parent="layout v container/trade displays h container"]
-custom_minimum_size = Vector2(160, 70)
+custom_minimum_size = Vector2(160, 75)
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
@@ -72,14 +74,15 @@ arrow_texture_normal = ExtResource("5_bv8y1")
 arrow_texture_pressed = ExtResource("7_ywle7")
 item_background_normal = ExtResource("3_mg1x1")
 item_background_pressed = ExtResource("9_ucy5d")
+price_tag_normal = ExtResource("12_8bam3")
+price_tag_pressed = ExtResource("11_mfv16")
 
 [node name="horizontal container" type="HBoxContainer" parent="layout v container/trade displays h container/trade display 1"]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_bottom = -13.0
 
 [node name="input item node" type="Control" parent="layout v container/trade displays h container/trade display 1/horizontal container"]
 layout_mode = 2
@@ -185,6 +188,33 @@ offset_right = 44.0
 offset_bottom = 26.0
 grow_vertical = 2
 texture = ExtResource("4_bv8y1")
+
+[node name="input price tag background" type="NinePatchRect" parent="layout v container/trade displays h container/trade display 1"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 61.0
+offset_right = 51.0
+offset_bottom = 72.0
+texture = ExtResource("12_8bam3")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="input price tag text" type="RichTextLabel" parent="layout v container/trade displays h container/trade display 1/input price tag background"]
+custom_minimum_size = Vector2(0, 14)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -2.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 16
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="trade display 2" type="Button" parent="layout v container/trade displays h container"]
 custom_minimum_size = Vector2(160, 70)

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://wa3kn4t2t0tc"
-path="res://.godot/imported/watch_ad-normal.png-0691186cb2f63019b118eb5c302b120d.ctex"
+uid="uid://bse7v8ag4okq"
+path="res://.godot/imported/price-tag-pressed.png-e61bf0317c4d7109b7ab472da1843552.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/ui/wandering-trader/watch_ad-normal.png"
-dest_files=["res://.godot/imported/watch_ad-normal.png-0691186cb2f63019b118eb5c302b120d.ctex"]
+source_file="res://Assets/ui/wandering-trader/price-tag-pressed.png"
+dest_files=["res://.godot/imported/price-tag-pressed.png-e61bf0317c4d7109b7ab472da1843552.ctex"]
 
 [params]
 
