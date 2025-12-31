@@ -64,8 +64,7 @@ func _on_button_up() -> void:
 	
 	var confirm_instance = confirm_popup.instantiate()
 	confirm_instance.message_text = "Are you sure you want to spend " + str(item_stack_price) + " silver catcoins?"
-	confirm_instance.action_to_execute = do_trade_items
-	confirm_instance.arguments = [str(trade_item), item_amount, item_stack_price]
+	confirm_instance.action_to_execute = do_trade_items.bind(trade_item, item_amount, item_stack_price)
 	add_child(confirm_instance)
 	
 	

@@ -6,5 +6,7 @@ var DiamondCatCoins :int = 0
 
 # String item : int amount
 var inventory = {
-	"wood": 10
+	"wood": 10,
+	"clay": 0,
+	"stone": 0	
 }

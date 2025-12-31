@@ -814,6 +814,6 @@ vertical_alignment = 1
 
 [node name="trade manager" type="Node" parent="."]
 script = ExtResource("2_bynap")
-clay_texture = ExtResource("15_mfv16")
+clay_texture = ExtResource("16_8ljkb")
 wood_texture = ExtResource("4_bv8y1")
-stone_texture = ExtResource("16_8ljkb")
+stone_texture = ExtResource("15_mfv16")
