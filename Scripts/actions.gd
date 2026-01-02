@@ -14,6 +14,7 @@ var hasStarted: bool
 var hasFinished:bool
 var isDurationable:bool
 var duration: float
+var entity: MapEntity
 
 func getAnimName()->String:
 	match actionEnum:

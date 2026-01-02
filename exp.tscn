@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://crx72cxfij5tg"]
+
+[ext_resource type="TileSet" uid="uid://bve2eymgqa6k4" path="res://Assets/tileset/main.tres" id="1_bl6ei"]
+[ext_resource type="Script" uid="uid://dbg4slqeebnhr" path="res://Scripts/tilemap_export.gd" id="2_prgfs"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="TileMap" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray(0, 0, 10, 0, 6, 0, 0, 0, 53, 0, 29, 0, 0, 0, 10, 0, 7, 0, 0, 0, 53, 0, 30, 0, 0, 0, 11, 0, 6, 0, 0, 0, 54, 0, 29, 0, 0, 0, 11, 0, 7, 0, 0, 0, 54, 0, 30, 0, 0, 0)
+tile_set = ExtResource("1_bl6ei")
+script = ExtResource("2_prgfs")

@@ -1,9 +1,7 @@
 class_name Smoke extends CPUParticles2D
 
-var coords: Vector2i;
-
-func _init(coords: Vector2i = Vector2i(8, 8)) -> void:
-	self.coords = coords;
+func _init(position: Vector2i = Vector2i(0, 0)) -> void:
+	self.position = position;
 	#var material = ParticleProcessMaterial.new();
 	self.z_index = 99;
 	#material.gravity.y = 1;
@@ -21,7 +19,6 @@ func _init(coords: Vector2i = Vector2i(8, 8)) -> void:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	self.position = (self.get_parent() as Map).translate_coord_to_px(self.coords) - Vector2i(0, 8);
 	self.amount = 128;
 	self.emission_sphere_radius = 4;
 	

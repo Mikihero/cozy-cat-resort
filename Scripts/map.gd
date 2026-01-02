@@ -1,6 +1,6 @@
 class_name Map extends Node2D
 
-var entities: Array[MapEntity] = [];
+#var entities: Array[MapEntity] = [];
 
 var width = 0;
 var height = 0;
@@ -8,13 +8,12 @@ var save_thread: Thread;
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var ent: Array[MapEntity] = [];
 	var bg: TileMapLayer = self.get_node("TileMapBackground");
 	var cam: Camera2D = self.get_parent().get_node("Camera2D");
 	var used = bg.get_used_cells();
 	width = used.map(func(v): return v.x).max() + 1;
 	height = used.map(func(v): return v.y).max() + 1;
-	var px = Map.translate_coord_to_px(Vector2i(width-1, height-1));
+	var px = Vector2i(width-1, height-1) * 16;
 	cam.limit_bottom = px.y;
 	cam.limit_right = px.x;
 	cam.set_meta("min_zoom", maxf(
@@ -25,14 +24,9 @@ func _ready() -> void:
 		self.save_to_file();
 	var save_file = FileAccess.open("user://save.json", FileAccess.READ);
 	var data = JSON.parse_string(save_file.get_line());
-	(data.get("entities") as Array).map(MapEntity.deserialize).map(func(e: MapEntity): ent.push_back(e));
-	print("load:", ent);
-	self.entities = ent;
-	
-	print(self.entities.size())
-	
-	self.paint_entities();
-	
+	(data.get("entities") as Array).map(MapEntity.deserialize).map(func(e: MapEntity): self.add_entity(e));
+	#self.paint_entities();
+	self.add_child(MapEntity.new(Rect2i(8, 8, 3, 3), MapEntity.Type.HOUSE, load("res://Assets/entities/house/3x3.png")))
 	save_thread = Thread.new();
 	save_thread.start(
 		func():
@@ -42,70 +36,104 @@ func _ready() -> void:
 	)
 	pass # Replace with function body.
 
-const TREES = [
-	Vector2i(53, 6),
-	Vector2i(52, 5),
-];
-const ROCKS = [
-	Vector2i(49,30),
-	Vector2i(51,30),
-	Vector2i(53,30)
-];
-const SMALL_HOUSE = Vector2i(21, 12);
+#const TREES = [
+	#Vector2i(53, 6),
+	#Vector2i(52, 5),
+#];
+#const ROCKS = [
+	#Vector2i(49,30),
+	#Vector2i(51,30),
+	#Vector2i(53,30)
+#];
+#const SMALL_HOUSE = Vector2i(21, 12);
 
 func get_entities() -> Array[MapEntity]:
-	var blocking = self.get_node("TileMapForegroundBlocking") as TileMapLayer;
-	var ent: Array[MapEntity] = []
-	for c in blocking.get_used_cells():
-		var data = blocking.get_cell_tile_data(c);
-		var atlas = blocking.get_cell_atlas_coords(c);
-		if data.z_index == 0:
-			if TREES.find(atlas) != -1:
-				var w = 1 if c == Vector2i(52, 5) else 2;
-				ent.push_back(MapEntity.new(Rect2i(c, Vector2i(w, 1)), MapEntity.Type.TREE, atlas))
-				
-			if ROCKS.find(atlas) != -1:
-				ent.push_back(MapEntity.new(Rect2i(c, Vector2i(2, 1)), MapEntity.Type.ROCK, atlas))
-
-			if SMALL_HOUSE == atlas:
-				ent.push_back(MapEntity.new(Rect2i(c + Vector2i(0, 1), Vector2i(3, 3)), MapEntity.Type.HOUSE, atlas));
-								
-	return ent;
+	var ret: Array[MapEntity] = []
+	for e in self.get_children().filter(func(e): return e is MapEntity):
+		ret.push_back(e);
+	return ret;
 
 func add_entity(entity: MapEntity):
+	var index = self.get_children().find(entity);
+	if index != -1:
+		return
+
+	self.add_child(entity);
 		
-	pass
+func remove_entity(entity: MapEntity):
+	entity.destroyed = true;
+	var index = self.get_children().find(entity);
+	if index == -1:
+		return
+	
+	self.remove_child(entity);
+	#self.unpaint_entity(entity);
 
-func paint_entities():
-	self.entities.map(func(e: MapEntity): self.paint_entity(e));
-
-
-func paint_entity(e: MapEntity):
-	var foreground: TileMapLayer = self.get_node("TileMapForegroundBlocking");
-	match e.type:
-		MapEntity.Type.TREE:
-			if e.area.size.x == 2:
-				foreground.set_pattern(e.area.position - Vector2i(0, 1), foreground.tile_set.get_pattern(1))
-			else:
-				foreground.set_pattern(e.area.position - Vector2i(0, 2), foreground.tile_set.get_pattern(0))
-		MapEntity.Type.ROCK:
-			var offs = [
-				Vector2i(0, -1), Vector2i(1, -1),
-				Vector2i(0, 0), Vector2i(1, 0)
-			];
-			for o in offs:
-				foreground.set_cell(e.area.position + o, 0, e.texture + o)
-		MapEntity.Type.HOUSE:
-			var non_blocking: TileMapLayer = self.get_node("TileMapForegroundNonBlocking");
-			match e.area.size:
-				Vector2i(3, 3): #small
-					foreground.set_pattern(e.area.position - Vector2i(1, 3), foreground.tile_set.get_pattern(2));
-					non_blocking.set_cell(e.area.position + Vector2i(-1, 0), 0, Vector2i(17, 0));
-					non_blocking.set_cell(e.area.position + Vector2i(-1, -1), 0, Vector2i(12, 0));
-					non_blocking.set_cell(e.area.position + Vector2i(-1, -2), 0, Vector2i(17, 0), 1);
-					non_blocking.set_cell(e.area.position + Vector2i(0, -2), 0, Vector2i(27, 5));
-					non_blocking.set_cell(e.area.position + Vector2i(1, -3), 0, Vector2i(29, 5));
-					self.add_child(Smoke.new(e.area.position + Vector2i(1, -3)))
+#func paint_entities():
+	#self.entities.map(func(e: MapEntity): self.paint_entity(e));
+#
+#func unpaint_entity(e: MapEntity):
+	#var foreground: TileMapLayer = self.get_node("TileMapForegroundBlocking");
+	#match e.type:
+		#MapEntity.Type.TREE:
+			#if e.area.size.x == 2:
+				#foreground.erase_cell(e.area.position + Vector2i(0, -1));
+				#foreground.erase_cell(e.area.position + Vector2i(1, -1));
+				#foreground.erase_cell(e.area.position + Vector2i(0, 0));
+				#foreground.erase_cell(e.area.position + Vector2i(1, 0));
+				#foreground.erase_cell(e.area.position + Vector2i(0, 1));
+				#foreground.erase_cell(e.area.position + Vector2i(1, 1));
+			#else:
+				#foreground.erase_cell(e.area.position - Vector2i(0, 2));
+				#foreground.erase_cell(e.area.position - Vector2i(0, 1));
+				#foreground.erase_cell(e.area.position - Vector2i(0, 0));
+				#
+		#MapEntity.Type.ROCK:
+			#var offs = [
+				#Vector2i(0, -1), Vector2i(1, -1),
+				#Vector2i(0, 0), Vector2i(1, 0)
+			#];
+			#for o in offs:
+				#foreground.set_cell(e.area.position + o, 0, e.texture + o)
+		#MapEntity.Type.HOUSE:
+			#var non_blocking: TileMapLayer = self.get_node("TileMapForegroundNonBlocking");
+			#match e.area.size:
+				#Vector2i(3, 3): #small
+					#foreground.set_pattern(e.area.position - Vector2i(1, 3), foreground.tile_set.get_pattern(2));
+					#non_blocking.set_cell(e.area.position + Vector2i(-1, 0), 0, Vector2i(17, 0));
+					#non_blocking.set_cell(e.area.position + Vector2i(-1, -1), 0, Vector2i(12, 0));
+					#non_blocking.set_cell(e.area.position + Vector2i(-1, -2), 0, Vector2i(17, 0), 1);
+					#non_blocking.set_cell(e.area.position + Vector2i(0, -2), 0, Vector2i(27, 5));
+					#non_blocking.set_cell(e.area.position + Vector2i(1, -3), 0, Vector2i(29, 5));
+					#self.add_child(Smoke.new(e.area.position + Vector2i(1, -3)))
+#
+#func paint_entity(e: MapEntity):
+	#var foreground: TileMapLayer = self.get_node("TileMapForegroundBlocking");
+	#match e.type:
+		#MapEntity.Type.TREE:
+			#if e.area.size.x == 2:
+				#
+				#foreground.set_pattern(e.area.position - Vector2i(0, 1), foreground.tile_set.get_pattern(1))
+			#else:
+				#foreground.set_pattern(e.area.position - Vector2i(0, 2), foreground.tile_set.get_pattern(0))
+		#MapEntity.Type.ROCK:
+			#var offs = [
+				#Vector2i(0, -1), Vector2i(1, -1),
+				#Vector2i(0, 0), Vector2i(1, 0)
+			#];
+			#for o in offs:
+				#foreground.set_cell(e.area.position + o, 0, e.texture + o)
+		#MapEntity.Type.HOUSE:
+			#var non_blocking: TileMapLayer = self.get_node("TileMapForegroundNonBlocking");
+			#match e.area.size:
+				#Vector2i(3, 3): #small
+					#foreground.set_pattern(e.area.position - Vector2i(1, 3), foreground.tile_set.get_pattern(2));
+					#non_blocking.set_cell(e.area.position + Vector2i(-1, 0), 0, Vector2i(17, 0));
+					#non_blocking.set_cell(e.area.position + Vector2i(-1, -1), 0, Vector2i(12, 0));
+					#non_blocking.set_cell(e.area.position + Vector2i(-1, -2), 0, Vector2i(17, 0), 1);
+					#non_blocking.set_cell(e.area.position + Vector2i(0, -2), 0, Vector2i(27, 5));
+					#non_blocking.set_cell(e.area.position + Vector2i(1, -3), 0, Vector2i(29, 5));
+					#self.add_child(Smoke.new(e.area.position + Vector2i(1, -3)))
 
 
 func get_best_path(source: Vector2i, destination: Vector2i) -> Array[Vector2i]:
@@ -147,7 +175,7 @@ func get_best_path(source: Vector2i, destination: Vector2i) -> Array[Vector2i]:
 		].filter(func(v):
 			return (v.x >=0 && v.y >= 0 && v.x < width && v.y < height) &&\
 			self.is_tile_free(v) &&\
-			!self.entities.any(func(e: MapEntity): return e.get_area().encloses(Rect2i(v, Vector2i(1, 1)))) 
+			!self.get_entities().any(func(e: MapEntity): return e.get_area().encloses(Rect2i(v, Vector2i(1, 1)))) 
 		);
 		for neighbor in neighbors:
 
@@ -180,7 +208,6 @@ func is_tile_free(coords: Vector2i) -> bool:
 		foreground.get_cell_tile_data(coords).z_index == 0:
 		return false;
 		
-
 	return true;
 
 
@@ -193,12 +220,29 @@ func _input(event: InputEvent) -> void:
 		has_moved = true;
 		var camera = (self.get_parent().get_node("Camera2D") as Camera2D);
 		camera.position -= event.relative;
+		camera.position.x = clampi(camera.position.x, 
+			0, int(floorf((width - 1) * 16 - 384. / camera.zoom.x))
+		);
+		camera.position.y = clampi(camera.position.y, 
+			0, int(floorf((height - 1) * 16 - 216. / camera.zoom.y))
+		);
 		
 	if event is InputEventMagnifyGesture:
 		var cam = self.get_parent().get_node("Camera2D") as Camera2D;
+		var old = Vector2(384. / cam.zoom.x, 216. / cam.zoom.y);
 
 		cam.zoom = Vector2.ONE * clampf(cam.zoom.x * event.factor, cam.get_meta("min_zoom", 1.0), 1.0);
-		
+		var delta = old - (Vector2(384. / cam.zoom.x, 216. / cam.zoom.y));
+		if event.factor < 1.0:
+			cam.position += delta / 2;
+			cam.position.x = clampi(cam.position.x, 
+				0, int(floorf((width - 1) * 16 - (384.) / cam.zoom.x))
+			);
+			cam.position.y = clampi(cam.position.y, 
+				0, int(floorf((height - 1) * 16 - (216.) / cam.zoom.y))
+			);
+		else:
+			cam.position += delta/2;
 
 	if event is InputEventScreenTouch:
 		if event.is_pressed():
@@ -209,7 +253,12 @@ func _input(event: InputEvent) -> void:
 			var camera = (self.get_parent().get_node("Camera2D") as Camera2D);
 			var time = Time.get_ticks_msec() / 1000.0 - touch_start_time;
 			if time < TAP_THRESHOLD && !has_moved:
-				player.onMapPressed(self.translate_px_to_coords(event.position + camera.position - Vector2(192, 108)));
+				var tl = Vector2(camera.position.x / camera.zoom.x, camera.position.y / camera.zoom.y)
+				var px: Vector2 = event.position + tl;
+				px.x /= camera.zoom.x;
+				px.y /= camera.zoom.y;
+				px = Vector2i(int(px.x), int(px.y));
+				player.onMapPressed(Map.translate_px_to_coords(px));
 
 	pass
 

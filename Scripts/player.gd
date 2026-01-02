@@ -46,15 +46,19 @@ func update_action(delta:float):
 			move_update(delta)
 		currentAction.ActionEnums.axe:
 			self.flip_h = self.position.direction_to(currentAction.actionPlayerRect.position).x < 0
-			
-			pass
+		currentAction.ActionEnums.pickaxe:
+			self.flip_h = self.position.direction_to(currentAction.actionPlayerRect.position).x < 0
 	
 	# finish when duration ends or hasFinished flag is set
 	if (currentAction.duration<0 && currentAction.isDurationable) || (currentAction.hasFinished):
 		finishAction()
 
 func finishAction():
-	queuedActions.pop_front()
+	var a = queuedActions.pop_front();
+	if a.entity:
+		var map = self.get_parent().get_node("Map") as Map;
+		map.remove_entity(a.entity);
+		
 	if (queuedActions.size() == 0):
 		targetSelector.cool_hide_selector()
 
@@ -78,17 +82,19 @@ enum MoveResult {
 	FAILED
 }
 
-func move(whereTo: Vector2i) -> MoveResult:
+func move(whereTo: Vector2i, 
+		offsets: Array[Vector2i] = [
+			Vector2i(-1, 0),
+			Vector2i(1, 0),
+			Vector2i(0, -1),
+			Vector2i(0, 1),
+		]) -> MoveResult:
 	var map = self.get_parent().get_node("Map") as Map;
 	var result: MoveResult;
 	path = map.get_best_path(Map.translate_px_to_coords(self.position), whereTo);
 	if path.is_empty():
-		var points_to_try = [
-			whereTo + Vector2i(-1, 0),
-			whereTo + Vector2i(1, 0),
-		];
-		for p in points_to_try:
-			p = map.get_best_path(Map.translate_px_to_coords(self.position), p);
+		for o in offsets:
+			var p = map.get_best_path(Map.translate_px_to_coords(self.position), whereTo + o);
 			if p.is_empty():
 				continue
 			if path.is_empty() || p.size() < path.size():
@@ -107,22 +113,31 @@ func move(whereTo: Vector2i) -> MoveResult:
 func schedule_map_action(target: Vector2i):
 	var map = self.get_parent().get_node("Map") as Map;
 	
-	var index = map.entities.find_custom(func(e: MapEntity): return e.area.encloses(Rect2i(target, Vector2i.ONE)));
+	var index = map.get_entities().find_custom(func(e: MapEntity): return e.area.encloses(Rect2i(target, Vector2i.ONE)));
 	if index == -1:
 		return;
 	
 	var action = PlayerAction.new();
-	action.actionPlayerRect = map.entities.get(index).get_sprite_area_in_global_coords();
-	match map.entities.get(index).type:
+	var entity: MapEntity = map.get_entities()[index];
+	action.actionPlayerRect = entity.get_sprite_area_in_global_coords();
+	action.entity = entity;
+	match entity.type:
 		MapEntity.Type.TREE:
+			move(entity.get_area().position, [Vector2i(-1, 0), Vector2i(entity.get_area().size.x, 0)]);
+			queuedActions.back().actionPlayerRect.position = path.back()
 			action.actionEnum = action.ActionEnums.axe;
+			action.isDurationable = true;
 			action.duration = 5;
 		MapEntity.Type.ROCK:
+			move(entity.get_area().position, [Vector2i(-1, 0), Vector2i(entity.get_area().size.x, 0)]);
+			queuedActions.back().actionPlayerRect.position = path.back()
 			action.actionEnum = action.ActionEnums.pickaxe;
+			action.isDurationable = true;
 			action.duration = 10;
 		MapEntity.Type.HOUSE:
 			action.actionEnum = action.ActionEnums.work;
 			action.duration = 5;
+			action.isDurationable = true;
 		_: return;
 		
 	queuedActions.append(action);
@@ -133,15 +148,25 @@ func onMapPressed(mapCoord: Vector2i):
 		var newAction: PlayerAction = PlayerAction.new();
 		newAction.actionEnum = newAction.ActionEnums.walk
 		newAction.duration = 0;
-		newAction.actionPlayerRect = Rect2i(path.back(), Vector2i(24, 24)) \
-		if !path.is_empty() else Rect2i(Map.translate_coord_to_px(mapCoord), Vector2i(24, 24));
-
-		queuedActions.append(newAction)
+		newAction.actionPlayerRect = Rect2i(path.back(), Vector2i.ONE * 24) \
+		if !path.is_empty() else Rect2i(Map.translate_coord_to_px(mapCoord), Vector2i.ONE * 24);
+		queuedActions.append(newAction);
 		match res:
 			MoveResult.NEAREST_BLOCK:
 				self.schedule_map_action(mapCoord)
+	else:	
+		if queuedActions.back().actionPlayerRect.encloses(
+			Rect2i(Map.translate_coord_to_px(mapCoord), 
+			Vector2i.ONE
+		)):
+			queuedActions.clear();
+			targetSelector.cool_hide_selector();	
+		else: 
+			queuedActions.clear();
+			onMapPressed(mapCoord);
+				
+								
+				
 		
-	else:
-		if (queuedActions[0].actionEnum == queuedActions[0].ActionEnums.walk):
-			move(mapCoord);
-			queuedActions[0].actionPlayerRect.position = Map.translate_coord_to_px(mapCoord)
+
+			
