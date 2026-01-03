@@ -17,6 +17,25 @@ var buildingBlockingLayer:TileMapLayer; # for borders, bridges
 var camera:Camera2D;
 var player: Cat;
 
+
+func viewport_size_changed():
+	var cam: Camera2D = self.get_parent().get_node("Camera2D");
+	var size = cam.get_viewport().get_visible_rect().size;
+	cam.position.x = clampi(cam.position.x,
+		0, int(floorf((width - 1) * 16 - size.x / cam.zoom.x))
+	);
+	cam.position.y = clampi(cam.position.y,
+		0, int(floorf((height - 1) * 16 - size.y / cam.zoom.y))
+	);
+	var px = Vector2i(width-1, height-1) * 16;
+	#cam.limit_bottom = px.y;
+	#cam.limit_right = px.x;
+	cam.set_meta("min_zoom", maxf(
+		float(ProjectSettings.get_setting("display/window/size/viewport_height")) / float(px.y),
+		float(ProjectSettings.get_setting("display/window/size/viewport_width")) / float(px.x)
+	));
+
+# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# initialize stuff
 	self.backgroundLayer = self.get_node("TileMapBackground");
@@ -35,12 +54,14 @@ func _ready() -> void:
 	self.camera.limit_bottom = px.y;
 	self.camera.limit_right = px.x;
 	self.camera.set_meta("min_zoom", maxf(
-		float(ProjectSettings.get_setting("display/window/size/viewport_height")) / float(px.y), 
+		float(ProjectSettings.get_setting("display/window/size/viewport_height")) / float(px.y),
 		float(ProjectSettings.get_setting("display/window/size/viewport_width")) / float(px.x)
 	));
+	self.get_tree().root.size_changed.connect(self.viewport_size_changed)
 	# initialize saver
 	SaveManager.initialize_save(self);
 	initialize_blocking_layers()
+
 
 func get_entities() -> Array[MapEntity]:
 	var ret: Array[MapEntity] = []
@@ -49,11 +70,11 @@ func get_entities() -> Array[MapEntity]:
 	return ret;
 
 func add_entity(entity: MapEntity) -> bool: # returns false if failed
-	# check if entity is already on map 
+	# check if entity is already on map
 	# Piotrek, is this really necessary tho?
 	var index = self.get_children().find(entity);
 	if index != -1:
-		return false 
+		return false
 	# check if entity can be placed on map
 	for i in range(entity.area.size.x):
 		for j in range(entity.area.size.y):
@@ -79,7 +100,7 @@ func remove_entity(entity: MapEntity):
 		Vector2i(-1, -1))
 	self.remove_child(entity);
 
-func get_best_path(source: Vector2i, destination: Vector2i) -> Array[Vector2i]:
+func get_best_path(source: Vector2i, destination: Vector2i, offsets: Array[Vector2i] = []) -> Array[Vector2i]:
 	var h = func (n: Vector2i) -> int:
 		return int(pow(destination.x - n.x,2) + pow(destination.y - n.y, 2))
 	var open = [source];
@@ -96,8 +117,7 @@ func get_best_path(source: Vector2i, destination: Vector2i) -> Array[Vector2i]:
 		var current = f_score.find_key(f_score.values().min());
 		#print(current)
 		#print("g:", g_score, "\nf: ", f_score)
-		if current == destination:
-
+		if current == destination || offsets.any(func(o): return current - o == destination):
 			var path: Array[Vector2i] = [current];
 			while from.has(current):
 				current = from[current];
@@ -116,7 +136,7 @@ func get_best_path(source: Vector2i, destination: Vector2i) -> Array[Vector2i]:
 			self.is_tile_free(v) &&\
 			!self.get_entities().any(\
 				func(e: MapEntity): \
-					return e.area.encloses(Rect2i(v, Vector2i(1, 1)))) 
+					return e.area.encloses(Rect2i(v, Vector2i(1, 1))))
 		);
 		for neighbor in neighbors:
 
@@ -145,27 +165,30 @@ func is_tile_free(coords: Vector2i) -> bool:
 func _input(event: InputEvent) -> void:
 	if event is InputEventScreenDrag:
 		has_moved = true;
-		self.camera.position -= event.relative;
-		self.camera.position.x = clampi(int(camera.position.x), 
-			0, int(floorf((width - 1) * 16 - 384. / camera.zoom.x))
-		);
-		camera.position.y = clampi(int(camera.position.y), 
-			0, int(floorf((height - 1) * 16 - 216. / camera.zoom.y))
-		);
-		
-	if event is InputEventMagnifyGesture:
-		var old = Vector2(384. / self.self.cameraera.zoom.x, 216. / self.camera.zoom.y);
 
-		self.camera.zoom = Vector2.ONE * clampf(self.camera.zoom.x * event.factor,\
-			self.camera.get_meta("min_zoom", 1.0), 1.0);
-		var delta = old - (Vector2(384. / self.camera.zoom.x, 216. / self.camera.zoom.y));
+		var size = self.camera.get_viewport().get_visible_rect().size;
+		self.camera.position -= event.relative;
+		self.camera.position.x = clampf(self.camera.position.x,
+			0., floorf((width - 1) * 16 - size.x / self.camera.zoom.x)
+		);
+		self.camera.position.y = clampf(self.camera.position.y,
+			0., floorf((height - 1) * 16 - size.y / self.camera.zoom.y)
+		);
+
+	if event is InputEventMagnifyGesture:
+		var size = self.camera.get_viewport().get_visible_rect().size;
+		var old = Vector2(size.x / self.camera.zoom.x, size.y / self.camera.zoom.y);
+
+		self.camera.zoom = Vector2.ONE * clampf(self.camera.zoom.x * event.factor, self.camera.get_meta("min_zoom", 1.0), 1.0);
+
+		var delta = old - (Vector2(size.x / self.camera.zoom.x, size.y / self.camera.zoom.y));
 		if event.factor < 1.0:
 			self.camera.position += delta / 2;
-			self.camera.position.x = clampi(int(self.camera.position.x), 
-				0, int(floorf((width - 1) * 16 - (384.) / self.camera.zoom.x))
+			self.camera.position.x = clampf(self.camera.position.x,
+				0., floorf((width - 1) * 16 - (size.x) / self.camera.zoom.x)
 			);
-			self.camera.position.y = clampi(int(self.camera.position.y), 
-				0, int(floorf((height - 1) * 16 - (216.) / self.camera.zoom.y))
+			self.camera.position.y = clampf(self.camera.position.y,
+				0., floorf((height - 1) * 16 - (size.y) / self.camera.zoom.y)
 			);
 		else:
 			self.camera.position += delta/2;
@@ -177,13 +200,15 @@ func _input(event: InputEvent) -> void:
 		else:
 			var time = Time.get_ticks_msec() / 1000.0 - touch_start_time;
 			if time < TAP_THRESHOLD && !has_moved:
-				var tl = Vector2(\
-					self.camera.position.x / self.camera.zoom.x,\
-					self.camera.position.y / self.camera.zoom.y)
-				var px: Vector2 = event.position + tl;
-				px.x /= camera.zoom.x;
-				px.y /= camera.zoom.y;
-				px = Vector2i(int(px.x), int(px.y));
+				#var tl = Vector2(\
+					#self.camera.position.x / self.camera.zoom.x,\
+					#self.camera.position.y / self.camera.zoom.y)
+				#var px: Vector2 = event.position + tl;
+				#px.x /= camera.zoom.x;
+				#px.y /= camera.zoom.y;
+				#px = Vector2i(int(px.x), int(px.y));
+				var px = event.position / self.camera.zoom + camera.position;
+				
 				self.player.onMapPressed(Map.translate_px_to_coords(px));
 
 	# TODO: remove on release

@@ -101,20 +101,16 @@ func move(whereTo: Vector2i,
 			Vector2i(0, 1),
 		]) -> MoveResult:
 	var result: MoveResult;
-	path = map.get_best_path(Map.translate_px_to_coords(self.position), whereTo);
-	if path.is_empty():
-		for o in offsets:
-			var p = map.get_best_path(Map.translate_px_to_coords(self.position), whereTo + o);
-			if p.is_empty():
-				continue
-			if path.is_empty() || p.size() < path.size():
-				path = p;
-		if path.is_empty(): 
-			result = MoveResult.FAILED;
+	for i in range(offset.length()):
+		offset[i] *= 16;
+	path = map.get_best_path(Map.translate_px_to_coords(self.position), whereTo, offsets);
+	if !path.is_empty():
+		if path.back() == whereTo:
+			result = MoveResult.REACH_TARGET;
 		else:
 			result = MoveResult.NEAREST_BLOCK;
 	else:
-		result = MoveResult.REACH_TARGET;
+		result = MoveResult.FAILED;
 	path = Map.translate_coords_to_px(path);
 	if path.size() >= 2 && self.position.direction_to(path.get(0)) == -self.position.direction_to(path.get(1)):
 		path.pop_front()

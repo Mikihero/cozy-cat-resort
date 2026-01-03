@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var garyScene = preload("res://Scenes/gary.tscn")
-@onready var map = self.get_parent().get_node("map") as Map
+@onready var map = self.get_parent().get_node("Map") as Map
 
 var npcs: Array[npc] = []
 
