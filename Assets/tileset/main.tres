@@ -2058,6 +2058,9 @@ texture = ExtResource("1_ka4hy")
 4:26/0 = 0
 0:4/0 = 0
 0:5/0 = 0
+36:51/next_alternative_id = 2
+36:51/0 = 0
+37:51/0 = 0
 
 [resource]
 sources/0 = SubResource("TileSetAtlasSource_bo1nx")

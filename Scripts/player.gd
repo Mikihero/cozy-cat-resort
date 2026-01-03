@@ -4,10 +4,13 @@ class_name Cat extends AnimatedSprite2D
 
 var path: Array[Vector2i];
 var queuedActions: Array[PlayerAction];
-var targetSelector: selector
+var targetSelector: selector;
+
+var map:Map;
 
 func _ready() -> void:
 	self.play("idle")
+	self.map = self.get_parent().get_node("Map") as Map;
 	targetSelector = self.get_parent().get_node("selector") as selector;
 	targetSelector.hide_selector()
 
@@ -32,7 +35,6 @@ func update_action(delta:float):
 			if !footsteps_sound.playing:
 				footsteps_sound.play()
 		
-	#targetSelector.set_selector_position(currentAction.actionPlayerPos, Vector2i(1, 1))
 	targetSelector.set_selector_global_position(currentAction.actionPlayerRect);
 
 	#progress and call correct update function
@@ -56,7 +58,6 @@ func update_action(delta:float):
 func finishAction():
 	var a = queuedActions.pop_front();
 	if a.entity:
-		var map = self.get_parent().get_node("Map") as Map;
 		map.remove_entity(a.entity);
 		
 	if (queuedActions.size() == 0):
@@ -67,6 +68,15 @@ func move_update(delta:float):
 		queuedActions[0].hasFinished = true
 		return
 	var prev = self.position;
+	# check if path is obstructed (eg. a tree spawned)
+	var pathAtZeroTileCoords = Map.translate_px_to_coords(path.get(0)) as Vector2i;
+	if (!map.is_tile_free(pathAtZeroTileCoords)):
+		self.move(Map.translate_px_to_coords(path.back()));
+		if (path.is_empty()):
+			# somehow, we ended up in an object. should not happen. 
+			# just in case it does, teleport to bridge - safe space :3
+			self.position = Map.translate_coord_to_px(Vector2i(5, 23));
+			return;
 	var d = self.position.direction_to(path.get(0))
 	if (abs(d.x)>0):
 		self.flip_h = d.x<0
@@ -82,6 +92,7 @@ enum MoveResult {
 	FAILED
 }
 
+# whereTo is in Map coordinates
 func move(whereTo: Vector2i, 
 		offsets: Array[Vector2i] = [
 			Vector2i(-1, 0),
@@ -89,7 +100,6 @@ func move(whereTo: Vector2i,
 			Vector2i(0, -1),
 			Vector2i(0, 1),
 		]) -> MoveResult:
-	var map = self.get_parent().get_node("Map") as Map;
 	var result: MoveResult;
 	path = map.get_best_path(Map.translate_px_to_coords(self.position), whereTo);
 	if path.is_empty():
@@ -110,9 +120,7 @@ func move(whereTo: Vector2i,
 		path.pop_front()
 	return result;
 
-func schedule_map_action(target: Vector2i):
-	var map = self.get_parent().get_node("Map") as Map;
-	
+func schedule_map_action(target: Vector2i):	
 	var index = map.get_entities().find_custom(func(e: MapEntity): return e.area.encloses(Rect2i(target, Vector2i.ONE)));
 	if index == -1:
 		return;
@@ -141,10 +149,16 @@ func schedule_map_action(target: Vector2i):
 		_: return;
 		
 	queuedActions.append(action);
-
+# debug purposes TODO: get rid of this
+var flipflop = false
 func onMapPressed(mapCoord: Vector2i):
 	if (queuedActions.size() == 0):
 		var res = move(mapCoord);
+		flipflop = !flipflop
+		if (flipflop):
+			map.add_entity(\
+				MapEntity.new(Rect2i(20, 7, 4, 4), MapEntity.Type.HOUSE, \
+				MapEntity.house4x4Texture))
 		var newAction: PlayerAction = PlayerAction.new();
 		newAction.actionEnum = newAction.ActionEnums.walk
 		newAction.duration = 0;
@@ -164,9 +178,3 @@ func onMapPressed(mapCoord: Vector2i):
 		else: 
 			queuedActions.clear();
 			onMapPressed(mapCoord);
-				
-								
-				
-		
-
-			

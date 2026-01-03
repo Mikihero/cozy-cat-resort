@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c8chewl3txgp1"
-path="res://.godot/imported/3x3.png-b8ff4c6c10d9ea389046651fa2357972.ctex"
+uid="uid://cotiikw4ofiou"
+path="res://.godot/imported/cleaning.png-82373fc28011756a7b8c3848063aa186.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/entities/house/3x3.png"
-dest_files=["res://.godot/imported/3x3.png-b8ff4c6c10d9ea389046651fa2357972.ctex"]
+source_file="res://Assets/ui/actions_anim/cleaning.png"
+dest_files=["res://.godot/imported/cleaning.png-82373fc28011756a7b8c3848063aa186.ctex"]
 
 [params]
 

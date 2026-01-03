@@ -1,7 +1,7 @@
 [gd_scene load_steps=24 format=3 uid="uid://b2eudxvpq3i0r"]
 
 [ext_resource type="Texture2D" uid="uid://c11g6ctlde4hr" path="res://Assets/anim/gary-guest.png" id="1_g6dq4"]
-[ext_resource type="Script" uid="uid://dpx1lf4i67lef" path="res://Scenes/npc.gd" id="2_urpj4"]
+[ext_resource type="Script" uid="uid://dpx1lf4i67lef" path="res://Scripts/npc.gd" id="2_urpj4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ee4r6"]
 atlas = ExtResource("1_g6dq4")
