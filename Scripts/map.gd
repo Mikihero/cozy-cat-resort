@@ -48,7 +48,7 @@ func get_entities() -> Array[MapEntity]:
 		ret.push_back(e);
 	return ret;
 
-func add_entity(entity: MapEntity) -> bool:
+func add_entity(entity: MapEntity) -> bool: # returns false if failed
 	# check if entity is already on map 
 	# Piotrek, is this really necessary tho?
 	var index = self.get_children().find(entity);

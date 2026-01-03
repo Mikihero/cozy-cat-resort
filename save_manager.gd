@@ -18,7 +18,6 @@ func load_save():
 		SaveManager.save_entities_to_file();
 	var save_file = FileAccess.open("user://save.json", FileAccess.READ);
 	var data = JSON.parse_string(save_file.get_line());
-	print(data.get("entities") as Array)
 	for entDict in (data.get("entities") as Array):
 		var entity: MapEntity = MapEntity.deserialize(entDict);
 		map.add_entity(entity);

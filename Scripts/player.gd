@@ -131,13 +131,13 @@ func schedule_map_action(target: Vector2i):
 	action.entity = entity;
 	match entity.type:
 		MapEntity.Type.TREE:
-			move(entity.get_area().position, [Vector2i(-1, 0), Vector2i(entity.get_area().size.x, 0)]);
+			move(entity.area.position); #, [Vector2i(-1, 0), Vector2i(entity.area.size.x, 0)]);
 			queuedActions.back().actionPlayerRect.position = path.back()
 			action.actionEnum = action.ActionEnums.axe;
 			action.isDurationable = true;
 			action.duration = 5;
 		MapEntity.Type.ROCK:
-			move(entity.get_area().position, [Vector2i(-1, 0), Vector2i(entity.get_area().size.x, 0)]);
+			move(entity.area.position);#, [Vector2i(-1, 0), Vector2i(entity.area.size.x, 0)]);
 			queuedActions.back().actionPlayerRect.position = path.back()
 			action.actionEnum = action.ActionEnums.pickaxe;
 			action.isDurationable = true;
@@ -159,6 +159,12 @@ func onMapPressed(mapCoord: Vector2i):
 			map.add_entity(\
 				MapEntity.new(Rect2i(20, 7, 4, 4), MapEntity.Type.HOUSE, \
 				MapEntity.house4x4Texture))
+			map.add_entity(\
+				MapEntity.new(Rect2i(randi_range(10, 20), randi_range(30, 40), 2, 2), MapEntity.Type.ROCK, \
+				MapEntity.largeRock2x2Texture))
+			map.add_entity(\
+				MapEntity.new(Rect2i(randi_range(15, 27), randi_range(15, 22), 2, 2), MapEntity.Type.TREE, \
+				MapEntity.largeTree2x2Texture))
 		var newAction: PlayerAction = PlayerAction.new();
 		newAction.actionEnum = newAction.ActionEnums.walk
 		newAction.duration = 0;

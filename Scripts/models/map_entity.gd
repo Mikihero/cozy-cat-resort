@@ -3,6 +3,7 @@ class_name MapEntity extends Sprite2D
 @export var actionBubbleScene = preload("res://Scenes/entities/action_bubble_scene.tscn")
 static var house4x4Texture = preload("res://Assets/entities/house/4x4.png")
 static var largeRock2x2Texture = preload("res://Assets/entities/rock/large.png")
+static var largeTree2x2Texture = preload("res://Assets/entities/tree/large.png")
 
 enum Type {
 	TREE = 0,
