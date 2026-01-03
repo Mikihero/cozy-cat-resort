@@ -71,7 +71,10 @@ func move_update(delta:float):
 	# check if path is obstructed (eg. a tree spawned)
 	var pathAtZeroTileCoords = Map.translate_px_to_coords(path.get(0)) as Vector2i;
 	if (!map.is_tile_free(pathAtZeroTileCoords)):
-		self.move(Map.translate_px_to_coords(path.back()));
+		self.move(
+			Map.translate_px_to_coords(self.position), 
+			Map.translate_px_to_coords(path.back())
+		);
 		if (path.is_empty()):
 			# somehow, we ended up in an object. should not happen. 
 			# just in case it does, teleport to bridge - safe space :3
@@ -93,25 +96,30 @@ enum MoveResult {
 }
 
 # whereTo is in Map coordinates
-func move(whereTo: Vector2i, 
+func move(from: Vector2i, whereTo: Vector2i, 
 		offsets: Array[Vector2i] = [
 			Vector2i(-1, 0),
 			Vector2i(1, 0),
 			Vector2i(0, -1),
 			Vector2i(0, 1),
-		]) -> MoveResult:
+		], append_to_existing: bool = false) -> MoveResult:
 	var result: MoveResult;
-	for i in range(offset.length()):
-		offset[i] *= 16;
-	path = map.get_best_path(Map.translate_px_to_coords(self.position), whereTo, offsets);
-	if !path.is_empty():
-		if path.back() == whereTo:
+
+	var new_path = map.get_best_path(from, whereTo, offsets);
+
+	if !new_path.is_empty():
+		if new_path.back() == whereTo:
 			result = MoveResult.REACH_TARGET;
 		else:
 			result = MoveResult.NEAREST_BLOCK;
 	else:
 		result = MoveResult.FAILED;
-	path = Map.translate_coords_to_px(path);
+	new_path = Map.translate_coords_to_px(new_path);
+	if append_to_existing:
+		path.append_array(new_path);
+	else:
+		path = new_path;
+		
 	if path.size() >= 2 && self.position.direction_to(path.get(0)) == -self.position.direction_to(path.get(1)):
 		path.pop_front()
 	return result;
@@ -125,15 +133,17 @@ func schedule_map_action(target: Vector2i):
 	var entity: MapEntity = map.get_entities()[index];
 	action.actionPlayerRect = entity.get_sprite_area_in_global_coords();
 	action.entity = entity;
+	var new_pos = entity.area.position;
+	new_pos.y += entity.area.size.y - 1;
 	match entity.type:
 		MapEntity.Type.TREE:
-			move(entity.area.position); #, [Vector2i(-1, 0), Vector2i(entity.area.size.x, 0)]);
+			move(path.back(), new_pos, [Vector2i(-1, 0), Vector2i(entity.area.size.x, 0)], true);
 			queuedActions.back().actionPlayerRect.position = path.back()
 			action.actionEnum = action.ActionEnums.axe;
 			action.isDurationable = true;
 			action.duration = 5;
 		MapEntity.Type.ROCK:
-			move(entity.area.position);#, [Vector2i(-1, 0), Vector2i(entity.area.size.x, 0)]);
+			move(path.back(), new_pos, [Vector2i(-1, 0), Vector2i(entity.area.size.x, 0)], true);
 			queuedActions.back().actionPlayerRect.position = path.back()
 			action.actionEnum = action.ActionEnums.pickaxe;
 			action.isDurationable = true;
@@ -149,7 +159,7 @@ func schedule_map_action(target: Vector2i):
 var flipflop = false
 func onMapPressed(mapCoord: Vector2i):
 	if (queuedActions.size() == 0):
-		var res = move(mapCoord);
+		var res = move(Map.translate_px_to_coords(self.position), mapCoord);
 		flipflop = !flipflop
 		if (flipflop):
 			map.add_entity(\

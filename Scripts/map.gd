@@ -117,13 +117,14 @@ func get_best_path(source: Vector2i, destination: Vector2i, offsets: Array[Vecto
 		var current = f_score.find_key(f_score.values().min());
 		#print(current)
 		#print("g:", g_score, "\nf: ", f_score)
-		if current == destination || offsets.any(func(o): return current - o == destination):
+		if current == destination:
 			var path: Array[Vector2i] = [current];
 			while from.has(current):
 				current = from[current];
 				path.append(current)
 			path.reverse()
 			return path
+	
 		open.remove_at(open.find(current))
 		f_score.erase(current)
 		var neighbors = [
@@ -140,7 +141,7 @@ func get_best_path(source: Vector2i, destination: Vector2i, offsets: Array[Vecto
 		);
 		for neighbor in neighbors:
 
-			var score = 	g_score[current]
+			var score = 	g_score[current] + 1;
 			#print("n: ", neighbor, " score: ", score)
 			if !g_score.has(neighbor) || score < g_score[neighbor]:
 				from[neighbor] = current
@@ -149,6 +150,20 @@ func get_best_path(source: Vector2i, destination: Vector2i, offsets: Array[Vecto
 				if !open.has(neighbor):
 					open.append(neighbor)
 	var pathFinal: Array[Vector2i] = [];
+	var alternatives: Array[Vector2i] = [];
+	for offset in offsets:
+		if from.has(destination + offset):
+			alternatives.push_back(destination + offset);
+			
+	alternatives.sort_custom(func(a, b): return g_score[a] < g_score[b]);
+	if !alternatives.is_empty():
+		var current = alternatives[0];
+		pathFinal.append(current);
+		while from.has(current):
+			current = from[current];
+			pathFinal.append(current)
+		pathFinal.reverse()
+
 	return pathFinal;
 
 # to walk
@@ -207,8 +222,8 @@ func _input(event: InputEvent) -> void:
 				#px.x /= camera.zoom.x;
 				#px.y /= camera.zoom.y;
 				#px = Vector2i(int(px.x), int(px.y));
-				var px = event.position / self.camera.zoom + camera.position;
 				
+				var px = Vector2i(event.position / self.camera.zoom) + Vector2i(camera.position);
 				self.player.onMapPressed(Map.translate_px_to_coords(px));
 
 	# TODO: remove on release

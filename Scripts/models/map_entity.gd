@@ -32,7 +32,7 @@ func destroy():
 # coords utils
 func get_sprite_area_in_global_coords() -> Rect2i:
 	var ret = self.area;
-	ret.position = (ret.position + Vector2i.ONE) * 16;
+	ret.position = (ret.position) * 16;
 	ret.size = ret.size * 16;
 	return ret;
 
