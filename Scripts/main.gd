@@ -4,6 +4,9 @@ extends Node2D
 @onready var spawn_point = $SpawnPoint
 @onready var timer = $Timer
 
+@onready var map: Map = $Map
+@onready var settings: Control = $CanvasLayer/AspectRatio/Settings
+
 func _ready():
 	timer.timeout.connect(_on_timer_timeout)
 	spawn_carts()
@@ -31,3 +34,12 @@ func spawn_carts():
 		#new_cart.stop_pos = 272 + (i * -offset)
 		
 		add_child(new_cart)
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey:
+		if OS.get_keycode_string(event.keycode) == "E" && !event.is_pressed():
+			settings.visible = !settings.visible
+		
+	map.set_process_input(!(settings.visible))
+	
+	

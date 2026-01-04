@@ -1,0 +1,156 @@
+[gd_scene load_steps=10 format=3 uid="uid://cm3tj32ks2uya"]
+
+[ext_resource type="Texture2D" uid="uid://drxfbuygityce" path="res://Assets/ui/simple-button-wide-border.png" id="1_4geyq"]
+[ext_resource type="Script" uid="uid://bj6su6hodtesv" path="res://Scripts/settings.gd" id="1_f60ng"]
+[ext_resource type="StyleBox" uid="uid://ykbqjul20drt" path="res://Assets/ui/styles/simple-basic.tres" id="2_aaqfp"]
+[ext_resource type="StyleBox" uid="uid://douabvrad66ov" path="res://Assets/ui/styles/brown-pressed.tres" id="3_j2dne"]
+[ext_resource type="Texture2D" uid="uid://bd2458fnbm0dl" path="res://Assets/ui/cancel.png" id="4_6kysc"]
+[ext_resource type="Texture2D" uid="uid://chhlpceoabnbi" path="res://Assets/ui/coin-holder-background.png" id="5_j2dne"]
+[ext_resource type="Texture2D" uid="uid://do8vjs02wg07y" path="res://Assets/ui/button_dark.png" id="6_6vr2p"]
+[ext_resource type="Texture2D" uid="uid://ieepm2cojo2e" path="res://Assets/ui/button_dark_pressed.png" id="7_f60ng"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6vr2p"]
+
+[node name="Settings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_f60ng")
+
+[node name="background" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 8.0
+offset_right = -16.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_4geyq")
+region_rect = Rect2(0, 0, 42, 42)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="header" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 192.0
+offset_right = 192.0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="header"]
+custom_minimum_size = Vector2(162, 22)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -162.0
+offset_top = 1.0
+offset_right = 162.0
+offset_bottom = 45.0
+grow_horizontal = 2
+texture = ExtResource("5_j2dne")
+
+[node name="title" type="RichTextLabel" parent="header"]
+layout_mode = 0
+offset_left = -40.0
+offset_top = -3.0
+offset_right = 60.0
+offset_bottom = 23.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/normal_font_size = 32
+text = "SETTINGS"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 8.0
+offset_right = 368.0
+offset_bottom = 208.0
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
+theme_override_constants/h_separation = 30
+columns = 2
+
+[node name="MusicLabel" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Music"
+
+[node name="MusicSlider" type="HSlider" parent="MarginContainer/ScrollContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 0.0
+value = 100.0
+
+[node name="SoundLabel" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Sound"
+
+[node name="SoundSlider" type="HSlider" parent="MarginContainer/ScrollContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 0.0
+value = 100.0
+
+[node name="SaveButton" type="TextureButton" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+size_flags_stretch_ratio = 0.0
+texture_normal = ExtResource("6_6vr2p")
+texture_pressed = ExtResource("7_f60ng")
+stretch_mode = 0
+
+[node name="exampleCancelIconButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.95800006
+anchor_top = 0.071
+anchor_right = 0.95800006
+anchor_bottom = 0.071
+offset_left = -10.872009
+offset_top = -11.336
+offset_right = 4.1279907
+offset_bottom = 3.6639996
+scale = Vector2(1.5, 1.5)
+theme_override_styles/normal = ExtResource("2_aaqfp")
+theme_override_styles/normal_mirrored = ExtResource("2_aaqfp")
+theme_override_styles/pressed = ExtResource("3_j2dne")
+theme_override_styles/pressed_mirrored = ExtResource("3_j2dne")
+theme_override_styles/hover = ExtResource("2_aaqfp")
+theme_override_styles/hover_mirrored = ExtResource("2_aaqfp")
+theme_override_styles/hover_pressed = ExtResource("3_j2dne")
+theme_override_styles/hover_pressed_mirrored = ExtResource("3_j2dne")
+theme_override_styles/disabled = ExtResource("2_aaqfp")
+theme_override_styles/disabled_mirrored = ExtResource("2_aaqfp")
+theme_override_styles/focus = SubResource("StyleBoxTexture_6vr2p")
+icon = ExtResource("4_6kysc")
+icon_alignment = 1

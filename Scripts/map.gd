@@ -196,7 +196,7 @@ func _input(event: InputEvent) -> void:
 			var time = Time.get_ticks_msec() / 1000.0 - touch_start_time;
 			if time < TAP_THRESHOLD && !has_moved:
 				player.onMapPressed(self.translate_px_to_coords(event.position + camera.position - Vector2(192, 108)));
-	pass
+
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST || what == NOTIFICATION_APPLICATION_PAUSED:
