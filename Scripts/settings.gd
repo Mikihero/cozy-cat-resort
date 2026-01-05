@@ -1,18 +1,23 @@
 extends Control
 
 var active_audio_bus: String = "";
-var active_slider: HSlider;
 @onready var music_slider = $MarginContainer/ScrollContainer/VBoxContainer/GridContainer/MusicSlider;
 @onready var sound_slider = $MarginContainer/ScrollContainer/VBoxContainer/GridContainer/SoundSlider;
+@onready var close_button = $exampleCancelIconButton;
+@onready var save_button = $MarginContainer/ScrollContainer/VBoxContainer/SaveButton;
+var map: Map;
 
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:	
+func _ready() -> void:
+	map = get_node("/roon/Main/Map");
 	music_slider.drag_started.connect(func(): active_audio_bus = "Music")
 	music_slider.drag_ended.connect(func(_c): active_audio_bus = "")
 
 	sound_slider.drag_started.connect(func(): active_audio_bus = "Sound")
 	sound_slider.drag_ended.connect(func(_c): active_audio_bus = "")
 	
+	close_button.pressed.connect(func(): self.visible = false);
+	save_button.pressed.connect(func(): map.save_to_file());
 	
 	pass # Replace with function body.
 

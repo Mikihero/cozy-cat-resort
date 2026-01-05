@@ -40,6 +40,6 @@ func _input(event: InputEvent) -> void:
 		if OS.get_keycode_string(event.keycode) == "E" && !event.is_pressed():
 			settings.visible = !settings.visible
 		
-	map.process_input = !(settings.visible)
+	map.set_process_input(!(settings.visible))
 	
 	

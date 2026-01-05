@@ -6,8 +6,6 @@ var width = 0
 var height = 0
 var save_thread: Thread;
 
-var process_input: bool = true;
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var ent: Array[MapEntity] = [];
@@ -183,8 +181,6 @@ var touch_start_time = 0;
 var has_moved = false;
 
 func _input(event: InputEvent) -> void:
-	if !process_input:
-		return;
 	if event is InputEventScreenDrag:
 		has_moved = true;
 		var camera = (self.get_parent().get_node("Camera2D") as Camera2D);
