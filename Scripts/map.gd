@@ -6,46 +6,35 @@ var height = 0;
 const TAP_THRESHOLD = 0.2;
 var touch_start_time = 0;
 var has_moved = false;
+var children:Array[MapEntity];
 
 # simplified access
 var backgroundLayer:TileMapLayer;
 var backgroundBorderLayer:TileMapLayer;
 var foregroundBlockingLayer:TileMapLayer;
-var staticWalkingBlockingLayer:TileMapLayer; # for stuff like map build in, houses, etc.
-var dynamicWalkingBlockingLayer:TileMapLayer; # for stuff like npcs, trees, rocks, etc.
-var buildingBlockingLayer:TileMapLayer; # for borders, bridges
+var buildingBlockingLayer:TileMapLayer;
 var camera:Camera2D;
 var player: Cat;
 
+# map for blocked/unblocked
+var grid := PackedByteArray() # 1 if free, 0 if empty
+var gridWidth: int;
+var gridHeight:int;
 
-func viewport_size_changed():
-	var cam: Camera2D = self.get_parent().get_node("Camera2D");
-	var size = cam.get_viewport().get_visible_rect().size;
-	cam.position.x = clampi(cam.position.x,
-		0, int(floorf((width - 1) * 16 - size.x / cam.zoom.x))
-	);
-	cam.position.y = clampi(cam.position.y,
-		0, int(floorf((height - 1) * 16 - size.y / cam.zoom.y))
-	);
-	var px = Vector2i(width-1, height-1) * 16;
-	#cam.limit_bottom = px.y;
-	#cam.limit_right = px.x;
-	cam.set_meta("min_zoom", maxf(
-		float(ProjectSettings.get_setting("display/window/size/viewport_height")) / float(px.y),
-		float(ProjectSettings.get_setting("display/window/size/viewport_width")) / float(px.x)
-	));
-
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	# initialize stuff
+	# initialize access stuff
 	self.backgroundLayer = self.get_node("TileMapBackground");
 	self.backgroundBorderLayer = self.get_node("TileMapBackgroundBorder");
 	self.foregroundBlockingLayer = self.get_node("TileMapForegroundBlocking");
-	self.staticWalkingBlockingLayer = self.get_node("TileMapWalkingProhibitedStatic");
-	self.dynamicWalkingBlockingLayer = self.get_node("TileMapWalkingProhibitedDynamic");
 	self.buildingBlockingLayer = self.get_node("TileMapBuildingProhibited");
 	self.camera = self.get_parent().get_node("Camera2D");
-	self.player = self.get_parent().get_node("Player")
+	self.player = self.get_parent().get_node("Player");
+	# init map
+	var usedRect = self.backgroundLayer.get_used_rect();
+	grid.resize(usedRect.size.x * usedRect.size.y);
+	grid.fill(1)
+	self.gridWidth = usedRect.size.x;
+	self.gridHeight = usedRect.size.y;
 	# init viewport stuff
 	var used = self.backgroundLayer.get_used_cells();
 	self.width = used.map(func(v): return v.x).max() + 1;
@@ -60,21 +49,34 @@ func _ready() -> void:
 	self.get_tree().root.size_changed.connect(self.viewport_size_changed)
 	# initialize saver
 	SaveManager.initialize_save(self);
+	# blocking
 	initialize_blocking_layers()
+	print_grid()
 
+func viewport_size_changed():
+	var cam: Camera2D = self.get_parent().get_node("Camera2D");
+	var size = cam.get_viewport().get_visible_rect().size;
+	cam.position.x = clampi(
+		int(cam.position.x), 0, int((width - 1) * 16 - size.x / cam.zoom.x)
+	)
+	cam.position.y = clampi(
+		int(cam.position.y), 0, int(floorf((height - 1) * 16 - size.y / cam.zoom.y))
+	);
+	var px = Vector2i(width-1, height-1) * 16;
+	cam.set_meta("min_zoom", maxf(
+		float(ProjectSettings.get_setting("display/window/size/viewport_height")) / float(px.y),
+		float(ProjectSettings.get_setting("display/window/size/viewport_width")) / float(px.x)
+	));
 
 func get_entities() -> Array[MapEntity]:
-	var ret: Array[MapEntity] = []
-	for e in self.get_children().filter(func(e): return e is MapEntity):
-		ret.push_back(e);
-	return ret;
+	return self.children;
 
 func add_entity(entity: MapEntity) -> bool: # returns false if failed
 	# check if entity is already on map
-	# Piotrek, is this really necessary tho?
-	var index = self.get_children().find(entity);
-	if index != -1:
-		return false
+	# commenting it out to see if really neccessary
+	#var index = self.get_children().find(entity);
+	#if index != -1:
+	#	return false
 	# check if entity can be placed on map
 	for i in range(entity.area.size.x):
 		for j in range(entity.area.size.y):
@@ -82,11 +84,9 @@ func add_entity(entity: MapEntity) -> bool: # returns false if failed
 				entity.area.position.x + i, \
 				entity.area.position.y +j))): return false
 	# add entity
-	set_layer_cells(self.staticWalkingBlockingLayer, \
-		entity.area.position, \
-		entity.area.size, \
-		Vector2i(37, 51))
+	set_grid_cells(false, entity.area.position, entity.area.size)
 	self.add_child(entity);
+	self.children.push_back(entity);
 	return true
 
 func remove_entity(entity: MapEntity):
@@ -94,88 +94,93 @@ func remove_entity(entity: MapEntity):
 	var index = self.get_children().find(entity);
 	if index == -1:
 		return
-	set_layer_cells(self.staticWalkingBlockingLayer, \
-		entity.area.position, \
-		entity.area.size, \
-		Vector2i(-1, -1))
+	set_grid_cells(true, entity.area.position, entity.area.size)
 	self.remove_child(entity);
+	self.children.erase(entity);
+
+func _reconstruct_path(came_from: Dictionary, current: Vector2i) -> Array[Vector2i]:
+	var path: Array[Vector2i] = [current]
+	while came_from.has(current):
+		current = came_from[current]
+		path.append(current)
+	path.reverse()
+	return path
 
 func get_best_path(source: Vector2i, destination: Vector2i, offsets: Array[Vector2i] = []) -> Array[Vector2i]:
-	var h = func (n: Vector2i) -> int:
-		return int(pow(destination.x - n.x,2) + pow(destination.y - n.y, 2))
-	var open = [source];
-	var from = {};
 
-	var g_score = {
-		source: 0
-	};
-	var f_score = {
-		source: h.call(source)
-	};
+	var h = func(n: Vector2i) -> int:
+		return abs(destination.x - n.x) + abs(destination.y - n.y)
+
+	var open := MinHeap.new()
+	open.push({ pos = source, f = h.call(source) })
+
+	var came_from := {}
+	var g_score := { source: 0 }
+	var visited := {}
+
+	var best_reachable := source
+	var best_h: int = h.call(source)
 
 	while !open.is_empty():
-		var current = f_score.find_key(f_score.values().min());
-		#print(current)
-		#print("g:", g_score, "\nf: ", f_score)
+		var current = open.pop().pos
+
+		if visited.has(current):
+			continue
+		visited[current] = true
+
+		var current_h = h.call(current)
+		if current_h < best_h:
+			best_h = current_h
+			best_reachable = current
+
 		if current == destination:
-			var path: Array[Vector2i] = [current];
-			while from.has(current):
-				current = from[current];
-				path.append(current)
-			path.reverse()
-			return path
-	
-		open.remove_at(open.find(current))
-		f_score.erase(current)
-		var neighbors = [
+			return _reconstruct_path(came_from, current)
+
+		for neighbor in [
 			current + Vector2i(0, 1),
 			current + Vector2i(0, -1),
 			current + Vector2i(1, 0),
-			current + Vector2i(-1, 0),
-		].filter(func(v):
-			return (v.x >=0 && v.y >= 0 && v.x < width && v.y < height) &&\
-			self.is_tile_free(v) &&\
-			!self.get_entities().any(\
-				func(e: MapEntity): \
-					return e.area.encloses(Rect2i(v, Vector2i(1, 1))))
-		);
-		for neighbor in neighbors:
+			current + Vector2i(-1, 0)
+		]:
+			if neighbor.x < 0 or neighbor.y < 0 or neighbor.x >= width or neighbor.y >= height:
+				continue
+			if !self.is_tile_free(neighbor):
+				continue
+			if self.get_entities().any(func(e):
+				return e.area.encloses(Rect2i(neighbor, Vector2i(1, 1)))
+			):
+				continue
 
-			var score = 	g_score[current] + 1;
-			#print("n: ", neighbor, " score: ", score)
-			if !g_score.has(neighbor) || score < g_score[neighbor]:
-				from[neighbor] = current
-				g_score[neighbor] = score
-				f_score[neighbor] = score + h.call(neighbor)
-				if !open.has(neighbor):
-					open.append(neighbor)
-	var pathFinal: Array[Vector2i] = [];
-	var alternatives: Array[Vector2i] = [];
+			var tentative_g = g_score[current] + 1
+
+			if !g_score.has(neighbor) or tentative_g < g_score[neighbor]:
+				came_from[neighbor] = current
+				g_score[neighbor] = tentative_g
+				open.push({
+					pos = neighbor,
+					f = tentative_g + h.call(neighbor)
+				})
+
+	# === Fallback logic ===
+	var candidates: Array[Vector2i] = []
+
 	for offset in offsets:
-		if from.has(destination + offset):
-			alternatives.push_back(destination + offset);
-			
-	alternatives.sort_custom(func(a, b): return g_score[a] < g_score[b]);
-	if !alternatives.is_empty():
-		var current = alternatives[0];
-		pathFinal.append(current);
-		while from.has(current):
-			current = from[current];
-			pathFinal.append(current)
-		pathFinal.reverse()
+		var alt = destination + offset
+		if came_from.has(alt):
+			candidates.append(alt)
 
-	return pathFinal;
+	if !candidates.is_empty():
+		candidates.sort_custom(func(a, b):
+			return g_score[a] < g_score[b]
+		)
+		return _reconstruct_path(came_from, candidates[0])
+
+	# Closest reachable tile
+	return _reconstruct_path(came_from, best_reachable)
 
 # to walk
 func is_tile_free(coords: Vector2i) -> bool:
-	var atlasCoords: Vector2i = \
-		self.staticWalkingBlockingLayer.get_cell_atlas_coords(coords)
-	if (atlasCoords == Vector2i(37,51)):
-			return false;
-	atlasCoords = self.dynamicWalkingBlockingLayer.get_cell_atlas_coords(coords)
-	if (atlasCoords == Vector2i(37,51)):
-			return false;
-	return true
+	return is_grid_tile_free(coords.x, coords.y);
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventScreenDrag:
@@ -215,16 +220,8 @@ func _input(event: InputEvent) -> void:
 		else:
 			var time = Time.get_ticks_msec() / 1000.0 - touch_start_time;
 			if time < TAP_THRESHOLD && !has_moved:
-				#var tl = Vector2(\
-					#self.camera.position.x / self.camera.zoom.x,\
-					#self.camera.position.y / self.camera.zoom.y)
-				#var px: Vector2 = event.position + tl;
-				#px.x /= camera.zoom.x;
-				#px.y /= camera.zoom.y;
-				#px = Vector2i(int(px.x), int(px.y));
-				
 				var px = Vector2i(event.position / self.camera.zoom) + Vector2i(camera.position);
-				self.player.onMapPressed(Map.translate_px_to_coords(px));
+				self.player.on_map_pressed(Map.translate_px_to_coords(px));
 
 	# TODO: remove on release
 	if event is InputEventMouseButton and event.pressed:
@@ -267,6 +264,18 @@ func _input(event: InputEvent) -> void:
 				int(floorf((height - 1) * 16 - new_size.y))
 			)
 
+static func translate_coord_to_px(pos: Vector2i) -> Vector2i:
+	return pos * 16 + Vector2i(8, 8);
+
+static func translate_coords_to_px(pos: Array[Vector2i]) -> Array[Vector2i]:
+	var ret: Array[Vector2i] = [];
+	for p in pos:
+		ret.append(Map.translate_coord_to_px(p));
+	return ret
+
+static func translate_px_to_coords(pos: Vector2i) -> Vector2i:
+	return Vector2i(pos / 16)
+
 func initialize_blocking_layers():
 	for i in range(48):
 		for j in range(55):
@@ -280,22 +289,31 @@ func initialize_blocking_layers():
 				self.foregroundBlockingLayer.get_cell_tile_data(coords).z_index == 0:
 				shouldBeBlocked = true
 			if (shouldBeBlocked):
-				staticWalkingBlockingLayer.set_cell(coords, 0, Vector2i(37,51))
-				buildingBlockingLayer.set_cell(coords, 0, Vector2i(37,51))
-
-static func translate_coord_to_px(pos: Vector2i) -> Vector2i:
-	return pos * 16 + Vector2i(8, 8);
-
-static func translate_coords_to_px(pos: Array[Vector2i]) -> Array[Vector2i]:
-	var ret: Array[Vector2i] = [];
-	for p in pos:
-		ret.append(Map.translate_coord_to_px(p));
-	return ret
-
-static func translate_px_to_coords(pos: Vector2i) -> Vector2i:
-	return Vector2i(pos / 16)
+				modify_grid_cell(coords.x, coords.y, false);
+				buildingBlockingLayer.set_cell(coords, 0, Vector2i(37,51));
 
 func set_layer_cells(layer:TileMapLayer, start:Vector2i, size:Vector2i, cellStuff:Vector2i):
 	for i in range(size.x):
 		for j in range(size.y):
 			layer.set_cell(start + Vector2i(i, j), 0, cellStuff)
+
+func set_grid_cells(shouldBeFree:bool, posTileCoords: Vector2i, sizeTileCoords:Vector2i):
+	for i in range(sizeTileCoords.x):
+		for j in range(sizeTileCoords.y):
+			self.modify_grid_cell(posTileCoords.x+i, posTileCoords.y+j, shouldBeFree);
+
+func modify_grid_cell(xTileCoords:int, yTileCoords:int, shouldBeFree:bool):
+	assert(xTileCoords<self.gridWidth && yTileCoords<self.gridHeight);
+	grid[self.gridWidth * xTileCoords + yTileCoords] = 1 if shouldBeFree else 0;
+
+func is_grid_tile_free(xTileCoordArg:int, yTileCoordArg:int) -> bool:
+	return grid[self.gridWidth * xTileCoordArg + yTileCoordArg];
+
+func print_grid():
+	print("map: ------------------------------------------------")
+	for j in range(self.gridHeight):
+		var finalString:String = ""
+		for i in range(self.gridWidth):
+			finalString+=" " if self.is_grid_tile_free(i, j) else "0"
+		print(finalString)
+	print("-----------------------------------------------------")

@@ -34,13 +34,13 @@ func set_selector_position(rect: Rect2i):
 	);
 
 func set_selector_global_position(rect: Rect2i):
-	if (rect.size.x / 16) % 2 == 1:
+	if int(rect.size.x / 16.0) % 2 == 1:
 		rect.position.x += 4;
 	else:
 		rect.position.x -= 4;
 		rect.size.x += 8;
 		
-	if (rect.size.y / 16) % 2 == 1:
+	if int(rect.size.y / 16.0) % 2 == 1:
 		rect.position.y += 4;
 	else:
 		rect.position.y -= 4;

@@ -11,6 +11,7 @@ enum Type {
 	HOUSE = 2
 }
 
+# in map coords
 var area: Rect2i;
 var type: MapEntity.Type;
 var destroyed: bool = false;
@@ -30,7 +31,7 @@ func destroy():
 	self.get_parent().remove_child(self);
 
 # coords utils
-func get_sprite_area_in_global_coords() -> Rect2i:
+func get_area_in_global_coords() -> Rect2i:
 	var ret = self.area;
 	ret.position = (ret.position) * 16;
 	ret.size = ret.size * 16;
