@@ -5,7 +5,7 @@ extends Node2D
 @onready var timer = $Timer
 
 @onready var map: Map = $Map
-@onready var settings: Control = $CanvasLayer/Settings
+@onready var settings: Control = $CanvasLayer/AspectRatio/Settings
 
 func _ready():
 	timer.timeout.connect(_on_timer_timeout)
