@@ -34,8 +34,19 @@ func set_selector_position(rect: Rect2i):
 	);
 
 func set_selector_global_position(rect: Rect2i):
-	var pixelPos = rect.position + Vector2i(5, 2);
-	var pixelSize:Vector2i = rect.size + Vector2i(6, 8);
+	if int(rect.size.x / 16.0) % 2 == 1:
+		rect.position.x += 4;
+	else:
+		rect.position.x -= 4;
+		rect.size.x += 8;
+		
+	if int(rect.size.y / 16.0) % 2 == 1:
+		rect.position.y += 4;
+	else:
+		rect.position.y -= 4;
+		rect.size.y += 8;
+	var pixelPos = rect.position;
+	var pixelSize:Vector2i = rect.size + Vector2i(8, 8)# + Vector2i(24, 24);
 	top.size = pixelSize
 	bottom.size = pixelSize
 	self.position = pixelPos

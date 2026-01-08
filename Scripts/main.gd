@@ -3,6 +3,7 @@ extends Node2D
 @export var cart_scene = preload("res://Scenes/cart.tscn")
 @onready var spawn_point = $SpawnPoint
 @onready var timer = $Timer
+var max_cats = 5;
 
 @onready var map: Map = $Map
 @onready var settings: Control = $CanvasLayer/AspectRatio/Settings
@@ -12,10 +13,15 @@ func _ready():
 	spawn_carts()
 	
 func _on_timer_timeout():
-	spawn_carts()
+	if (max_cats>0):
+		spawn_carts()
 	
 func spawn_carts():
 	var count = randi_range(1,4)
+	max_cats -= count
+	if (max_cats<0):
+		count+=max_cats
+		max_cats = 0
 	var offset = 15
 	
 	for i in range(count):

@@ -1,7 +1,27 @@
-[gd_scene load_steps=5 format=3 uid="uid://51v84hopesy6"]
+[gd_scene load_steps=7 format=3 uid="uid://51v84hopesy6"]
 
 [ext_resource type="Script" uid="uid://bfs7s710etr18" path="res://Scripts/cart.gd" id="1_ovega"]
 [ext_resource type="Texture2D" uid="uid://d05k85dcc1uvu" path="res://Assets/resources/cart.png" id="1_s4t62"]
+[ext_resource type="Texture2D" uid="uid://c4yorrtvwdhka" path="res://Assets/resources/cart-cat.png" id="3_ci2cr"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ovega"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_s4t62")
+}],
+"loop": true,
+"name": &"no cat",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ci2cr")
+}],
+"loop": true,
+"name": &"with cat",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ovega"]
 size = Vector2(10, 17)
@@ -12,8 +32,11 @@ size = Vector2(14, 17)
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_ovega")
 
-[node name="Cart" type="Sprite2D" parent="."]
-texture = ExtResource("1_s4t62")
+[node name="Cart" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -3)
+sprite_frames = SubResource("SpriteFrames_ovega")
+animation = &"no cat"
+frame_progress = 0.33616617
 
 [node name="FrontDetector" type="Area2D" parent="."]
 position = Vector2(8, 0)
