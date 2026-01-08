@@ -53,6 +53,7 @@ limit_top = 0
 metadata/min_zoom = 0.0
 
 [node name="Map" type="Node2D" parent="."]
+y_sort_enabled = true
 script = ExtResource("1_bo1nx")
 
 [node name="TileMapBackground" type="TileMapLayer" parent="Map"]
@@ -110,6 +111,7 @@ tile_map_data = PackedByteArray("AAAFABYAAAAlADMAAAAFABcAAAAlADMAAAAFABgAAAAlADM
 tile_set = ExtResource("2_8gbba")
 
 [node name="Player" type="AnimatedSprite2D" parent="."]
+z_index = 1
 position = Vector2(299, 127)
 scale = Vector2(0.99999994, 0.99999994)
 sprite_frames = ExtResource("3_8gbba")

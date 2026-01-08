@@ -13,6 +13,7 @@ var hasStarted:bool;
 var hasFinished:bool;
 var isDurationable:bool;
 var isCancellable:bool;
+var needsToWalkTowardsAction:bool;
 var isWalkingTowardsAction:bool;
 var duration: float;
 
@@ -29,7 +30,8 @@ static func create(type:ActionQueue.ActionTypeEnums, entity:MapEntity)->PlayerAc
 	var returnVal:PlayerAction = PlayerAction.new();
 	returnVal.hasStarted = false;
 	returnVal.hasFinished = false;
-	returnVal.isWalkingTowardsAction = true;
+	returnVal.needsToWalkTowardsAction = true;
+	returnVal.isWalkingTowardsAction = false;
 	returnVal.actionPlayerPos = Vector2i(-1,-1);
 	match  type:
 		ActionQueue.ActionTypeEnums.gather:

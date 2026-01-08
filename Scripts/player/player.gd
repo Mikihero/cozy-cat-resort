@@ -3,6 +3,7 @@ class_name Cat extends AnimatedSprite2D
 @onready var footsteps_sound = $Footsteps
 
 var path: Array[Vector2i];
+var movementSpeed: float = 2.0
 
 var actionQueue:ActionQueue = ActionQueue.new();
 
@@ -76,13 +77,23 @@ func move_update(delta:float)->bool:
 
 func gather_update(delta:float):
 	var currentAction: PlayerAction = actionQueue.get_action_to_execute();
-	if (!move_update(delta)):
-		currentAction.isDurationable = false
-		self.play("walk")
+	if (currentAction.needsToWalkTowardsAction):
+		if (currentAction.isWalkingTowardsAction):
+			if (!move_update(delta)):
+				currentAction.isDurationable = false
+				self.play("walk")
+			else:
+				currentAction.isDurationable = true
+				currentAction.needsToWalkTowardsAction = false;
+				self.play(currentAction.get_anim_name())
+		else:
+			move(Map.translate_px_to_coords(self.position), currentAction.actionPlayerPos, \
+				[Vector2i(-1, 0), Vector2i(currentAction.selectorRect.size.x, 0)], true);
+			currentAction.isWalkingTowardsAction = true;
+		return
 	else:
-		currentAction.isDurationable = true
-		self.play(currentAction.get_anim_name())
-	self.flip_h = self.position.direction_to(actionQueue.get_action_to_execute().actionPlayerPos).x < 0
+		self.flip_h = self.position.direction_to(\
+			Map.translate_coord_to_px(actionQueue.get_action_to_execute().selectorRect.position)).x < 0
 
 # debug purposes TODO: get rid of this
 var flipflop = false
@@ -114,15 +125,18 @@ func on_map_pressed(mapCoord: Vector2i):
 		var entity: MapEntity = map.get_entities()[index];
 		var actionType:ActionQueue.ActionTypeEnums = ActionQueue.ActionTypeEnums.gather;
 		var newAction:PlayerAction = PlayerAction.create(actionType, entity);
-		var result: bool =self.actionQueue.add_action(newAction, actionType);
-		if (!result): return;
+		var result: ActionQueue.actionAddResult =self.actionQueue.add_action(newAction, actionType);
+		if (result == ActionQueue.actionAddResult.FAILED): return;
+		
+		if (result == ActionQueue.actionAddResult.CANCELLED):
+			if (path.is_empty() && !actionQueue.should_get_executed()):
+				path.push_back(Map.translate_px_to_coords(self.position))
+				actionQueue.typeCurrentlyExecuted = ActionQueue.ActionTypeEnums.move
+			return
 		
 		var new_pos = entity.area.position;
 		new_pos.y += entity.area.size.y - 1;
-		match actionType:
-			ActionQueue.ActionTypeEnums.gather:
-				move(Map.translate_px_to_coords(self.position), new_pos, [Vector2i(-1, 0), Vector2i(entity.area.size.x, 0)], true);
-				actionQueue.actions.back().actionPlayerPos = path.back()
+		actionQueue.actions.back().actionPlayerPos = new_pos
 
 enum MoveResult {
 	REACH_TARGET,

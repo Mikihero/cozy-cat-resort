@@ -28,17 +28,23 @@ var actions:Array[PlayerAction]
 func can_add_action(type: ActionTypeEnums)-> bool:
 	return (self.actions.is_empty() || self.typeCurrentlyExecuted == type);
 
-# can either add action or cancel action. returns true if cancelled or added, false if didnt do anything 
-func add_action(action:PlayerAction, type: ActionTypeEnums)->bool: 
+enum actionAddResult{
+	ADDED,
+	CANCELLED,
+	FAILED
+}
+# can either add action or cancel action. returns 1 if added, 2 if cancelled, 0 if didnt do anything 
+func add_action(action:PlayerAction, type: ActionTypeEnums)->actionAddResult: 
 	if (can_add_action(type)):
 		var actionIndex:int = can_be_cancelled(action);
+		self.typeCurrentlyExecuted = type
 		if (actionIndex == -1):
 			self.actions.push_back(action);
+			return actionAddResult.ADDED
 		else:
 			self.actions.remove_at(actionIndex);
-		self.typeCurrentlyExecuted = type
-		return true;
-	return false;
+			return actionAddResult.CANCELLED
+	return actionAddResult.FAILED;
 
 func should_get_executed()-> bool:
 	return !self.actions.is_empty();

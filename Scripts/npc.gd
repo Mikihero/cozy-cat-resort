@@ -15,7 +15,7 @@ func set_pos_and_show(pos:Vector2i):
 	$Gary.play("walk")
 	goal = Vector2i(randi_range(5, 40), randi_range(10, 42))
 	recalculate_path()
-	speed = randf() * 0.5 + 0.75
+	speed = (randf() * 0.5 + 0.75) * 0.2
 	isWalking = true
 
 func _physics_process(delta: float) -> void:
