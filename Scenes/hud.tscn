@@ -1,0 +1,56 @@
+[gd_scene load_steps=3 format=3 uid="uid://b51yr0gwl1d37"]
+
+[ext_resource type="Texture2D" uid="uid://do8vjs02wg07y" path="res://Assets/ui/button_dark.png" id="1_fccik"]
+[ext_resource type="Texture2D" uid="uid://ieepm2cojo2e" path="res://Assets/ui/button_dark_pressed.png" id="2_bjfho"]
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ButtonsTR" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -70.0
+offset_right = -5.0
+offset_bottom = 30.0
+grow_horizontal = 0
+theme_override_constants/separation = 5
+alignment = 1
+
+[node name="Settings" type="TextureButton" parent="ButtonsTR"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("1_fccik")
+texture_pressed = ExtResource("2_bjfho")
+stretch_mode = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ButtonsTR/Settings"]
+layout_mode = 0
+offset_right = 30.0
+offset_bottom = 30.0
+mouse_filter = 1
+text = "⚙️"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Inventory" type="TextureButton" parent="ButtonsTR"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("1_fccik")
+texture_pressed = ExtResource("2_bjfho")
+stretch_mode = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ButtonsTR/Inventory"]
+layout_mode = 0
+offset_right = 30.0
+offset_bottom = 30.0
+mouse_filter = 1
+text = " "
+horizontal_alignment = 1
+vertical_alignment = 1

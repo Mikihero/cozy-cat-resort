@@ -91,4 +91,4 @@ func _on_show_pressed():
 		_rewarded_ad.show(on_user_earned_reward_listener)
 
 func _on_close_pressed():
-	queue_free()
+	self.visible = false;

@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" uid="uid://b0gemtouhxu6o" path="res://Scripts/inventory.gd" id="1_aqnmd"]
 [ext_resource type="Texture2D" uid="uid://drxfbuygityce" path="res://Assets/ui/simple-button-wide-border.png" id="2_mgnjo"]
-[ext_resource type="PackedScene" path="res://Scenes/examples/coin display.tscn" id="5_k1vlg"]
+[ext_resource type="PackedScene" uid="uid://gltssceucsnb" path="res://Scenes/examples/coin display.tscn" id="5_k1vlg"]
 [ext_resource type="StyleBox" uid="uid://ykbqjul20drt" path="res://Assets/ui/styles/simple-basic.tres" id="6_trvqw"]
 [ext_resource type="StyleBox" uid="uid://douabvrad66ov" path="res://Assets/ui/styles/brown-pressed.tres" id="7_aqnmd"]
 [ext_resource type="Texture2D" uid="uid://t47kd6d1ekhp" path="res://Assets/resources/watch_ad-normal.png" id="7_trvqw"]
 [ext_resource type="Texture2D" uid="uid://dlevh4uj5ftbv" path="res://Assets/resources/watch_ad-pressed.png" id="8_aqnmd"]
 [ext_resource type="Texture2D" uid="uid://bd2458fnbm0dl" path="res://Assets/ui/cancel.png" id="8_o4ksx"]
-[ext_resource type="Theme" uid="uid://cnb7lg7g23rxi" path="res://Assets/scroll_theme.tres" id="9_2rjgx"]
+[ext_resource type="Theme" uid="uid://do6dybk54iy41" path="res://Assets/scroll_theme.tres" id="9_2rjgx"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5qg7d"]
 

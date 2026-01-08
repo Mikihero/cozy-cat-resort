@@ -3,6 +3,7 @@ class_name Map extends Node2D
 # helper variables
 var width = 0;
 var height = 0;
+
 const TAP_THRESHOLD = 0.2;
 var touch_start_time = 0;
 var has_moved = false;
@@ -15,6 +16,7 @@ var foregroundBlockingLayer:TileMapLayer;
 var buildingBlockingLayer:TileMapLayer;
 var camera:Camera2D;
 var player: Cat;
+@onready var hud: HUD = $"/root/Main/CanvasLayer/AspectRatio/HUD";
 
 # map for blocked/unblocked
 var grid := PackedByteArray() # 1 if free, 0 if empty
@@ -214,6 +216,8 @@ func _input(event: InputEvent) -> void:
 			self.camera.position += delta/2;
 
 	if event is InputEventScreenTouch:
+		if hud.is_position_on_hud(event.position):
+			return
 		if event.is_pressed():
 			has_moved = false;
 			touch_start_time = Time.get_ticks_msec() / 1000.0;
