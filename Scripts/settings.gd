@@ -16,7 +16,7 @@ func _ready() -> void:
 	sound_slider.drag_ended.connect(func(_c): active_audio_bus = "")
 
 	close_button.pressed.connect(func(): self.visible = false);
-	save_button.pressed.connect(func(): map.save_to_file());
+	save_button.pressed.connect(func(): SaveManager.save_entities_to_file());
 
 	pass # Replace with function body.
 

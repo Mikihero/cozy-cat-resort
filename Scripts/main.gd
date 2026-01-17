@@ -8,7 +8,7 @@ var max_cats = 5;
 @onready var map: Map = $Map
 @onready var settings: Control = $CanvasLayer/AspectRatio/Settings
 @onready var inventory: Control = $CanvasLayer/AspectRatio/Inventory
-@onready var hud: HUD = $CanvasLayer/AspectRatio/HUD
+@onready var hud: HUD = $CanvasLayer/HUD
 
 func _ready():
 	timer.timeout.connect(_on_timer_timeout)
@@ -18,6 +18,7 @@ func _ready():
 	settings.visibility_changed.connect(update_hud_visibility);
 	inventory.visibility_changed.connect(update_hud_visibility);
 	spawn_carts()
+	ToastManager.initialize();
 		
 func _on_timer_timeout():
 	if (max_cats>0):
@@ -50,8 +51,10 @@ func spawn_carts():
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey:
-		if OS.get_keycode_string(event.keycode) == "E" && !event.is_pressed():
-			settings.visible = !settings.visible
+		if !event.is_pressed():
+			match OS.get_keycode_string(event.keycode):
+				'E': settings.visible = !settings.visible
+		
 		
 	map.set_process_input(!(settings.visible))
 	

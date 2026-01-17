@@ -16,7 +16,7 @@ var foregroundBlockingLayer:TileMapLayer;
 var buildingBlockingLayer:TileMapLayer;
 var camera:Camera2D;
 var player: Cat;
-@onready var hud: HUD = $"/root/Main/CanvasLayer/AspectRatio/HUD";
+@onready var hud: HUD = $"/root/Main/CanvasLayer/HUD";
 
 # map for blocked/unblocked
 var grid := PackedByteArray() # 1 if free, 0 if empty

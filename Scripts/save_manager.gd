@@ -32,6 +32,7 @@ func save_entities_to_file():
 	var data_string = JSON.stringify(data);
 	save_file.store_string(data_string);
 	print("autosave ", data.entities.size(), " entities")
+	ToastManager.toast("autosave %s entities" % data.entities.size());
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST || what == NOTIFICATION_APPLICATION_PAUSED:
