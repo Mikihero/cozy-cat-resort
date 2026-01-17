@@ -2,7 +2,7 @@ extends Node2D
 
 var toast_queue: Array[Toast] = [];
 var mutex = Mutex.new();
-@onready var toast_node: VBoxContainer = $"/root/Main/CanvasLayer/Toasts";
+@onready var toast_node: VBoxContainer = $"/root/Main/CanvasLayer/HUD/MarginContainer/Toasts";
 # Called when the node enters the scene tree for the first time.
 #func _ready() -> void:
 	#toast_node = get_node("")

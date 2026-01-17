@@ -12,10 +12,17 @@
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6vr2p"]
 
 [node name="Settings" type="Control"]
+custom_minimum_size = Vector2(384, 216)
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -108.0
+offset_right = 192.0
+offset_bottom = 108.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_f60ng")
@@ -39,9 +46,11 @@ patch_margin_right = 4
 patch_margin_bottom = 4
 
 [node name="header" type="Control" parent="."]
-anchors_preset = 0
-offset_left = 192.0
-offset_right = 192.0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
 
 [node name="NinePatchRect" type="NinePatchRect" parent="header"]
 custom_minimum_size = Vector2(162, 22)

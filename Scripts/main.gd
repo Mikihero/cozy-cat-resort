@@ -6,17 +6,10 @@ extends Node2D
 var max_cats = 5;
 
 @onready var map: Map = $Map
-@onready var settings: Control = $CanvasLayer/AspectRatio/Settings
-@onready var inventory: Control = $CanvasLayer/AspectRatio/Inventory
 @onready var hud: HUD = $CanvasLayer/HUD
 
 func _ready():
 	timer.timeout.connect(_on_timer_timeout)
-	hud.settings.pressed.connect(func(): settings.visible = !settings.visible);
-	hud.inventory.pressed.connect(func(): inventory.visible = !inventory.visible);
-	var update_hud_visibility = func(): hud.visible = !(settings.visible || inventory.visible);
-	settings.visibility_changed.connect(update_hud_visibility);
-	inventory.visibility_changed.connect(update_hud_visibility);
 	spawn_carts()
 	ToastManager.initialize();
 		
@@ -53,9 +46,8 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventKey:
 		if !event.is_pressed():
 			match OS.get_keycode_string(event.keycode):
-				'E': settings.visible = !settings.visible
-		
-		
-	map.set_process_input(!(settings.visible))
+				'E': hud.settings.visible = !hud.settings.visible
+			
+	map.set_process_input(!hud.is_menu_open())
 	
 	
