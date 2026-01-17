@@ -1,0 +1,288 @@
+[gd_scene load_steps=19 format=3 uid="uid://cscsh7t6y3olo"]
+
+[ext_resource type="Texture2D" uid="uid://d2pt3shydhe8b" path="res://Assets/ui/simple-background.png" id="1_fdj0q"]
+[ext_resource type="Script" uid="uid://btjpsxmbwl4u3" path="res://Scripts/shop.gd" id="1_k6pkm"]
+[ext_resource type="StyleBox" uid="uid://ykbqjul20drt" path="res://Assets/ui/styles/simple-basic.tres" id="2_k6jq0"]
+[ext_resource type="Theme" uid="uid://cnb7lg7g23rxi" path="res://Assets/scroll_theme.tres" id="3_1sjcd"]
+[ext_resource type="StyleBox" uid="uid://douabvrad66ov" path="res://Assets/ui/styles/brown-pressed.tres" id="3_3ps1r"]
+[ext_resource type="Texture2D" uid="uid://bd2458fnbm0dl" path="res://Assets/ui/cancel.png" id="4_ymrm4"]
+[ext_resource type="Texture2D" uid="uid://r2jm7c42ksne" path="res://Assets/resources/wood.png" id="5_1cyt5"]
+[ext_resource type="StyleBox" uid="uid://c7f2tgcg1hdje" path="res://Assets/ui/styles/light-basic.tres" id="5_k6jq0"]
+[ext_resource type="PackedScene" uid="uid://cyxeqvmk5w524" path="res://Scenes/item.tscn" id="6_3ps1r"]
+[ext_resource type="Texture2D" uid="uid://cvg0kuspfw1r4" path="res://Assets/resources/stone.png" id="6_3568l"]
+[ext_resource type="Texture2D" uid="uid://bud7g7hnkpylr" path="res://Assets/resources/clay.png" id="7_mjtuy"]
+[ext_resource type="PackedScene" uid="uid://cvui546ijvxlf" path="res://Scenes/item_info.tscn" id="8_k6pkm"]
+[ext_resource type="Texture2D" uid="uid://c0inyqnskoiqa" path="res://Assets/ui/plus_btn.png" id="8_tyrku"]
+[ext_resource type="Texture2D" uid="uid://csliqy3rlo6vg" path="res://Assets/ui/minus_btn.png" id="9_5xp22"]
+[ext_resource type="Texture2D" uid="uid://c3t8xc0u2j224" path="res://Assets/ui/simple-button1.png" id="10_ow1eo"]
+[ext_resource type="Texture2D" uid="uid://dhjp6el51wqh6" path="res://Assets/ui/coins/golden-coin.png" id="11_k6pkm"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_s8dlv"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1sjcd"]
+texture = ExtResource("10_ow1eo")
+texture_margin_left = 4.0
+texture_margin_top = 2.0
+texture_margin_right = 4.0
+texture_margin_bottom = 2.0
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_k6pkm")
+
+[node name="simpleBackground" type="NinePatchRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -97.0
+offset_right = 61.530853
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+texture = ExtResource("1_fdj0q")
+region_rect = Rect2(0, 0, 21, 21)
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="Label" type="Label" parent="simpleBackground"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -24.0
+offset_top = 2.5
+offset_right = 24.0
+offset_bottom = 15.5
+grow_horizontal = 2
+text = "Materials"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="simpleBackground"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -47.030853
+offset_top = -28.5
+offset_right = 139.96915
+offset_bottom = 106.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("3_1sjcd")
+horizontal_scroll_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="simpleBackground/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/margin_right = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="simpleBackground/ScrollContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="simpleBackground/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Item" parent="simpleBackground/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("6_3ps1r")]
+layout_mode = 2
+item_img = ExtResource("7_mjtuy")
+item_name = "clay"
+
+[node name="Item2" parent="simpleBackground/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("6_3ps1r")]
+layout_mode = 2
+item_img = ExtResource("6_3568l")
+item_name = "stone"
+
+[node name="Item3" parent="simpleBackground/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("6_3ps1r")]
+layout_mode = 2
+item_img = ExtResource("5_1cyt5")
+item_name = "wood"
+
+[node name="Item4" parent="simpleBackground/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("6_3ps1r")]
+layout_mode = 2
+
+[node name="Item5" parent="simpleBackground/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("6_3ps1r")]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="simpleBackground/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Item" parent="simpleBackground/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("6_3ps1r")]
+layout_mode = 2
+
+[node name="Item2" parent="simpleBackground/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("6_3ps1r")]
+layout_mode = 2
+
+[node name="Item3" parent="simpleBackground/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("6_3ps1r")]
+layout_mode = 2
+
+[node name="Item4" parent="simpleBackground/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("6_3ps1r")]
+layout_mode = 2
+
+[node name="Item5" parent="simpleBackground/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("6_3ps1r")]
+layout_mode = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="simpleBackground/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Item" parent="simpleBackground/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer3" instance=ExtResource("6_3ps1r")]
+layout_mode = 2
+
+[node name="Item2" parent="simpleBackground/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer3" instance=ExtResource("6_3ps1r")]
+layout_mode = 2
+
+[node name="Item3" parent="simpleBackground/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer3" instance=ExtResource("6_3ps1r")]
+layout_mode = 2
+
+[node name="Item4" parent="simpleBackground/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer3" instance=ExtResource("6_3ps1r")]
+layout_mode = 2
+
+[node name="Item5" parent="simpleBackground/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer3" instance=ExtResource("6_3ps1r")]
+layout_mode = 2
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="simpleBackground/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Item" parent="simpleBackground/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer4" instance=ExtResource("6_3ps1r")]
+layout_mode = 2
+
+[node name="Item2" parent="simpleBackground/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer4" instance=ExtResource("6_3ps1r")]
+layout_mode = 2
+
+[node name="Item3" parent="simpleBackground/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer4" instance=ExtResource("6_3ps1r")]
+layout_mode = 2
+
+[node name="Item4" parent="simpleBackground/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer4" instance=ExtResource("6_3ps1r")]
+layout_mode = 2
+
+[node name="Item5" parent="simpleBackground/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer4" instance=ExtResource("6_3ps1r")]
+layout_mode = 2
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="simpleBackground/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Item" parent="simpleBackground/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer5" instance=ExtResource("6_3ps1r")]
+layout_mode = 2
+
+[node name="Item2" parent="simpleBackground/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer5" instance=ExtResource("6_3ps1r")]
+layout_mode = 2
+
+[node name="Item3" parent="simpleBackground/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer5" instance=ExtResource("6_3ps1r")]
+layout_mode = 2
+
+[node name="Item4" parent="simpleBackground/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer5" instance=ExtResource("6_3ps1r")]
+layout_mode = 2
+
+[node name="Item5" parent="simpleBackground/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer5" instance=ExtResource("6_3ps1r")]
+layout_mode = 2
+
+[node name="cancel" type="Button" parent="."]
+offset_left = 343.0
+offset_top = 3.0
+offset_right = 363.40002
+offset_bottom = 23.0
+scale = Vector2(1.5, 1.5)
+theme_override_styles/normal = ExtResource("2_k6jq0")
+theme_override_styles/normal_mirrored = ExtResource("2_k6jq0")
+theme_override_styles/pressed = ExtResource("3_3ps1r")
+theme_override_styles/pressed_mirrored = ExtResource("3_3ps1r")
+theme_override_styles/hover = ExtResource("2_k6jq0")
+theme_override_styles/hover_mirrored = ExtResource("2_k6jq0")
+theme_override_styles/hover_pressed = ExtResource("3_3ps1r")
+theme_override_styles/hover_pressed_mirrored = ExtResource("3_3ps1r")
+theme_override_styles/disabled = ExtResource("2_k6jq0")
+theme_override_styles/disabled_mirrored = ExtResource("2_k6jq0")
+theme_override_styles/focus = SubResource("StyleBoxTexture_s8dlv")
+icon = ExtResource("4_ymrm4")
+icon_alignment = 1
+
+[node name="Label" type="Label" parent="."]
+offset_left = 27.0
+offset_top = 11.0
+offset_right = 80.5
+offset_bottom = 28.0
+scale = Vector2(2, 2)
+theme_override_styles/normal = ExtResource("5_k6jq0")
+text = "Shop"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MaterialInfo" parent="." instance=ExtResource("8_k6pkm")]
+offset_left = 27.0
+offset_top = 62.0
+offset_right = 80.5
+offset_bottom = 102.0
+item_name = "Select item"
+
+[node name="Buy" type="NinePatchRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -165.0
+offset_top = 51.0
+offset_right = -111.0
+offset_bottom = 72.75
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+texture = ExtResource("1_fdj0q")
+region_rect = Rect2(0, 0, 21, 21)
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Buy"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 168.66666
+offset_bottom = 60.333344
+scale = Vector2(0.3, 0.3)
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Label" type="Label" parent="Buy/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Buy"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Buy/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Plus" type="TextureButton" parent="Buy/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("8_tyrku")
+
+[node name="Amount" type="Label" parent="Buy/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "1"
+horizontal_alignment = 1
+
+[node name="Minus" type="TextureButton" parent="Buy/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("9_5xp22")
+
+[node name="Button3" type="Button" parent="Buy/HBoxContainer"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/normal = SubResource("StyleBoxTexture_1sjcd")
+icon = ExtResource("11_k6pkm")
+alignment = 0
+icon_alignment = 2
