@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cscsh7t6y3olo"]
+[gd_scene load_steps=25 format=3 uid="uid://cscsh7t6y3olo"]
 
 [ext_resource type="Texture2D" uid="uid://d2pt3shydhe8b" path="res://Assets/ui/simple-background.png" id="1_fdj0q"]
 [ext_resource type="Script" uid="uid://btjpsxmbwl4u3" path="res://Scripts/shop.gd" id="1_k6pkm"]
@@ -16,14 +16,42 @@
 [ext_resource type="Texture2D" uid="uid://csliqy3rlo6vg" path="res://Assets/ui/minus_btn.png" id="9_5xp22"]
 [ext_resource type="Texture2D" uid="uid://c3t8xc0u2j224" path="res://Assets/ui/simple-button1.png" id="10_ow1eo"]
 [ext_resource type="Texture2D" uid="uid://dhjp6el51wqh6" path="res://Assets/ui/coins/golden-coin.png" id="11_k6pkm"]
+[ext_resource type="Texture2D" uid="uid://db3tv3oj7o1f2" path="res://Assets/ui/simple-button2.png" id="16_mjtuy"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_s8dlv"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1sjcd"]
+[sub_resource type="FontVariation" id="FontVariation_3568l"]
+spacing_top = -5
+
+[sub_resource type="FontVariation" id="FontVariation_mjtuy"]
+spacing_top = -5
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3568l"]
 texture = ExtResource("10_ow1eo")
 texture_margin_left = 4.0
 texture_margin_top = 2.0
-texture_margin_right = 4.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cuuv1"]
+texture = ExtResource("16_mjtuy")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yl1pv"]
+texture = ExtResource("10_ow1eo")
+texture_margin_left = 4.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_m13ki"]
+texture = ExtResource("16_mjtuy")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 2.0
 texture_margin_bottom = 2.0
 
 [node name="CanvasLayer" type="CanvasLayer"]
@@ -94,16 +122,19 @@ size_flags_horizontal = 4
 layout_mode = 2
 item_img = ExtResource("7_mjtuy")
 item_name = "clay"
+price = 100
 
 [node name="Item2" parent="simpleBackground/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("6_3ps1r")]
 layout_mode = 2
 item_img = ExtResource("6_3568l")
 item_name = "stone"
+price = 50
 
 [node name="Item3" parent="simpleBackground/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("6_3ps1r")]
 layout_mode = 2
 item_img = ExtResource("5_1cyt5")
 item_name = "wood"
+price = 30
 
 [node name="Item4" parent="simpleBackground/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("6_3ps1r")]
 layout_mode = 2
@@ -117,6 +148,8 @@ size_flags_horizontal = 4
 
 [node name="Item" parent="simpleBackground/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("6_3ps1r")]
 layout_mode = 2
+item_img = ExtResource("5_1cyt5")
+item_name = "wood"
 
 [node name="Item2" parent="simpleBackground/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("6_3ps1r")]
 layout_mode = 2
@@ -220,9 +253,9 @@ vertical_alignment = 1
 
 [node name="MaterialInfo" parent="." instance=ExtResource("8_k6pkm")]
 offset_left = 27.0
-offset_top = 62.0
+offset_top = 61.0
 offset_right = 80.5
-offset_bottom = 102.0
+offset_bottom = 101.0
 item_name = "Select item"
 
 [node name="Buy" type="NinePatchRect" parent="."]
@@ -232,9 +265,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -165.0
-offset_top = 51.0
+offset_top = 49.0
 offset_right = -111.0
-offset_bottom = 72.75
+offset_bottom = 71.75
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(2, 2)
@@ -248,9 +281,9 @@ patch_margin_bottom = 2
 [node name="HBoxContainer" type="HBoxContainer" parent="Buy"]
 layout_mode = 0
 offset_left = 2.0
-offset_top = 2.0
+offset_top = 2.5
 offset_right = 168.66666
-offset_bottom = 60.333344
+offset_bottom = 60.833344
 scale = Vector2(0.3, 0.3)
 theme_override_constants/separation = 16
 alignment = 1
@@ -264,6 +297,7 @@ horizontal_alignment = 1
 [node name="VBoxContainer" type="VBoxContainer" parent="Buy/HBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
+theme_override_constants/separation = 2
 
 [node name="Plus" type="TextureButton" parent="Buy/HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -271,8 +305,11 @@ texture_normal = ExtResource("8_tyrku")
 
 [node name="Amount" type="Label" parent="Buy/HBoxContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_3568l")
+theme_override_font_sizes/font_size = 32
 text = "1"
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Minus" type="TextureButton" parent="Buy/HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -282,7 +319,23 @@ texture_normal = ExtResource("9_5xp22")
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 size_flags_vertical = 4
-theme_override_styles/normal = SubResource("StyleBoxTexture_1sjcd")
+theme_override_fonts/font = SubResource("FontVariation_mjtuy")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxTexture_3568l")
+theme_override_styles/normal_mirrored = ExtResource("2_k6jq0")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_cuuv1")
+theme_override_styles/pressed_mirrored = ExtResource("3_3ps1r")
+theme_override_styles/hover = SubResource("StyleBoxTexture_yl1pv")
+theme_override_styles/hover_mirrored = ExtResource("2_k6jq0")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_m13ki")
+theme_override_styles/hover_pressed_mirrored = ExtResource("3_3ps1r")
+theme_override_styles/disabled = ExtResource("2_k6jq0")
+theme_override_styles/disabled_mirrored = ExtResource("2_k6jq0")
 icon = ExtResource("11_k6pkm")
 alignment = 0
 icon_alignment = 2
+
+[connection signal="pressed" from="cancel" to="." method="_on_cancel_pressed"]
+[connection signal="pressed" from="Buy/HBoxContainer/VBoxContainer/Plus" to="." method="_on_plus_pressed"]
+[connection signal="pressed" from="Buy/HBoxContainer/VBoxContainer/Minus" to="." method="_on_minus_pressed"]
+[connection signal="pressed" from="Buy/HBoxContainer/Button3" to="." method="_on_button_3_pressed"]
