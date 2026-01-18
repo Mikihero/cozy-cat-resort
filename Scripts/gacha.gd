@@ -1,14 +1,13 @@
-extends Node2D
+extends Control
 
 @export var banner_cat: Texture2D
 @export var banner_material: Texture2D
 
-@onready var popup_scene = preload("res://Scenes/examples/confirm.tscn")
-@onready var ok_scene = preload("res://Scenes/examples/ok.tscn")
+@onready var hud: HUD = $"../../.";
 @onready var wishing_scene = preload("res://Scenes/wishing.tscn")
-@onready var banner_image = $"Banner image"
-@onready var cat_gacha = $"Cat gacha"
-@onready var material_gacha = $"Material gacha"
+@onready var banner_image = $"banner/Banner image"
+@onready var cat_gacha = $"tabs/Cat gacha"
+@onready var material_gacha = $"tabs/Material gacha"
 
 var coin_type = ""
 var selected_banner = "cat"
@@ -16,27 +15,17 @@ var selected_banner = "cat"
 func _on_diamond_pressed() -> void:
 	coin_type = "diamond"
 	if (Globals.DiamondCatCoins >= 10):
-		var popup_instance = popup_scene.instantiate()
-		popup_instance.message_text = "Are you sure you want to spend 10 diamond catcoins?"
-		popup_instance.action_to_execute = check_funds
-		add_child(popup_instance)
+		hud.popup_confirm("Are you sure you want to spend 10 diamond catcoins?", check_funds)
 	else:
-		var ok_instance = ok_scene.instantiate()
-		ok_instance.message_text = "Not enough diamond catcoins"
-		add_child(ok_instance)
+		hud.popup_info("Not enough diamond catcoins")
 
 
 func _on_gold_pressed() -> void:
 	coin_type = "gold"
 	if (Globals.GoldCatCoins >= 100):
-		var popup_instance = popup_scene.instantiate()
-		popup_instance.message_text = "Are you sure you want to spend 100 gold catcoins?"
-		popup_instance.action_to_execute = check_funds
-		add_child(popup_instance)
+		hud.popup_confirm("Are you sure you want to spend 100 gold catcoins?", check_funds)
 	else:
-		var ok_instance = ok_scene.instantiate()
-		ok_instance.message_text = "Not enough gold catcoins"
-		add_child(ok_instance)
+		hud.popup_info("Not enough gold catcoins")
 	
 
 func check_funds():
@@ -53,7 +42,7 @@ func check_funds():
 	wishing_instance.tree_exited.connect(func(): process_mode = PROCESS_MODE_INHERIT)
 
 func _on_cancel_pressed() -> void:
-	queue_free()
+	self.visible = false;
 
 
 func _on_cat_gacha_pressed() -> void:

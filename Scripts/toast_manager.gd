@@ -1,8 +1,8 @@
-extends Node2D
+extends Node
 
 var toast_queue: Array[Toast] = [];
 var mutex = Mutex.new();
-@onready var toast_node: VBoxContainer = $"/root/Main/CanvasLayer/HUD/MarginContainer/Toasts";
+var toast_node: VBoxContainer;
 # Called when the node enters the scene tree for the first time.
 #func _ready() -> void:
 	#toast_node = get_node("")
@@ -10,6 +10,7 @@ var mutex = Mutex.new();
 var placeholders: Array[Toast] = []
 
 func initialize():
+	toast_node = ($"/root/Main/CanvasLayer/HUD" as HUD).toasts;
 	for i in range(3):
 		var t = Toast.placeholder("");
 		t.started = true;

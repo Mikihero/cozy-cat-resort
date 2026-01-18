@@ -1,9 +1,9 @@
-extends CanvasLayer
+class_name PopupConfirm extends Control
 
 var message_text = ""
 var action_to_execute: Callable
 
-func  _ready() -> void:			
+func  _ready() -> void:
 	$ColorRect/PanelContainer/VBoxContainer/Message.text = message_text
 
 func _on_cancel_pressed() -> void:

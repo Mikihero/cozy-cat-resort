@@ -3,7 +3,7 @@ extends Control
 var active_audio_bus: String = "";
 @onready var music_slider = $MarginContainer/ScrollContainer/VBoxContainer/GridContainer/MusicSlider;
 @onready var sound_slider = $MarginContainer/ScrollContainer/VBoxContainer/GridContainer/SoundSlider;
-@onready var close_button = $exampleCancelIconButton;
+@onready var close_button = $exitButton;
 @onready var save_button = $MarginContainer/ScrollContainer/VBoxContainer/SaveButton;
 @onready var map: Map = $"/root/Main/Map";
 

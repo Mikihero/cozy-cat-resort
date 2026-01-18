@@ -1,6 +1,6 @@
 [gd_scene load_steps=45 format=3 uid="uid://gltssceucsnb"]
 
-[ext_resource type="Script" uid="uid://bnmi5fxtxpw0a" path="res://Scripts/coin display manager.gd" id="1_wi7sw"]
+[ext_resource type="Script" path="res://Scripts/coin display manager.gd" id="1_wi7sw"]
 [ext_resource type="Texture2D" uid="uid://chhlpceoabnbi" path="res://Assets/ui/coin-holder-background.png" id="1_wsiki"]
 [ext_resource type="Texture2D" uid="uid://ccmfadiha73j8" path="res://Assets/ui/coin-holder-foreground.png" id="2_uq737"]
 [ext_resource type="Texture2D" uid="uid://g6rr8ljiftt3" path="res://Assets/ui/coins/platinum-coin-anim.png" id="6_0h4dd"]
@@ -289,7 +289,6 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 grow_horizontal = 2
-size_flags_horizontal = 4
 
 [node name="coin display node" type="Control" parent="."]
 layout_mode = 2

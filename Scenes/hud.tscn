@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://b51yr0gwl1d37"]
+[gd_scene load_steps=7 format=3 uid="uid://b51yr0gwl1d37"]
 
+[ext_resource type="Script" uid="uid://bax0jvucxn1yh" path="res://Scripts/hud.gd" id="1_36asn"]
 [ext_resource type="Texture2D" uid="uid://do8vjs02wg07y" path="res://Assets/ui/button_dark.png" id="1_fccik"]
 [ext_resource type="Texture2D" uid="uid://ieepm2cojo2e" path="res://Assets/ui/button_dark_pressed.png" id="2_bjfho"]
 [ext_resource type="PackedScene" uid="uid://cm3tj32ks2uya" path="res://Scenes/settings.tscn" id="3_6fbih"]
 [ext_resource type="PackedScene" uid="uid://x7iwbtuec5y8" path="res://Scenes/inventory.tscn" id="4_t1xeu"]
+[ext_resource type="PackedScene" uid="uid://bik6bgpqf1hde" path="res://Scenes/gacha.tscn" id="5_t1xeu"]
 
 [node name="HUD" type="Control"]
 layout_mode = 3
@@ -14,6 +16,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource("1_36asn")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 0
@@ -23,6 +26,28 @@ theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
+
+[node name="ButtonsTL" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Gacha" type="TextureButton" parent="MarginContainer/ButtonsTL"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("1_fccik")
+texture_pressed = ExtResource("2_bjfho")
+stretch_mode = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/ButtonsTL/Gacha"]
+layout_mode = 0
+offset_right = 30.0
+offset_bottom = 30.0
+mouse_filter = 1
+text = "🎰"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="ButtonsTR" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
@@ -72,15 +97,27 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
 
-[node name="AspectRatio" type="AspectRatioContainer" parent="."]
+[node name="Overlay" type="AspectRatioContainer" parent="."]
 layout_mode = 0
 mouse_filter = 2
 ratio = 1.7778
+alignment_vertical = 0
 
-[node name="Settings" parent="AspectRatio" instance=ExtResource("3_6fbih")]
+[node name="Settings" parent="Overlay" instance=ExtResource("3_6fbih")]
 visible = false
 layout_mode = 2
 
-[node name="Inventory" parent="AspectRatio" instance=ExtResource("4_t1xeu")]
+[node name="Inventory" parent="Overlay" instance=ExtResource("4_t1xeu")]
 visible = false
 layout_mode = 2
+
+[node name="Gacha" parent="Overlay" instance=ExtResource("5_t1xeu")]
+visible = false
+layout_mode = 2
+
+[node name="Popups" type="BoxContainer" parent="."]
+layout_mode = 0
+offset_right = 384.0
+offset_bottom = 216.0
+size_flags_horizontal = 3
+mouse_filter = 2

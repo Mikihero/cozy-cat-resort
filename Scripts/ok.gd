@@ -1,4 +1,4 @@
-extends CanvasLayer
+class_name PopupInfo extends Control
 
 var message_text = ""
 
