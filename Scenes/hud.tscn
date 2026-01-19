@@ -115,9 +115,18 @@ layout_mode = 2
 visible = false
 layout_mode = 2
 
-[node name="Popups" type="BoxContainer" parent="."]
+[node name="Popups" type="PanelContainer" parent="."]
+visible = false
 layout_mode = 0
 offset_right = 384.0
 offset_bottom = 216.0
 size_flags_horizontal = 3
 mouse_filter = 2
+
+[node name="background" type="ColorRect" parent="Popups"]
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0, 0, 0, 0.2509804)
+
+[node name="popupsContainer" type="BoxContainer" parent="Popups"]
+layout_mode = 2

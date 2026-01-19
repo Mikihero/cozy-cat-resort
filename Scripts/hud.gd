@@ -16,7 +16,8 @@ class_name HUD extends Control
 @onready var settings: Control = $Overlay/Settings;
 @onready var gacha: Control = $Overlay/Gacha;
 
-@onready var popups: BoxContainer = $Popups;
+@onready var popups: PanelContainer = $Popups;
+@onready var popups_container: BoxContainer = $Popups/popupsContainer;
 var popup_confirm_scene = preload("res://Scenes/examples/confirm.tscn");
 var popup_info_scene = preload("res://Scenes/examples/info.tscn");
 
@@ -35,6 +36,12 @@ func _ready() -> void:
 		.filter(func(c): return c is Control)\
 		.map(func(c: Control): c.visibility_changed.connect(_on_overlay_visibility_changed))
 	
+	popups_container.child_exiting_tree.connect(func(_c): 
+		# 1 because node is still in the tree when the event is processed
+		if popups_container.get_child_count() == 1:
+			popups.visible = false;
+	)
+	
 	pass # Replace with function body.
 
 func popup_confirm(message: String, action: Callable):
@@ -42,13 +49,13 @@ func popup_confirm(message: String, action: Callable):
 	var popup: PopupConfirm = popup_confirm_scene.instantiate();
 	popup.message_text = message;
 	popup.action_to_execute = action;
-	popups.add_child(popup)
+	popups_container.add_child(popup)
 	
 func popup_info(message: String):
 	popups.visible = true;
 	var popup: PopupInfo = popup_info_scene.instantiate();
 	popup.message_text = message;
-	popups.add_child(popup)
+	popups_container.add_child(popup)
 
 func _on_overlay_visibility_changed() -> void:
 	self.buttonsTR.visible = !self.is_menu_open()
